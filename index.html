@@ -22,37 +22,37 @@
     .btn {
       display: inline-block;
       margin-top: 20px;
-      padding: 12px 24px;
+      padding: 14px 28px;
       background: #c62828;
       color: #fff;
       text-decoration: none;
       border-radius: 8px;
       cursor: pointer;
-      position: relative;
-      font-size: 18px;
+      font-size: 20px;
       font-weight: bold;
+      position: relative;
       /* hiệu ứng rìa sáng */
-      box-shadow: 0 0 10px rgba(198,40,40,0.8), 0 0 20px rgba(198,40,40,0.6);
+      box-shadow: 0 0 15px rgba(198,40,40,0.8), 0 0 30px rgba(198,40,40,0.6);
       animation: glow 1.5s infinite alternate;
     }
     /* hiệu ứng glow */
     @keyframes glow {
       from { box-shadow: 0 0 10px rgba(198,40,40,0.8); }
-      to   { box-shadow: 0 0 20px rgba(198,40,40,1); }
+      to   { box-shadow: 0 0 25px rgba(198,40,40,1); }
     }
-    /* thêm icon bàn tay chỉ vào */
+    /* icon bàn tay chỉ vào */
     .btn::after {
       content: "👉";
       position: absolute;
-      right: -40px;
+      right: -45px;
       top: 50%;
       transform: translateY(-50%);
-      font-size: 24px;
+      font-size: 26px;
       animation: point 1s infinite alternate;
     }
     @keyframes point {
-      from { right: -40px; }
-      to   { right: -50px; }
+      from { right: -45px; }
+      to   { right: -55px; }
     }
     /* hiệu ứng fade-out toàn trang khi click */
     .fade-out {
