@@ -12,15 +12,22 @@
       padding: 0;
     }
     .cover {
-      padding: 40px 20px;
+      padding: 20px;
     }
     .cover img {
-      max-width: 90%;
+      width: 100%;          /* ảnh tự co giãn theo màn hình */
+      max-width: 600px;     /* giới hạn tối đa */
+      height: auto;         /* giữ tỷ lệ ảnh */
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      margin: 0 auto;
+      display: block;       /* luôn căn giữa */
     }
     .btn {
-      display: inline-block;
+      display: inline-flex; /* icon và chữ cùng hàng */
+      align-items: center;
+      justify-content: center;
+      gap: 8px;             /* khoảng cách icon và chữ */
       margin-top: 20px;
       padding: 14px 28px;
       background: #c62828;
@@ -30,32 +37,25 @@
       cursor: pointer;
       font-size: 20px;
       font-weight: bold;
-      position: relative;
-      /* hiệu ứng rìa sáng */
       box-shadow: 0 0 15px rgba(198,40,40,0.8), 0 0 30px rgba(198,40,40,0.6);
       animation: glow 1.5s infinite alternate, pulse 2s infinite;
       transition: transform 0.3s ease;
     }
-    /* glow nhấp nháy */
     @keyframes glow {
       from { box-shadow: 0 0 10px rgba(198,40,40,0.8); }
       to   { box-shadow: 0 0 25px rgba(198,40,40,1); }
     }
-    /* pulse phóng to/thu nhỏ nhẹ */
     @keyframes pulse {
       0%   { transform: scale(1); }
       50%  { transform: scale(1.05); }
       100% { transform: scale(1); }
     }
-    /* hover thêm hiệu ứng */
     .btn:hover {
       background: #b71c1c;
       transform: scale(1.1);
     }
-    /* icon bàn tay trước chữ */
     .btn::before {
       content: "👉";
-      margin-right: 8px;
       font-size: 24px;
       animation: point 1s infinite alternate;
     }
@@ -63,10 +63,20 @@
       from { transform: translateX(0); }
       to   { transform: translateX(-5px); }
     }
-    /* fade-out toàn trang khi click */
     .fade-out {
       opacity: 0;
       transition: opacity 0.8s ease;
+    }
+    /* Responsive cho màn hình nhỏ */
+    @media (max-width:600px) {
+      .btn {
+        font-size: 18px;
+        padding: 12px 20px;
+        gap: 6px;
+      }
+      .btn::before {
+        font-size: 20px;
+      }
     }
   </style>
 </head>
