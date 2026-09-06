@@ -2,11 +2,89 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Bìa - Wedding</title>
+  <title>Tân Hôn Trung Nghĩa & Ngọc Ngân </title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      height: 100vh; /* chiếm toàn bộ chiều cao màn hình */
+      display: flex;
+      justify-content: center; /* căn giữa ngang */
+      align-items: center;     /* căn giữa dọc */
+      text-align: center;
+      /* tone màu nền phía sau */
+      background: linear-gradient(135deg, #fffaf5, #ffe0e0, #f8bbd0);
+    }
+    .cover img {
+      width: 100%;
+      max-width: 800px;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      margin-bottom: 20px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: #c62828;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 20px;
+      font-weight: bold;
+      box-shadow: 0 0 15px rgba(198,40,40,0.8), 0 0 30px rgba(198,40,40,0.6);
+      animation: glow 1.5s infinite alternate, pulse 2s infinite;
+      transition: transform 0.3s ease;
+    }
+    @keyframes glow {
+      from { box-shadow: 0 0 10px rgba(198,40,40,0.8); }
+      to   { box-shadow: 0 0 25px rgba(198,40,40,1); }
+    }
+    @keyframes pulse {
+      0%   { transform: scale(1); }
+      50%  { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    .btn:hover {
+      background: #b71c1c;
+      transform: scale(1.1);
+    }
+    .btn::before {
+      content: "👉";
+      font-size: 24px;
+      animation: point 1s infinite alternate;
+    }
+    @keyframes point {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-5px); }
+    }
+    .fade-out {
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+  </style>
 </head>
 <body>
-  <h1>Welcome to Our Wedding Website</h1>
-  <p>Trung Nghĩa & Ngọc Ngân</p>
-  <a href="main.html">Xem Thiệp Cưới</a>
+  <div class="cover">
+    <!-- Ảnh bìa cưới -->
+    <img src="imagebia/anhbia.png" alt="Ảnh bìa cưới">
+    <p><a href="main.html" class="btn" id="openCard">Xem Thiệp Cưới</a></p>
+  </div>
+
+  <script>
+    const btn = document.getElementById('openCard');
+    btn.addEventListener('click', function(event) {
+      event.preventDefault();
+      document.body.classList.add('fade-out');
+      setTimeout(() => {
+        window.location.href = btn.getAttribute('href');
+      }, 800);
+    });
+  </script>
 </body>
 </html>
