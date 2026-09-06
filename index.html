@@ -12,58 +12,69 @@
       text-align: center;
       color: #5c3d3d;
     }
-    header {
-      background: #f3d5d5;
-      padding: 60px 20px;
+
+    /* Save the Date section */
+    .save-date {
+      background:#c62828; /* nền đỏ sang trọng */
+      color:#fff;         /* chữ trắng nổi bật */
+      padding:8vh 5vw;
+      text-align:center;
+      border-radius:2vw;
+      line-height:1.5; /* khoảng cách dòng hợp lý */
+      margin: 5vh auto;
+      max-width: 800px;
     }
-    header h1 {
-      font-size: 52px;
-      margin: 0;
+
+    .title {
+      font-family:'Playfair Display', serif; /* font sang trọng */
+      font-size:7vw;
+      font-weight:bold;
+      letter-spacing:0.5vw;
+      margin-bottom:2vh;
     }
-    header p {
-      font-size: 22px;
-      margin-top: 10px;
+
+    .subtitle {
+      font-family:'Cormorant Garamond', serif;
+      font-size:4vw;
+      font-style:italic;
+      margin-bottom:4vh;
     }
-    nav {
-      background: #d97c7c;
-      padding: 12px;
+
+    .names {
+      font-family:'Arial', cursive; /* font script mềm mại cho tên */
+      font-size:6vw;
+      margin:4vh 0;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:2vw;
     }
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin: 0 15px;
-      font-weight: bold;
+
+    .names .amp {
+      font-size:7vw;
+      font-weight:bold;
+      font-family:'Playfair Display', serif; /* dấu & sang trọng */
     }
-    .section {
-      padding: 60px 20px;
+
+    .date {
+      font-family:'Playfair Display', serif;
+      font-size:6vw;
+      font-weight:bold;
+      margin-top:5vh;
+      background:#fff;
+      color:#c62828;
+      display:inline-block;
+      padding:1vh 3vw;
+      border-radius:1vw;
     }
-    .section h2 {
-      font-size: 34px;
-      margin-bottom: 20px;
-    }
-    .btn {
-      display: inline-block;
-      padding: 12px 28px;
-      background: #d97c7c;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
-      margin-top: 20px;
-    }
-    footer {
-      background: #f3d5d5;
-      padding: 20px;
-      font-size: 14px;
-    }
-    img {
-      max-width: 300px;
-      margin: 10px;
-      border-radius: 8px;
-    }
-    #countdown {
-      font-size: 28px;
-      margin-top: 20px;
-      color: #d97c7c;
+
+    /* Responsive cho điện thoại */
+    @media (max-width:600px) {
+      .title { font-size:9vw; }
+      .subtitle { font-size:6vw; }
+      .names { font-size:8vw; }
+      .names .amp { font-size:9vw; }
+      .date { font-size:8vw; }
     }
   </style>
 </head>
@@ -73,64 +84,20 @@
     <p>Chúng tôi hân hoan chào đón bạn đến ngày trọng đại!</p>
   </header>
 
-  <nav>
-    <a href="#date">Ngày cưới</a>
-    <a href="#invitation">Lời mời</a>
-    <a href="#album">Album ảnh</a>
-    <a href="#countdown">Đếm ngược</a>
-  </nav>
-
-  <div class="section" id="date">
-    <h2>Ngày trọng đại</h2>
-    <p>Ngày 20 tháng 12, 2026 tại TP. Hồ Chí Minh</p>
-    <a href="#" class="btn">Xem địa điểm</a>
-  </div>
-
-  <div class="section" id="invitation">
-    <h2>Lời mời</h2>
-    <p>Chúng tôi trân trọng kính mời bạn đến chung vui trong ngày trọng đại của mình.</p>
-    <a href="#" class="btn">Xác nhận tham dự</a>
-  </div>
-
-  <div class="section" id="album">
-    <h2>Album ảnh cưới</h2>
-    <p>Khoảnh khắc hạnh phúc của chúng tôi</p>
-    <img src="anhcuoi1.jpg" alt="Ảnh cưới 1">
-    <img src="anhcuoi2.jpg" alt="Ảnh cưới 2">
-    <img src="anhcuoi3.jpg" alt="Ảnh cưới 3">
-  </div>
-
-  <div class="section" id="countdown">
-    <h2>Đếm ngược đến ngày cưới</h2>
-    <div id="timer"></div>
+  <!-- Save the Date section -->
+  <div class="save-date">
+    <p class="title">SAVE THE DATE</p>
+    <p class="subtitle">We Get Married</p>
+    <p class="names">
+      <span class="name">TRUNG NGHĨA</span>
+      <span class="amp">&</span>
+      <span class="name">NGỌC NGÂN</span>
+    </p>
+    <p class="date">18.10.2026</p>
   </div>
 
   <footer>
     <p>© 2026 Trung Nghĩa & Ngọc Ngân Wedding</p>
   </footer>
-
-  <script>
-    // Countdown script
-    const weddingDate = new Date("Dec 20, 2026 00:00:00").getTime();
-    const timerElement = document.getElementById("timer");
-
-    const countdown = setInterval(function() {
-      const now = new Date().getTime();
-      const distance = weddingDate - now;
-
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      timerElement.innerHTML = days + " ngày " + hours + " giờ "
-        + minutes + " phút " + seconds + " giây ";
-
-      if (distance < 0) {
-        clearInterval(countdown);
-        timerElement.innerHTML = "Ngày trọng đại đã đến!";
-      }
-    }, 1000);
-  </script>
 </body>
 </html>
