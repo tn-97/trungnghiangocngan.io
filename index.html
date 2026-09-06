@@ -2,72 +2,100 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Wedding Demo</title>
+  <title>Wedding - Trung Nghĩa & Ngọc Ngân</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: #fdf6f0;
+      background: #fffaf5;
       margin: 0;
       padding: 0;
       text-align: center;
+      color: #5c3d3d;
     }
     header {
-      background: #e8c6c6;
-      padding: 40px;
+      background: #f3d5d5;
+      padding: 60px 20px;
     }
     header h1 {
-      font-size: 48px;
+      font-size: 52px;
       margin: 0;
-      color: #5c3d3d;
     }
     header p {
-      font-size: 20px;
-      margin: 10px 0 0;
+      font-size: 22px;
+      margin-top: 10px;
+    }
+    nav {
+      background: #d97c7c;
+      padding: 12px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
     }
     .section {
-      padding: 50px 20px;
+      padding: 60px 20px;
     }
     .section h2 {
-      color: #5c3d3d;
-      font-size: 32px;
+      font-size: 34px;
       margin-bottom: 20px;
     }
     .btn {
       display: inline-block;
-      padding: 12px 24px;
+      padding: 12px 28px;
       background: #d97c7c;
       color: white;
       text-decoration: none;
-      border-radius: 6px;
+      border-radius: 8px;
       margin-top: 20px;
     }
     footer {
-      background: #e8c6c6;
+      background: #f3d5d5;
       padding: 20px;
       font-size: 14px;
+    }
+    img {
+      max-width: 300px;
+      margin: 10px;
+      border-radius: 8px;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Nguyen & Linh</h1>
-    <p>Chúng tôi sắp kết hôn!</p>
+    <h1>Trung Nghĩa & Ngọc Ngân</h1>
+    <p>Chúng tôi hân hoan chào đón bạn đến ngày trọng đại!</p>
   </header>
 
-  <div class="section">
+  <nav>
+    <a href="#date">Ngày cưới</a>
+    <a href="#invitation">Lời mời</a>
+    <a href="#album">Album ảnh</a>
+  </nav>
+
+  <div class="section" id="date">
     <h2>Ngày trọng đại</h2>
     <p>Ngày 20 tháng 12, 2026 tại TP. Hồ Chí Minh</p>
     <a href="#" class="btn">Xem địa điểm</a>
   </div>
 
-  <div class="section">
+  <div class="section" id="invitation">
     <h2>Lời mời</h2>
-    <p>Chúng tôi hân hạnh mời bạn đến chung vui trong ngày trọng đại của mình.</p>
+    <p>Chúng tôi trân trọng kính mời bạn đến chung vui trong ngày trọng đại của mình.</p>
     <a href="#" class="btn">Xác nhận tham dự</a>
   </div>
 
+  <div class="section" id="album">
+    <h2>Album ảnh cưới</h2>
+    <p>Khoảnh khắc hạnh phúc của chúng tôi</p>
+    <img src="anhcuoi1.jpg" alt="Ảnh cưới 1">
+    <img src="anhcuoi2.jpg" alt="Ảnh cưới 2">
+    <img src="anhcuoi3.jpg" alt="Ảnh cưới 3">
+  </div>
+
   <footer>
-    <p>© 2026 Nguyen & Linh Wedding</p>
+    <p>© 2026 Trung Nghĩa & Ngọc Ngân Wedding</p>
   </footer>
 </body>
 </html>
