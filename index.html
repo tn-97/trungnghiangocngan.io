@@ -40,19 +40,19 @@
       from { box-shadow: 0 0 10px rgba(198,40,40,0.8); }
       to   { box-shadow: 0 0 25px rgba(198,40,40,1); }
     }
-    /* icon bàn tay chỉ vào */
-    .btn::after {
+    /* icon bàn tay chỉ vào TRƯỚC chữ */
+    .btn::before {
       content: "👉";
       position: absolute;
-      right: -45px;
+      left: -40px;
       top: 50%;
       transform: translateY(-50%);
       font-size: 26px;
       animation: point 1s infinite alternate;
     }
     @keyframes point {
-      from { right: -45px; }
-      to   { right: -55px; }
+      from { left: -40px; }
+      to   { left: -50px; }
     }
     /* hiệu ứng fade-out toàn trang khi click */
     .fade-out {
@@ -65,7 +65,7 @@
   <div class="cover">
     <!-- Ảnh bìa cưới -->
     <img src="imagebia/anhbia.png" alt="Ảnh bìa cưới">
-    <p><a href="main.html" class="btn" id="openCard">Xem Thiệp Cưới</a></p>
+    <p><a href="main.html" class="btn" id="openCard">Mở Thiệp</a></p>
   </div>
 
   <script>
