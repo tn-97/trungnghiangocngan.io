@@ -28,12 +28,33 @@
       text-decoration: none;
       border-radius: 8px;
       cursor: pointer;
-      transition: opacity 0.5s ease; /* hiệu ứng mờ */
+      position: relative;
+      font-size: 18px;
+      font-weight: bold;
+      /* hiệu ứng rìa sáng */
+      box-shadow: 0 0 10px rgba(198,40,40,0.8), 0 0 20px rgba(198,40,40,0.6);
+      animation: glow 1.5s infinite alternate;
     }
-    .btn:hover {
-      opacity: 0.7; /* khi hover sẽ mờ đi */
+    /* hiệu ứng glow */
+    @keyframes glow {
+      from { box-shadow: 0 0 10px rgba(198,40,40,0.8); }
+      to   { box-shadow: 0 0 20px rgba(198,40,40,1); }
     }
-    /* hiệu ứng fade toàn trang */
+    /* thêm icon bàn tay chỉ vào */
+    .btn::after {
+      content: "👉";
+      position: absolute;
+      right: -40px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 24px;
+      animation: point 1s infinite alternate;
+    }
+    @keyframes point {
+      from { right: -40px; }
+      to   { right: -50px; }
+    }
+    /* hiệu ứng fade-out toàn trang khi click */
     .fade-out {
       opacity: 0;
       transition: opacity 0.8s ease;
@@ -48,14 +69,13 @@
   </div>
 
   <script>
-    // Khi click nút, trang sẽ mờ dần rồi chuyển sang main.html
     const btn = document.getElementById('openCard');
     btn.addEventListener('click', function(event) {
-      event.preventDefault(); // chặn chuyển ngay lập tức
+      event.preventDefault();
       document.body.classList.add('fade-out');
       setTimeout(() => {
         window.location.href = btn.getAttribute('href');
-      }, 800); // delay 0.8s để hiệu ứng chạy xong
+      }, 800);
     });
   </script>
 </body>
