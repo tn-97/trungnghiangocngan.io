@@ -33,28 +33,37 @@
       position: relative;
       /* hiệu ứng rìa sáng */
       box-shadow: 0 0 15px rgba(198,40,40,0.8), 0 0 30px rgba(198,40,40,0.6);
-      animation: glow 1.5s infinite alternate;
+      animation: glow 1.5s infinite alternate, pulse 2s infinite;
+      transition: transform 0.3s ease;
     }
-    /* hiệu ứng glow */
+    /* glow nhấp nháy */
     @keyframes glow {
       from { box-shadow: 0 0 10px rgba(198,40,40,0.8); }
       to   { box-shadow: 0 0 25px rgba(198,40,40,1); }
     }
-    /* icon bàn tay chỉ vào TRƯỚC chữ */
+    /* pulse phóng to/thu nhỏ nhẹ */
+    @keyframes pulse {
+      0%   { transform: scale(1); }
+      50%  { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    /* hover thêm hiệu ứng */
+    .btn:hover {
+      background: #b71c1c;
+      transform: scale(1.1);
+    }
+    /* icon bàn tay trước chữ */
     .btn::before {
       content: "👉";
-      position: absolute;
-      left: -40px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 26px;
+      margin-right: 8px;
+      font-size: 24px;
       animation: point 1s infinite alternate;
     }
     @keyframes point {
-      from { left: -40px; }
-      to   { left: -50px; }
+      from { transform: translateX(0); }
+      to   { transform: translateX(-5px); }
     }
-    /* hiệu ứng fade-out toàn trang khi click */
+    /* fade-out toàn trang khi click */
     .fade-out {
       opacity: 0;
       transition: opacity 0.8s ease;
@@ -65,7 +74,7 @@
   <div class="cover">
     <!-- Ảnh bìa cưới -->
     <img src="imagebia/anhbia.png" alt="Ảnh bìa cưới">
-    <p><a href="main.html" class="btn" id="openCard">Mở Thiệp</a></p>
+    <p><a href="main.html" class="btn" id="openCard">Xem Thiệp Cưới</a></p>
   </div>
 
   <script>
