@@ -16,66 +16,56 @@
     }
 
     .save-date {
-      background:#fff;       /* khối trắng nổi bật */
-      color:#c62828;         /* chữ đỏ đồng bộ */
-      padding: 60px 40px;
+      background:#c62828;   /* khối cùng màu nền */
+      color:#fff;           /* chữ trắng nổi bật */
+      padding:60px 40px;
       text-align:center;
-      border-radius: 20px;
+      border:3px solid #2196f3; /* viền xanh mảnh */
+      border-radius:12px;
       line-height:1.5;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-      max-width: 800px;
-      width: 90%;
+      max-width:800px;
+      width:90%;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .save-date:hover {
+      border-color:#64b5f6; /* đổi sang xanh sáng hơn */
+      box-shadow:0 0 20px rgba(33,150,243,0.7); /* viền phát sáng */
     }
 
     .title {
       font-family:'Playfair Display', serif;
-      font-size: 48px;
+      font-size:48px;
       font-weight:bold;
-      letter-spacing: 4px;
-      margin-bottom: 20px;
+      letter-spacing:4px;
+      margin-bottom:20px;
     }
 
     .subtitle {
       font-family:'Cormorant Garamond', serif;
-      font-size: 28px;
+      font-size:28px;
       font-style:italic;
-      margin-bottom: 40px;
+      margin-bottom:40px;
     }
 
     .names {
-      font-family:'Great Vibes', cursive;
-      font-size: 42px;
-      margin: 40px 0;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      gap:20px;
-    }
-
-    .names .amp {
-      font-size: 48px;
-      font-weight:bold;
       font-family:'Playfair Display', serif;
+      font-size:36px;
+      margin:40px 0;
     }
 
     .date {
       font-family:'Playfair Display', serif;
-      font-size: 36px;
+      font-size:32px;
       font-weight:bold;
-      margin-top: 40px;
-      background:#c62828;
-      color:#fff;
-      display:inline-block;
-      padding: 10px 30px;
-      border-radius: 10px;
+      margin-top:30px;
     }
 
     @media (max-width:600px) {
-      .title { font-size: 32px; }
-      .subtitle { font-size: 20px; }
-      .names { font-size: 28px; }
-      .names .amp { font-size: 32px; }
-      .date { font-size: 24px; }
+      .title { font-size:32px; }
+      .subtitle { font-size:20px; }
+      .names { font-size:24px; }
+      .date { font-size:20px; }
     }
   </style>
 </head>
@@ -83,11 +73,7 @@
   <div class="save-date">
     <p class="title">SAVE THE DATE</p>
     <p class="subtitle">We Get Married</p>
-    <p class="names">
-      <span class="name">TRUNG NGHĨA</span>
-      <span class="amp">&</span>
-      <span class="name">NGỌC NGÂN</span>
-    </p>
+    <p class="names">TRUNG NGHĨA & NGỌC NGÂN</p>
     <p class="date">18.10.2026</p>
   </div>
 </body>
