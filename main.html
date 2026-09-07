@@ -7,7 +7,7 @@
     body {
       margin: 0;
       padding: 0;
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -18,63 +18,64 @@
     .save-date {
       background:#fff;       /* khối trắng nổi bật */
       color:#c62828;         /* chữ đỏ đồng bộ */
-      padding:8vh 5vw;
+      padding: 60px 40px;
       text-align:center;
-      border-radius:2vw;
+      border-radius: 20px;
       line-height:1.5;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
       max-width: 800px;
+      width: 90%;
     }
 
     .title {
       font-family:'Playfair Display', serif;
-      font-size:7vw;
+      font-size: 48px;
       font-weight:bold;
-      letter-spacing:0.5vw;
-      margin-bottom:2vh;
+      letter-spacing: 4px;
+      margin-bottom: 20px;
     }
 
     .subtitle {
       font-family:'Cormorant Garamond', serif;
-      font-size:4vw;
+      font-size: 28px;
       font-style:italic;
-      margin-bottom:4vh;
+      margin-bottom: 40px;
     }
 
     .names {
       font-family:'Great Vibes', cursive;
-      font-size:6vw;
-      margin:4vh 0;
+      font-size: 42px;
+      margin: 40px 0;
       display:flex;
       justify-content:center;
       align-items:center;
-      gap:2vw;
+      gap:20px;
     }
 
     .names .amp {
-      font-size:7vw;
+      font-size: 48px;
       font-weight:bold;
       font-family:'Playfair Display', serif;
     }
 
     .date {
       font-family:'Playfair Display', serif;
-      font-size:6vw;
+      font-size: 36px;
       font-weight:bold;
-      margin-top:5vh;
+      margin-top: 40px;
       background:#c62828;
       color:#fff;
       display:inline-block;
-      padding:1vh 3vw;
-      border-radius:1vw;
+      padding: 10px 30px;
+      border-radius: 10px;
     }
 
     @media (max-width:600px) {
-      .title { font-size:9vw; }
-      .subtitle { font-size:6vw; }
-      .names { font-size:8vw; }
-      .names .amp { font-size:9vw; }
-      .date { font-size:8vw; }
+      .title { font-size: 32px; }
+      .subtitle { font-size: 20px; }
+      .names { font-size: 28px; }
+      .names .amp { font-size: 32px; }
+      .date { font-size: 24px; }
     }
   </style>
 </head>
