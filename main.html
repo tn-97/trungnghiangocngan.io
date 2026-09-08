@@ -11,16 +11,16 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: #c62828; /* nền đỏ toàn trang */
+      background: #7b1f1f; /* đỏ đậm */
       font-family: 'Segoe UI', sans-serif;
     }
 
     .save-date {
-      background:#c62828;   /* khối cùng màu nền */
-      color:#fff;           /* chữ trắng nổi bật */
+      background:#7b1f1f;   
+      color:#fdd835;        
       padding:60px 40px;
       text-align:center;
-      border:3px solid #2196f3; /* viền xanh mảnh */
+      border:3px solid #fdd835; 
       border-radius:12px;
       line-height:1.5;
       max-width:1000px;
@@ -29,8 +29,8 @@
     }
 
     .save-date:hover {
-      border-color:#64b5f6; /* đổi sang xanh sáng hơn */
-      box-shadow:0 0 20px rgba(33,150,243,0.7); /* viền phát sáng */
+      border-color:#fff176; 
+      box-shadow:0 0 20px rgba(253,216,53,0.7); 
     }
 
     .title {
@@ -48,14 +48,16 @@
       margin-bottom:40px;
     }
 
-    .names {
-      font-family:'Playfair Display', serif;
-      font-size:6vw;
-      margin:4vh 0;
-      display:block;       /* hiển thị dọc */
-      text-align:center;   /* căn giữa */
-      line-height:1.4;     /* khoảng cách dòng hợp lý */
-  }
+      .names {
+      font-family: 'Segoe Script', cursive;
+      font-size: 8vw;
+      text-align: center;
+      line-height: 1.4;
+      background: linear-gradient(45deg, #fbc02d, #fff9c4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
 
 
     .date {
@@ -68,10 +70,12 @@
     @media (max-width:600px) {
       .title { font-size:32px; }
       .subtitle { font-size:20px; }
-      .names { font-size:24px; }
+      .names { font-size:32px; }
       .date { font-size:20px; }
     }
   </style>
+
+ 
 </head>
 <body>
   <div class="save-date">
