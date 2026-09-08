@@ -13,7 +13,7 @@
         align-items: center;
         background: #7b1f1f; /* đỏ đậm */
         font-family: 'Segoe UI', sans-serif;
-        flex-direction: column; /* để hiển thị thêm phần dưới */
+        flex-direction: column;
       }
 
       .save-date {
@@ -51,17 +51,17 @@
 
       .names {
         font-family: 'Segoe Script', cursive;
-        font-size: clamp(32px, 6vw, 80px); /* tự động co giãn theo màn hình */
+        font-size: clamp(32px, 6vw, 80px);
         text-align: center;
         line-height: 1.4;
-        white-space: nowrap; /* giữ nguyên một dòng */
-        overflow-wrap: normal; /* không cho xuống dòng */
+        white-space: nowrap;
+        overflow-wrap: normal;
         background: linear-gradient(45deg, #fbc02d, #fff9c4);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         text-shadow:
           1px 1px 2px #000,
-          0 0 6px #fdd835;
+          0 1 6px #fdd835;
       }
 
       .date {
@@ -80,17 +80,12 @@
         line-height: 1.8;
         max-width: 1000px;
         border-radius: 12px;
-        border: 3px solid #fff; /* thêm viền trắng */
-        transition: border-color 0.3s ease, box-shadow 0.3s ease;
-      }
-
-      .invitation-text:hover {
-        border-color: #fdd835;
-        box-shadow: 0 0 20px rgba(253,216,53,0.7);
+        border: 3px solid #fff;
+        margin-bottom: 40px;
       }
 
       .invitation-text .header {
-        font-size: 5vw;
+        font-size: 6vw; /* đồng bộ với wedding-info title */
         font-weight: bold;
         margin-bottom: 4vh;
       }
@@ -100,14 +95,66 @@
         margin: 2vh 0;
       }
 
+      .wedding-info {
+        background: #c62828;
+        color: #fff;
+        text-align: center;
+        padding: 5vh 2vw;
+        font-family: 'Georgia', serif;
+        line-height: 1.6;
+        max-width: 1000px;
+        border-radius: 12px;
+        border: 3px solid #fff;
+      }
+
+      .wedding-info .title {
+        font-size: 6vw; /* đồng bộ với invitation-text header */
+        font-weight: bold;
+        margin: 2vh 0;
+      }
+
+      .wedding-info .subtitle {
+        font-size: 4.5vw;
+        margin: 2vh 0;
+      }
+
+      .wedding-info .text {
+        font-size: 3.5vw;
+        margin: 1.5vh 0;
+      }
+
+      .wedding-info .time {
+        font-size: 4.5vw;
+        font-weight: bold;
+        margin: 2vh 0;
+      }
+
+      .wedding-info .address {
+        font-size: 3.5vw;
+        margin: 2vh 0;
+      }
+
+      .wedding-info .invite {
+        font-size: 4vw;
+        font-weight: bold;
+        margin-top: 3vh;
+      }
+
       @media (max-width:600px) {
         .title { font-size: 32px; }
         .subtitle { font-size: 20px; }
         .names { font-size: 12vw; line-height: 1.6; }
         .date { font-size: 20px; }
 
-        .invitation-text .header { font-size: 10vw; }
+        .invitation-text .header { font-size: 9vw; }
         .invitation-text p { font-size: 5vw; }
+
+        .wedding-info .title { font-size: 9vw; }
+        .wedding-info .subtitle { font-size: 7vw; }
+        .wedding-info .text { font-size: 5vw; }
+        .wedding-info .time { font-size: 6vw; }
+        .wedding-info .address { font-size: 5vw; }
+        .wedding-info .invite { font-size: 6.5vw; }
       }
     </style>
   </head>
@@ -123,7 +170,6 @@
       <p class="date">18.10.2026</p>
     </div>
 
-    <!-- Phần thêm mới -->
     <div class="invitation-text">
       <p class="header">THƯ MỜI</p>
       <p>
@@ -139,6 +185,21 @@
         Sự hiện diện cùng những lời chúc phúc là niềm vinh hạnh, là món quà quý
         giá và ý nghĩa nhất dành cho chúng tôi trong ngày vui.
       </p>
+    </div>
+
+    <div class="wedding-info">
+      <p class="title">THÔNG TIN LỄ CƯỚI</p>
+      <p class="subtitle">DỰ TIỆC MỪNG CƯỚI</p>
+      <p class="text">------</p>
+      <p class="text">Chủ nhật</p>
+      <p class="time">11 Giờ, ngày 18.10.2026</p>
+      <p class="text">------</p>
+      <p class="text">Âm lịch ngày 09 tháng 09 năm Bính Ngọ</p>
+      <p class="text">TẠI TƯ GIA NHÀ TRAI</p>
+      <p class="address">
+        168A/12, Khóm Long Hưng, Phường Thanh Đức, Tỉnh Vĩnh Long
+      </p>
+      <p class="invite">TRÂN TRỌNG KÍNH MỜI</p>
     </div>
   </body>
 </html>
