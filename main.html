@@ -4,78 +4,104 @@
     <meta charset="UTF-8" />
     <title>Wedding Invitation</title>
     <style>
-          body {
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #7b1f1f; /* đỏ đậm */
-            font-family: 'Segoe UI', sans-serif;
-          }
-
-          .save-date {
-            background: #7b1f1f;
-            color: #fdd835;
-            padding: 60px 40px;
-            text-align: center;
-            border: 3px solid #fdd835;
-            border-radius: 12px;
-            max-width: 1000px;
-            width: 90%;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-          }
-
-          .save-date:hover {
-            border-color: #fff176;
-            box-shadow: 0 0 20px rgba(253,216,53,0.7);
-          }
-
-          .title {
-            font-family: 'Playfair Display', serif;
-            font-size: 48px;
-            font-weight: bold;
-            letter-spacing: 4px;
-            margin-bottom: 20px;
-          }
-
-          .subtitle {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 28px;
-            font-style: italic;
-            margin-bottom: 40px;
-          }
-
-          .names {
-          font-family: 'Segoe Script', cursive;
-          font-size: clamp(32px, 6vw, 80px); /* tự động co giãn theo màn hình */
-          text-align: center;
-          line-height: 1.4;
-          white-space: nowrap; /* giữ nguyên một dòng */
-          overflow-wrap: normal; /* không cho xuống dòng */
-          background: linear-gradient(45deg, #fbc02d, #fff9c4);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          text-shadow:
-          1px 1px 2px #000,
-          0 0 6px #fdd835,
+      body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #7b1f1f; /* đỏ đậm */
+        font-family: 'Segoe UI', sans-serif;
+        flex-direction: column; /* để hiển thị thêm phần dưới */
       }
 
+      .save-date {
+        background: #7b1f1f;
+        color: #fdd835;
+        padding: 60px 40px;
+        text-align: center;
+        border: 3px solid #fdd835;
+        border-radius: 12px;
+        max-width: 1000px;
+        width: 90%;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        margin-bottom: 40px;
+      }
 
-          .date {
-            font-family: 'Playfair Display', serif;
-            font-size: 32px;
-            font-weight: bold;
-            margin-top: 30px;
-          }
+      .save-date:hover {
+        border-color: #fff176;
+        box-shadow: 0 0 20px rgba(253,216,53,0.7);
+      }
 
-          @media (max-width:600px) {
-            .title { font-size: 32px; }
-            .subtitle { font-size: 20px; }
-            .names { font-size: 12vw; line-height: 1.6; }
-            .date { font-size: 20px; }
-          }
+      .title {
+        font-family: 'Playfair Display', serif;
+        font-size: 48px;
+        font-weight: bold;
+        letter-spacing: 4px;
+        margin-bottom: 20px;
+      }
+
+      .subtitle {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 28px;
+        font-style: italic;
+        margin-bottom: 40px;
+      }
+
+      .names {
+        font-family: 'Segoe Script', cursive;
+        font-size: clamp(32px, 6vw, 80px); /* tự động co giãn theo màn hình */
+        text-align: center;
+        line-height: 1.4;
+        white-space: nowrap; /* giữ nguyên một dòng */
+        overflow-wrap: normal; /* không cho xuống dòng */
+        background: linear-gradient(45deg, #fbc02d, #fff9c4);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow:
+          1px 1px 2px #000,
+          1 0 6px #fdd835;
+      }
+
+      .date {
+        font-family: 'Playfair Display', serif;
+        font-size: 32px;
+        font-weight: bold;
+        margin-top: 30px;
+      }
+
+      .invitation-text {
+        background: #c62828;
+        color: #fff;
+        text-align: center;
+        padding: 5vh 5vw;
+        font-family: 'Arial', serif;
+        line-height: 1.8;
+        max-width: 1000px;
+        border-radius: 12px;
+      }
+
+      .invitation-text .header {
+        font-size: 5vw;
+        font-weight: bold;
+        margin-bottom: 4vh;
+      }
+
+      .invitation-text p {
+        font-size: 3.5vw;
+        margin: 2vh 0;
+      }
+
+      @media (max-width:600px) {
+        .title { font-size: 32px; }
+        .subtitle { font-size: 20px; }
+        .names { font-size: 12vw; line-height: 1.6; }
+        .date { font-size: 20px; }
+
+        .invitation-text .header { font-size: 10vw; }
+        .invitation-text p { font-size: 5vw; }
+      }
     </style>
   </head>
   <body>
@@ -88,6 +114,24 @@
         NGỌC NGÂN
       </p>
       <p class="date">18.10.2026</p>
+    </div>
+
+    <!-- Phần thêm mới -->
+    <div class="invitation-text">
+      <p class="header">THƯ MỜI</p>
+      <p>
+        Sau một chặng đường tìm hiểu và yêu thương, chúng tôi đã quyết định cùng
+        nhau xây dựng tổ ấm, chính thức bước vào hành trình mới của cuộc đời.
+      </p>
+      <p>
+        Trong niềm hạnh phúc của ngày trọng đại, chúng tôi xin trân trọng kính
+        mời Quý Gia Đình, Quý Đồng Nghiệp, Quý Bạn Bè gần xa đến tham dự Lễ Tân
+        Hôn và chung vui cùng gia đình.
+      </p>
+      <p>
+        Sự hiện diện cùng những lời chúc phúc là niềm vinh hạnh, là món quà quý
+        giá và ý nghĩa nhất dành cho chúng tôi trong ngày vui.
+      </p>
     </div>
   </body>
 </html>
