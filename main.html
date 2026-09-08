@@ -1,13 +1,849 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-  <meta charset="UTF-8">
-  <title>Bìa - Wedding</title>
-</head>
-<body>
-  <h1>Welcome to Our Wedding Website</h1>
-  <p>Trung Nghĩa & Ngọc Ngân</p>
-  <a href="index.html">Xem Thiệp Cưới</a>
-</body>
-</html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <title>Wedding Invitation</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 20px 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: #7b1f1f;
+        font-family: "Segoe UI", sans-serif;
+      }
+
+      /* =========================
+         KHUNG CHUNG
+      ========================== */
+
+      .save-date,
+      .invitation-text,
+      .wedding-info,
+      .photo-carousel,
+      .countdown-calendar {
+        width: 90%;
+        max-width: 1000px;
+        margin-bottom: 40px;
+        border-radius: 12px;
+        text-align: center;
+      }
+
+      /* =========================
+         SAVE THE DATE
+      ========================== */
+
+      .save-date {
+        background: #7b1f1f;
+        color: #fdd835;
+        padding: 60px 40px;
+        border: 2px solid #fff;
+      }
+
+      .title {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(30px, 5vw, 48px);
+        font-weight: bold;
+        letter-spacing: 4px;
+        margin-bottom: 20px;
+      }
+
+      .subtitle {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(20px, 3vw, 28px);
+        font-style: italic;
+        margin-bottom: 40px;
+      }
+
+      .names {
+        font-family: "Segoe Script", cursive;
+        font-size: clamp(32px, 6vw, 80px);
+        line-height: 1.4;
+        white-space: nowrap;
+
+        background: linear-gradient(45deg, #fbc02d, #fff9c4);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .date {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(24px, 4vw, 32px);
+        font-weight: bold;
+        margin-top: 30px;
+      }
+
+      /* =========================
+         THƯ MỜI
+      ========================== */
+
+      .invitation-text {
+        background: #c62828;
+        color: #fff;
+        padding: 40px 30px;
+        border: 2px solid #fff;
+        line-height: 1.8;
+      }
+
+      .invitation-text .header {
+        font-size: clamp(28px, 6vw, 48px);
+        font-weight: bold;
+        margin-bottom: 30px;
+      }
+
+      .invitation-text p {
+        font-size: clamp(16px, 3vw, 24px);
+        margin: 20px 0;
+      }
+
+      /* =========================
+         THÔNG TIN LỄ CƯỚI
+      ========================== */
+
+      .wedding-info {
+        background: #c62828;
+        color: #fff;
+        padding: 40px 25px;
+        border: 2px solid #fff;
+        font-family: Georgia, serif;
+        line-height: 1.6;
+      }
+
+      .wedding-info .title {
+        font-size: clamp(28px, 6vw, 48px);
+        font-weight: bold;
+        margin: 20px 0;
+      }
+
+      .wedding-info .subtitle {
+        font-size: clamp(22px, 4.5vw, 36px);
+        margin: 20px 0;
+      }
+
+      .wedding-info .text {
+        font-size: clamp(16px, 3.5vw, 24px);
+        margin: 15px 0;
+      }
+
+      .wedding-info .time {
+        font-size: clamp(20px, 4.5vw, 32px);
+        font-weight: bold;
+        margin: 20px 0;
+      }
+
+      .wedding-info .address {
+        font-size: clamp(16px, 3.5vw, 24px);
+        margin: 20px 0;
+      }
+
+      .wedding-info .invite {
+        font-size: clamp(20px, 4vw, 30px);
+        font-weight: bold;
+        margin-top: 30px;
+      }
+
+      /* =========================
+         COUNTDOWN + CALENDAR
+      ========================== */
+
+      .countdown-calendar {
+        background: #c62828;
+        color: #fff;
+        padding: 30px 20px;
+        border: 2px solid #fff;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+      }
+
+      #countdown {
+        display: flex;
+        justify-content: center;
+        align-items: stretch;
+        gap: 12px;
+        margin-bottom: 30px;
+        width: 100%;
+      }
+
+      .count-box {
+        background: #7b1f1f;
+        color: #fff;
+        padding: 15px 8px;
+        border-radius: 10px;
+        text-align: center;
+        flex: 1;
+        min-width: 0;
+        border: 1px solid #fff;
+      }
+
+      .count-box div:first-child {
+        font-size: clamp(24px, 5vw, 50px);
+        font-weight: bold;
+        line-height: 1.2;
+      }
+
+      .count-box div:last-child {
+        font-size: clamp(12px, 2vw, 18px);
+        margin-top: 5px;
+      }
+
+      /* =========================
+         LỊCH
+      ========================== */
+
+      .calendar-title {
+        font-size: clamp(24px, 4vw, 36px);
+        margin: 20px 0;
+        color: #fff;
+      }
+
+      .calendar {
+        width: 100%;
+        max-width: 700px;
+        margin: 0 auto;
+        border-collapse: separate;
+        border-spacing: 3px;
+        table-layout: fixed;
+        text-align: center;
+        font-size: clamp(12px, 2.5vw, 22px);
+        color: #fff;
+      }
+
+      .calendar th,
+      .calendar td {
+        width: 14.28%;
+        height: 45px;
+        padding: 5px 2px;
+        vertical-align: middle;
+      }
+
+      .calendar th {
+        font-weight: bold;
+      }
+
+      .calendar .special-day {
+        background: #fff;
+        color: #c62828;
+        font-weight: bold;
+        border-radius: 50%;
+      }
+
+      .special-date {
+        margin-top: 25px;
+        font-size: clamp(16px, 3vw, 24px);
+      }
+
+      /* =========================
+         IMAGE CAROUSEL
+      ========================== */
+
+      .photo-carousel {
+        padding: 0;
+      }
+
+      .carousel-title {
+        color: #fdd835;
+        font-family: "Playfair Display", serif;
+        font-size: clamp(28px, 5vw, 48px);
+        margin-bottom: 25px;
+        letter-spacing: 2px;
+      }
+
+      .carousel-container {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        border-radius: 12px;
+        border: 2px solid #fff;
+        background: #000;
+      }
+
+      .carousel-track {
+        display: flex;
+        transition: transform 0.6s ease;
+      }
+
+      .carousel-slide {
+        min-width: 100%;
+        width: 100%;
+      }
+
+      .carousel-slide img {
+        width: 100%;
+        height: 600px;
+        display: block;
+        object-fit: cover;
+      }
+
+      /* Nút chuyển ảnh */
+
+      .carousel-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+
+        width: 50px;
+        height: 50px;
+
+        border: none;
+        border-radius: 50%;
+
+        background: rgba(123, 31, 31, 0.8);
+        color: #fff;
+
+        font-size: 35px;
+        cursor: pointer;
+
+        z-index: 10;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .carousel-btn:hover {
+        background: #c62828;
+      }
+
+      .carousel-btn.prev {
+        left: 15px;
+      }
+
+      .carousel-btn.next {
+        right: 15px;
+      }
+
+      /* Chấm hiển thị */
+
+      .carousel-dots {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 15px;
+      }
+
+      .carousel-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #fff;
+        opacity: 0.5;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .carousel-dot.active {
+        opacity: 1;
+        background: #fdd835;
+        transform: scale(1.3);
+      }
+
+      /* =========================
+         RESPONSIVE ĐIỆN THOẠI
+      ========================== */
+
+      @media (max-width: 600px) {
+
+        body {
+          padding: 10px 0;
+        }
+
+        .save-date,
+        .invitation-text,
+        .wedding-info,
+        .photo-carousel,
+        .countdown-calendar {
+          width: 95%;
+          margin-bottom: 25px;
+        }
+
+        .save-date {
+          padding: 40px 15px;
+        }
+
+        .invitation-text,
+        .wedding-info {
+          padding: 30px 15px;
+        }
+
+        /* COUNTDOWN */
+
+        .countdown-calendar {
+          padding: 20px 10px;
+        }
+
+        #countdown {
+          gap: 5px;
+        }
+
+        .count-box {
+          padding: 12px 3px;
+        }
+
+        .count-box div:first-child {
+          font-size: 7vw;
+        }
+
+        .count-box div:last-child {
+          font-size: 3vw;
+        }
+
+        /* CALENDAR */
+
+        .calendar {
+          border-spacing: 1px;
+        }
+
+        .calendar th,
+        .calendar td {
+          height: 38px;
+          padding: 3px 0;
+          font-size: 3.5vw;
+        }
+
+        /* CAROUSEL */
+
+        .carousel-slide img {
+          height: 450px;
+        }
+
+        .carousel-btn {
+          width: 38px;
+          height: 38px;
+          font-size: 25px;
+        }
+
+        .carousel-btn.prev {
+          left: 8px;
+        }
+
+        .carousel-btn.next {
+          right: 8px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- =========================
+       SAVE THE DATE
+  ========================== -->
+
+    <div class="save-date">
+      <p class="title">SAVE THE DATE</p>
+
+      <p class="subtitle">We Get Married</p>
+
+      <p class="names">
+        TRUNG NGHĨA
+        <br />
+        &
+        <br />
+        NGỌC NGÂN
+      </p>
+
+      <p class="date">18.10.2026</p>
+    </div>
+
+    <!-- =========================
+       THƯ MỜI
+  ========================== -->
+
+    <div class="invitation-text">
+      <p class="header">THƯ MỜI</p>
+
+      <p>
+        Sau một chặng đường tìm hiểu và yêu thương, chúng tôi đã quyết định cùng
+        nhau xây dựng tổ ấm, chính thức bước vào hành trình mới của cuộc đời.
+      </p>
+
+      <p>
+        Trong niềm hạnh phúc của ngày trọng đại, chúng tôi xin trân trọng kính
+        mời Quý Gia Đình, Quý Đồng Nghiệp, Quý Bạn Bè gần xa đến tham dự Lễ Tân
+        Hôn và chung vui cùng gia đình.
+      </p>
+
+      <p>
+        Sự hiện diện cùng những lời chúc phúc là niềm vinh hạnh, là món quà quý
+        giá và ý nghĩa nhất dành cho chúng tôi trong ngày vui.
+      </p>
+    </div>
+
+    <!-- =========================
+       THÔNG TIN LỄ CƯỚI
+  ========================== -->
+
+    <div class="wedding-info">
+      <p class="title">THÔNG TIN LỄ CƯỚI</p>
+
+      <p class="subtitle">DỰ TIỆC MỪNG CƯỚI</p>
+
+      <p class="text">──────</p>
+
+      <p class="text">Chủ nhật</p>
+
+      <p class="time">11 Giờ, ngày 18.10.2026</p>
+
+      <p class="text">──────</p>
+
+      <p class="text">Âm lịch ngày 09 tháng 09 năm Bính Ngọ</p>
+
+      <p class="text">TẠI TƯ GIA NHÀ TRAI</p>
+
+      <p class="address">
+        168A/12, Khóm Long Hưng, Phường Thanh Đức, Tỉnh Vĩnh Long
+      </p>
+
+      <p class="invite">TRÂN TRỌNG KÍNH MỜI</p>
+    </div>
+
+    <!-- =========================
+       ĐẾM NGƯỢC + LỊCH
+  ========================== -->
+
+    <div class="countdown-calendar">
+      <div id="countdown">
+        <div class="count-box">
+          <div id="days">0</div>
+          <div>Ngày</div>
+        </div>
+
+        <div class="count-box">
+          <div id="hours">0</div>
+          <div>Giờ</div>
+        </div>
+
+        <div class="count-box">
+          <div id="minutes">0</div>
+          <div>Phút</div>
+        </div>
+
+        <div class="count-box">
+          <div id="seconds">0</div>
+          <div>Giây</div>
+        </div>
+      </div>
+
+      <h2 class="calendar-title">Tháng 10.2026</h2>
+
+      <table class="calendar">
+        <tr>
+          <th>Mon</th>
+          <th>Tue</th>
+          <th>Wed</th>
+          <th>Thu</th>
+          <th>Fri</th>
+          <th>Sat</th>
+          <th>Sun</th>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>1</td>
+          <td>2</td>
+          <td>3</td>
+          <td>4</td>
+        </tr>
+
+        <tr>
+          <td>5</td>
+          <td>6</td>
+          <td>7</td>
+          <td>8</td>
+          <td>9</td>
+          <td>10</td>
+          <td>11</td>
+        </tr>
+
+        <tr>
+          <td>12</td>
+          <td>13</td>
+          <td>14</td>
+          <td>15</td>
+          <td>16</td>
+          <td>17</td>
+          <td class="special-day">18</td>
+        </tr>
+
+        <tr>
+          <td>19</td>
+          <td>20</td>
+          <td>21</td>
+          <td>22</td>
+          <td>23</td>
+          <td>24</td>
+          <td>25</td>
+        </tr>
+
+        <tr>
+          <td>26</td>
+          <td>27</td>
+          <td>28</td>
+          <td>29</td>
+          <td>30</td>
+          <td>31</td>
+          <td></td>
+        </tr>
+      </table>
+
+      <p class="special-date">💖 Ngày đặc biệt: 18.10.2026</p>
+    </div>
+
+    <!-- =========================
+       IMAGE CAROUSEL 
+  ========================== -->
+
+    <div class="photo-carousel">
+      <h2 class="carousel-title">KHOẢNH KHẮC CỦA CHÚNG MÌNH</h2>
+
+      <div class="carousel-container">
+        <div class="carousel-track" id="carouselTrack">
+          <!-- ẢNH 1 -->
+          <div class="carousel-slide">
+            <img
+              src="image/anh1.jpg"
+              alt="Ảnh cưới Trung Nghĩa và Ngọc Ngân"
+            />
+          </div>
+
+          <!-- ẢNH 2 -->
+          <div class="carousel-slide">
+            <img
+              src="image/anh2.jpg"
+              alt="Ảnh cưới Trung Nghĩa và Ngọc Ngân"
+            />
+          </div>
+
+          <!-- ẢNH 3 -->
+          <div class="carousel-slide">
+            <img
+              src="image/anh3.jpg"
+              alt="Ảnh cưới Trung Nghĩa và Ngọc Ngân"
+            />
+          </div>
+
+          <!-- ẢNH 4 -->
+          <div class="carousel-slide">
+            <img
+              src="image/anh4.jpg"
+              alt="Ảnh cưới Trung Nghĩa và Ngọc Ngân"
+            />
+          </div>
+
+          <!-- ẢNH 5 -->
+          <div class="carousel-slide">
+            <img
+              src="image/anh5.jpg"
+              alt="Ảnh cưới Trung Nghĩa và Ngọc Ngân"
+            />
+          </div>
+        </div>
+
+        <!-- NÚT ẢNH TRƯỚC -->
+
+        <button
+          class="carousel-btn prev"
+          onclick="prevSlide()"
+          aria-label="Ảnh trước"
+        >
+          ‹
+        </button>
+
+        <!-- NÚT ẢNH TIẾP -->
+
+        <button
+          class="carousel-btn next"
+          onclick="nextSlide()"
+          aria-label="Ảnh tiếp theo"
+        >
+          ›
+        </button>
+      </div>
+
+      <!-- CÁC DẤU CHẤM -->
+
+      <div class="carousel-dots">
+        <span class="carousel-dot active" onclick="goToSlide(0)"></span>
+
+        <span class="carousel-dot" onclick="goToSlide(1)"></span>
+
+        <span class="carousel-dot" onclick="goToSlide(2)"></span>
+
+        <span class="carousel-dot" onclick="goToSlide(3)"></span>
+
+        <span class="carousel-dot" onclick="goToSlide(4)"></span>
+      </div>
+    </div>
+
+    <!-- =========================
+       SCRIPT CAROUSEL
+  ========================== -->
+
+    <script>
+
+      let currentSlide = 0;
+
+      const track =
+        document.getElementById("carouselTrack");
+
+      const slides =
+        document.querySelectorAll(".carousel-slide");
+
+      const dots =
+        document.querySelectorAll(".carousel-dot");
+
+      const totalSlides =
+        slides.length;
+
+
+      function showSlide(index) {
+
+        if (index >= totalSlides) {
+          currentSlide = 0;
+        }
+
+        else if (index < 0) {
+          currentSlide = totalSlides - 1;
+        }
+
+        else {
+          currentSlide = index;
+        }
+
+
+        track.style.transform =
+          "translateX(-" +
+          currentSlide * 100 +
+          "%)";
+
+
+        dots.forEach(function(dot) {
+          dot.classList.remove("active");
+        });
+
+
+        dots[currentSlide]
+          .classList.add("active");
+
+      }
+
+
+      function nextSlide() {
+        showSlide(currentSlide + 1);
+      }
+
+
+      function prevSlide() {
+        showSlide(currentSlide - 1);
+      }
+
+
+      function goToSlide(index) {
+        showSlide(index);
+      }
+
+
+      /* TỰ ĐỘNG CHUYỂN ẢNH */
+
+      setInterval(function() {
+        nextSlide();
+      }, 4000);
+    </script>
+
+    <!-- =========================
+       SCRIPT ĐẾM NGƯỢC
+  ========================== -->
+
+    <script>
+
+      var targetDate =
+        new Date("2026-10-18T00:00:00").getTime();
+
+
+      function updateCountdown() {
+
+        var now =
+          new Date().getTime();
+
+        var distance =
+          targetDate - now;
+
+
+        if (distance <= 0) {
+
+          clearInterval(countdown);
+
+          document.getElementById("countdown").innerHTML =
+            "🎉 Đã đến ngày trọng đại!";
+
+          return;
+        }
+
+
+        var days =
+          Math.floor(
+            distance / (1000 * 60 * 60 * 24)
+          );
+
+
+        var hours =
+          Math.floor(
+            (distance % (1000 * 60 * 60 * 24)) /
+            (1000 * 60 * 60)
+          );
+
+
+        var minutes =
+          Math.floor(
+            (distance % (1000 * 60 * 60)) /
+            (1000 * 60)
+          );
+
+
+        var seconds =
+          Math.floor(
+            (distance % (1000 * 60)) /
+            1000
+          );
+
+
+        document.getElementById("days").innerHTML =
+          days;
+
+        document.getElementById("hours").innerHTML =
+          hours;
+
+        document.getElementById("minutes").innerHTML =
+          minutes;
+
+        document.getElementById("seconds").innerHTML =
+          seconds;
+
+      }
+
+
+      /* Chạy ngay khi mở trang */
+
+      updateCountdown();
+
+
+      /* Cập nhật mỗi giây */
+
+      var countdown =
+        setInterval(
+          updateCountdown,
+          1000
+        );
+    </script>
+  </body>
+</html>
