@@ -1,91 +1,93 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-  <meta charset="UTF-8">
-  <title>Wedding Invitation</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: #7b1f1f; /* đỏ đậm */
-      font-family: 'Segoe UI', sans-serif;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <title>Wedding Invitation</title>
+    <style>
+          body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #7b1f1f; /* đỏ đậm */
+            font-family: 'Segoe UI', sans-serif;
+          }
 
-    .save-date {
-      background: #7b1f1f;
-      color: #fdd835;
-      padding: 60px 40px;
-      text-align: center;
-      border: 3px solid #fdd835;
-      border-radius: 12px;
-      max-width: 1000px;
-      width: 90%;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    }
+          .save-date {
+            background: #7b1f1f;
+            color: #fdd835;
+            padding: 60px 40px;
+            text-align: center;
+            border: 3px solid #fdd835;
+            border-radius: 12px;
+            max-width: 1000px;
+            width: 90%;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+          }
 
-    .save-date:hover {
-      border-color: #fff176;
-      box-shadow: 0 0 20px rgba(253,216,53,0.7);
-    }
+          .save-date:hover {
+            border-color: #fff176;
+            box-shadow: 0 0 20px rgba(253,216,53,0.7);
+          }
 
-    .title {
-      font-family: 'Playfair Display', serif;
-      font-size: 48px;
-      font-weight: bold;
-      letter-spacing: 4px;
-      margin-bottom: 20px;
-    }
+          .title {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: bold;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+          }
 
-    .subtitle {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 28px;
-      font-style: italic;
-      margin-bottom: 40px;
-    }
+          .subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            font-style: italic;
+            margin-bottom: 40px;
+          }
 
-    .names {
-      font-family: 'Segoe Script', cursive;
-      font-size: 8vw;
-      text-align: center;
-      line-height: 1.4;
-      background: linear-gradient(45deg, #fbc02d, #fff9c4);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow:
-        1px 1px 2px #000,
-        0 0 6px #fdd835,
-        1 0 12px #fbc02d;
-    }
+          .names {
+          font-family: 'Segoe Script', cursive;
+          font-size: clamp(32px, 6vw, 80px); /* tự động co giãn theo màn hình */
+          text-align: center;
+          line-height: 1.4;
+          white-space: nowrap; /* giữ nguyên một dòng */
+          overflow-wrap: normal; /* không cho xuống dòng */
+          background: linear-gradient(45deg, #fbc02d, #fff9c4);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          text-shadow:
+          1px 1px 2px #000,
+          0 0 6px #fdd835,
+      }
 
-    .date {
-      font-family: 'Playfair Display', serif;
-      font-size: 32px;
-      font-weight: bold;
-      margin-top: 30px;
-    }
 
-    @media (max-width:600px) {
-      .title { font-size: 32px; }
-      .subtitle { font-size: 20px; }
-      .names { font-size: 12vw; line-height: 1.6; }
-      .date { font-size: 20px; }
-    }
-  </style>
-</head>
-<body>
-  <div class="save-date">
-    <p class="title">SAVE THE DATE</p>
-    <p class="subtitle">We Get Married</p>
-    <p class="names">
-      TRUNG NGHĨA<br>
-      &<br>
-      NGỌC NGÂN
-    </p>
-    <p class="date">18.10.2026</p>
-  </div>
-</body>
+          .date {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: bold;
+            margin-top: 30px;
+          }
+
+          @media (max-width:600px) {
+            .title { font-size: 32px; }
+            .subtitle { font-size: 20px; }
+            .names { font-size: 12vw; line-height: 1.6; }
+            .date { font-size: 20px; }
+          }
+    </style>
+  </head>
+  <body>
+    <div class="save-date">
+      <p class="title">SAVE THE DATE</p>
+      <p class="subtitle">We Get Married</p>
+      <p class="names">
+        TRUNG NGHĨA<br />
+        &<br />
+        NGỌC NGÂN
+      </p>
+      <p class="date">18.10.2026</p>
+    </div>
+  </body>
 </html>
