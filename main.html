@@ -16,37 +16,37 @@
         padding: 20px 0;
         min-height: 100vh;
         display: flex;
-        justify-content: center;
+        flex-direction: column;
         align-items: center;
         background: #7b1f1f;
         font-family: "Segoe UI", sans-serif;
-        flex-direction: column;
       }
 
       /* =========================
          KHUNG CHUNG
-      ========================= */
+      ========================== */
 
       .save-date,
       .invitation-text,
       .wedding-info,
+      .photo-carousel,
       .countdown-calendar {
-        max-width: 1000px;
         width: 90%;
-        border-radius: 12px;
-        border: 2px solid #fff;
+        max-width: 1000px;
         margin-bottom: 40px;
+        border-radius: 12px;
         text-align: center;
       }
 
       /* =========================
          SAVE THE DATE
-      ========================= */
+      ========================== */
 
       .save-date {
         background: #7b1f1f;
         color: #fdd835;
         padding: 60px 40px;
+        border: 2px solid #fff;
       }
 
       .title {
@@ -69,12 +69,10 @@
         font-size: clamp(32px, 6vw, 80px);
         line-height: 1.4;
         white-space: nowrap;
+
         background: linear-gradient(45deg, #fbc02d, #fff9c4);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        text-shadow:
-          1px 1px 2px #000,
-          1 1px 6px #fdd835;
       }
 
       .date {
@@ -86,13 +84,13 @@
 
       /* =========================
          THƯ MỜI
-      ========================= */
+      ========================== */
 
       .invitation-text {
         background: #c62828;
         color: #fff;
         padding: 40px 30px;
-        font-family: Arial, sans-serif;
+        border: 2px solid #fff;
         line-height: 1.8;
       }
 
@@ -109,12 +107,13 @@
 
       /* =========================
          THÔNG TIN LỄ CƯỚI
-      ========================= */
+      ========================== */
 
       .wedding-info {
         background: #c62828;
         color: #fff;
         padding: 40px 25px;
+        border: 2px solid #fff;
         font-family: Georgia, serif;
         line-height: 1.6;
       }
@@ -153,13 +152,14 @@
       }
 
       /* =========================
-         ĐẾM NGƯỢC + LỊCH
-      ========================= */
+         COUNTDOWN + CALENDAR
+      ========================== */
 
       .countdown-calendar {
         background: #c62828;
         color: #fff;
         padding: 30px 20px;
+        border: 2px solid #fff;
         font-family: Arial, sans-serif;
         line-height: 1.6;
       }
@@ -196,18 +196,14 @@
       }
 
       /* =========================
-         TIÊU ĐỀ LỊCH
-      ========================= */
+         LỊCH
+      ========================== */
 
       .calendar-title {
         font-size: clamp(24px, 4vw, 36px);
         margin: 20px 0;
         color: #fff;
       }
-
-      /* =========================
-         LỊCH
-      ========================= */
 
       .calendar {
         width: 100%;
@@ -218,7 +214,6 @@
         table-layout: fixed;
         text-align: center;
         font-size: clamp(12px, 2.5vw, 22px);
-        background: transparent;
         color: #fff;
       }
 
@@ -247,8 +242,113 @@
       }
 
       /* =========================
+         IMAGE CAROUSEL
+      ========================== */
+
+      .photo-carousel {
+        padding: 0;
+      }
+
+      .carousel-title {
+        color: #fdd835;
+        font-family: "Playfair Display", serif;
+        font-size: clamp(28px, 5vw, 48px);
+        margin-bottom: 25px;
+        letter-spacing: 2px;
+      }
+
+      .carousel-container {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        border-radius: 12px;
+        border: 2px solid #fff;
+        background: #000;
+      }
+
+      .carousel-track {
+        display: flex;
+        transition: transform 0.6s ease;
+      }
+
+      .carousel-slide {
+        min-width: 100%;
+        width: 100%;
+      }
+
+      .carousel-slide img {
+        width: 100%;
+        height: 600px;
+        display: block;
+        object-fit: cover;
+      }
+
+      /* Nút chuyển ảnh */
+
+      .carousel-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+
+        width: 50px;
+        height: 50px;
+
+        border: none;
+        border-radius: 50%;
+
+        background: rgba(123, 31, 31, 0.8);
+        color: #fff;
+
+        font-size: 35px;
+        cursor: pointer;
+
+        z-index: 10;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .carousel-btn:hover {
+        background: #c62828;
+      }
+
+      .carousel-btn.prev {
+        left: 15px;
+      }
+
+      .carousel-btn.next {
+        right: 15px;
+      }
+
+      /* Chấm hiển thị */
+
+      .carousel-dots {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 15px;
+      }
+
+      .carousel-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #fff;
+        opacity: 0.5;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .carousel-dot.active {
+        opacity: 1;
+        background: #fdd835;
+        transform: scale(1.3);
+      }
+
+      /* =========================
          RESPONSIVE ĐIỆN THOẠI
-      ========================= */
+      ========================== */
 
       @media (max-width: 600px) {
 
@@ -259,6 +359,7 @@
         .save-date,
         .invitation-text,
         .wedding-info,
+        .photo-carousel,
         .countdown-calendar {
           width: 95%;
           margin-bottom: 25px;
@@ -272,6 +373,8 @@
         .wedding-info {
           padding: 30px 15px;
         }
+
+        /* COUNTDOWN */
 
         .countdown-calendar {
           padding: 20px 10px;
@@ -293,6 +396,8 @@
           font-size: 3vw;
         }
 
+        /* CALENDAR */
+
         .calendar {
           border-spacing: 1px;
         }
@@ -302,6 +407,26 @@
           height: 38px;
           padding: 3px 0;
           font-size: 3.5vw;
+        }
+
+        /* CAROUSEL */
+
+        .carousel-slide img {
+          height: 450px;
+        }
+
+        .carousel-btn {
+          width: 38px;
+          height: 38px;
+          font-size: 25px;
+        }
+
+        .carousel-btn.prev {
+          left: 8px;
+        }
+
+        .carousel-btn.next {
+          right: 8px;
         }
       }
     </style>
@@ -318,8 +443,10 @@
       <p class="subtitle">We Get Married</p>
 
       <p class="names">
-        TRUNG NGHĨA<br />
-        &<br />
+        TRUNG NGHĨA
+        <br />
+        &
+        <br />
         NGỌC NGÂN
       </p>
 
@@ -383,8 +510,6 @@
   ========================== -->
 
     <div class="countdown-calendar">
-      <!-- ĐẾM NGƯỢC -->
-
       <div id="countdown">
         <div class="count-box">
           <div id="days">0</div>
@@ -407,11 +532,7 @@
         </div>
       </div>
 
-      <!-- TIÊU ĐỀ LỊCH -->
-
       <h2 class="calendar-title">Tháng 10.2026</h2>
-
-      <!-- LỊCH -->
 
       <table class="calendar">
         <tr>
@@ -479,23 +600,185 @@
     </div>
 
     <!-- =========================
+       IMAGE CAROUSEL 
+  ========================== -->
+
+    <div class="photo-carousel">
+      <h2 class="carousel-title">KHOẢNH KHẮC CỦA CHÚNG MÌNH</h2>
+
+      <div class="carousel-container">
+        <div class="carousel-track" id="carouselTrack">
+          <!-- ẢNH 1 -->
+          <div class="carousel-slide">
+            <img
+              src="image/anh1.jpg"
+              alt="Ảnh cưới Trung Nghĩa và Ngọc Ngân"
+            />
+          </div>
+
+          <!-- ẢNH 2 -->
+          <div class="carousel-slide">
+            <img
+              src="image/anh2.jpg"
+              alt="Ảnh cưới Trung Nghĩa và Ngọc Ngân"
+            />
+          </div>
+
+          <!-- ẢNH 3 -->
+          <div class="carousel-slide">
+            <img
+              src="image/anh3.jpg"
+              alt="Ảnh cưới Trung Nghĩa và Ngọc Ngân"
+            />
+          </div>
+
+          <!-- ẢNH 4 -->
+          <div class="carousel-slide">
+            <img
+              src="image/anh4.jpg"
+              alt="Ảnh cưới Trung Nghĩa và Ngọc Ngân"
+            />
+          </div>
+
+          <!-- ẢNH 5 -->
+          <div class="carousel-slide">
+            <img
+              src="image/anh5.jpg"
+              alt="Ảnh cưới Trung Nghĩa và Ngọc Ngân"
+            />
+          </div>
+        </div>
+
+        <!-- NÚT ẢNH TRƯỚC -->
+
+        <button
+          class="carousel-btn prev"
+          onclick="prevSlide()"
+          aria-label="Ảnh trước"
+        >
+          ‹
+        </button>
+
+        <!-- NÚT ẢNH TIẾP -->
+
+        <button
+          class="carousel-btn next"
+          onclick="nextSlide()"
+          aria-label="Ảnh tiếp theo"
+        >
+          ›
+        </button>
+      </div>
+
+      <!-- CÁC DẤU CHẤM -->
+
+      <div class="carousel-dots">
+        <span class="carousel-dot active" onclick="goToSlide(0)"></span>
+
+        <span class="carousel-dot" onclick="goToSlide(1)"></span>
+
+        <span class="carousel-dot" onclick="goToSlide(2)"></span>
+
+        <span class="carousel-dot" onclick="goToSlide(3)"></span>
+
+        <span class="carousel-dot" onclick="goToSlide(4)"></span>
+      </div>
+    </div>
+
+    <!-- =========================
+       SCRIPT CAROUSEL
+  ========================== -->
+
+    <script>
+
+      let currentSlide = 0;
+
+      const track =
+        document.getElementById("carouselTrack");
+
+      const slides =
+        document.querySelectorAll(".carousel-slide");
+
+      const dots =
+        document.querySelectorAll(".carousel-dot");
+
+      const totalSlides =
+        slides.length;
+
+
+      function showSlide(index) {
+
+        if (index >= totalSlides) {
+          currentSlide = 0;
+        }
+
+        else if (index < 0) {
+          currentSlide = totalSlides - 1;
+        }
+
+        else {
+          currentSlide = index;
+        }
+
+
+        track.style.transform =
+          "translateX(-" +
+          currentSlide * 100 +
+          "%)";
+
+
+        dots.forEach(function(dot) {
+          dot.classList.remove("active");
+        });
+
+
+        dots[currentSlide]
+          .classList.add("active");
+
+      }
+
+
+      function nextSlide() {
+        showSlide(currentSlide + 1);
+      }
+
+
+      function prevSlide() {
+        showSlide(currentSlide - 1);
+      }
+
+
+      function goToSlide(index) {
+        showSlide(index);
+      }
+
+
+      /* TỰ ĐỘNG CHUYỂN ẢNH */
+
+      setInterval(function() {
+        nextSlide();
+      }, 4000);
+    </script>
+
+    <!-- =========================
        SCRIPT ĐẾM NGƯỢC
   ========================== -->
 
     <script>
 
-      // Ngày cưới
-      var targetDate = new Date("2026-10-18T00:00:00").getTime();
+      var targetDate =
+        new Date("2026-10-18T00:00:00").getTime();
 
 
       function updateCountdown() {
 
-        var now = new Date().getTime();
+        var now =
+          new Date().getTime();
 
-        var distance = targetDate - now;
+        var distance =
+          targetDate - now;
 
 
-        // Nếu đã đến ngày cưới
         if (distance <= 0) {
 
           clearInterval(countdown);
@@ -507,34 +790,33 @@
         }
 
 
-        // Tính ngày
-        var days = Math.floor(
-          distance / (1000 * 60 * 60 * 24)
-        );
+        var days =
+          Math.floor(
+            distance / (1000 * 60 * 60 * 24)
+          );
 
 
-        // Tính giờ
-        var hours = Math.floor(
-          (distance % (1000 * 60 * 60 * 24)) /
-          (1000 * 60 * 60)
-        );
+        var hours =
+          Math.floor(
+            (distance % (1000 * 60 * 60 * 24)) /
+            (1000 * 60 * 60)
+          );
 
 
-        // Tính phút
-        var minutes = Math.floor(
-          (distance % (1000 * 60 * 60)) /
-          (1000 * 60)
-        );
+        var minutes =
+          Math.floor(
+            (distance % (1000 * 60 * 60)) /
+            (1000 * 60)
+          );
 
 
-        // Tính giây
-        var seconds = Math.floor(
-          (distance % (1000 * 60)) /
-          1000
-        );
+        var seconds =
+          Math.floor(
+            (distance % (1000 * 60)) /
+            1000
+          );
 
 
-        // Hiển thị
         document.getElementById("days").innerHTML =
           days;
 
@@ -546,18 +828,22 @@
 
         document.getElementById("seconds").innerHTML =
           seconds;
+
       }
 
 
-      // Chạy ngay khi mở trang
+      /* Chạy ngay khi mở trang */
+
       updateCountdown();
 
 
-      // Cập nhật mỗi giây
-      var countdown = setInterval(
-        updateCountdown,
-        1000
-      );
+      /* Cập nhật mỗi giây */
+
+      var countdown =
+        setInterval(
+          updateCountdown,
+          1000
+        );
     </script>
   </body>
 </html>
