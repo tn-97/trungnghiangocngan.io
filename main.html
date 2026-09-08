@@ -11,27 +11,24 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background: #7b1f1f; /* đỏ đậm */
+        background: #7b1f1f;
         font-family: 'Segoe UI', sans-serif;
         flex-direction: column;
+      }
+
+      .save-date, .invitation-text, .wedding-info, .countdown-calendar {
+        max-width: 1000px;
+        width: 90%;
+        border-radius: 12px;
+        border: 2px solid #fff;
+        margin-bottom: 40px;
+        text-align: center;
       }
 
       .save-date {
         background: #7b1f1f;
         color: #fdd835;
         padding: 60px 40px;
-        text-align: center;
-        border: 3px solid #fdd835;
-        border-radius: 12px;
-        max-width: 1000px;
-        width: 90%;
-        transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        margin-bottom: 40px;
-      }
-
-      .save-date:hover {
-        border-color: #fff176;
-        box-shadow: 0 0 20px rgba(253,216,53,0.7);
       }
 
       .title {
@@ -52,16 +49,12 @@
       .names {
         font-family: 'Segoe Script', cursive;
         font-size: clamp(32px, 6vw, 80px);
-        text-align: center;
         line-height: 1.4;
         white-space: nowrap;
-        overflow-wrap: normal;
         background: linear-gradient(45deg, #fbc02d, #fff9c4);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        text-shadow:
-          1px 1px 2px #000,
-          0 1 6px #fdd835;
+        text-shadow: 1px 1px 2px #000, 0 1 6px #fdd835;
       }
 
       .date {
@@ -74,18 +67,13 @@
       .invitation-text {
         background: #c62828;
         color: #fff;
-        text-align: center;
         padding: 5vh 5vw;
         font-family: 'Arial', serif;
         line-height: 1.8;
-        max-width: 1000px;
-        border-radius: 12px;
-        border: 2px solid #fff;
-        margin-bottom: 40px;
       }
 
       .invitation-text .header {
-        font-size: 6vw; /* đồng bộ với wedding-info title */
+        font-size: 6vw;
         font-weight: bold;
         margin-bottom: 4vh;
       }
@@ -98,17 +86,13 @@
       .wedding-info {
         background: #c62828;
         color: #fff;
-        text-align: center;
         padding: 5vh 2vw;
         font-family: 'Georgia', serif;
         line-height: 1.6;
-        max-width: 1000px;
-        border-radius: 12px;
-        border: 3px solid #fff;
       }
 
       .wedding-info .title {
-        font-size: 6vw; /* đồng bộ với invitation-text header */
+        font-size: 6vw;
         font-weight: bold;
         margin: 2vh 0;
       }
@@ -140,21 +124,45 @@
         margin-top: 3vh;
       }
 
-      @media (max-width:600px) {
-        .title { font-size: 32px; }
-        .subtitle { font-size: 20px; }
-        .names { font-size: 12vw; line-height: 1.6; }
-        .date { font-size: 20px; }
+      .countdown-calendar {
+        background:#c62828;
+        color:#fff;
+        padding:5vh 2vw;
+        font-family:'sans-serif';
+        line-height:1.6;
+      }
 
-        .invitation-text .header { font-size: 9vw; }
-        .invitation-text p { font-size: 5vw; }
-
-        .wedding-info .title { font-size: 9vw; }
-        .wedding-info .subtitle { font-size: 7vw; }
-        .wedding-info .text { font-size: 5vw; }
-        .wedding-info .time { font-size: 6vw; }
-        .wedding-info .address { font-size: 5vw; }
-        .wedding-info .invite { font-size: 6.5vw; }
+      .count-box {
+        background:#c62828;
+        color:#fff;
+        padding:5vw;
+        border-radius:2vw;
+        text-align:center;
+        flex:1;
+        margin:2vw;
+        border:2px solid #fff;
+      }
+      .count-box div:first-child {
+        font-size:10vw;
+        font-weight:bold;
+      }
+      .count-box div:last-child {
+        font-size:4vw;
+      }
+      
+      .calendar {
+        margin:auto;
+        border-collapse:collapse;
+        text-align:center;
+        font-size:4vw;
+        background:#c62828;
+        color:#fff;
+        border-radius:2vw;
+        padding:2vw;
+        border:2px solid #fff;
+      }
+      .calendar th, .calendar td {
+        padding:2vw;
       }
     </style>
   </head>
@@ -162,11 +170,7 @@
     <div class="save-date">
       <p class="title">SAVE THE DATE</p>
       <p class="subtitle">We Get Married</p>
-      <p class="names">
-        TRUNG NGHĨA<br />
-        &<br />
-        NGỌC NGÂN
-      </p>
+      <p class="names">TRUNG NGHĨA<br />&<br />NGỌC NGÂN</p>
       <p class="date">18.10.2026</p>
     </div>
 
@@ -201,5 +205,117 @@
       </p>
       <p class="invite">TRÂN TRỌNG KÍNH MỜI</p>
     </div>
+
+    <div class="countdown-calendar">
+      <!-- Countdown -->
+      <div
+        id="countdown"
+        style="display:flex; justify-content:center; flex-wrap:wrap; margin-bottom:5vh;"
+      >
+        <div class="count-box">
+          <div id="days">0</div>
+          <div>ngày</div>
+        </div>
+        <div class="count-box">
+          <div id="hours">0</div>
+          <div>giờ</div>
+        </div>
+        <div class="count-box">
+          <div id="minutes">0</div>
+          <div>phút</div>
+        </div>
+        <div class="count-box">
+          <div id="seconds">0</div>
+          <div>giây</div>
+        </div>
+      </div>
+      <!-- Lịch -->
+      <h2 style="font-size:6vw; color:#fff;">Tháng 10.2026</h2>
+      <table class="calendar">
+        <tr>
+          <th>Mon</th>
+          <th>Tue</th>
+          <th>Wed</th>
+          <th>Thu</th>
+          <th>Fri</th>
+          <th>Sat</th>
+          <th>Sun</th>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>1</td>
+          <td>2</td>
+          <td>3</td>
+          <td>4</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>6</td>
+          <td>7</td>
+          <td>8</td>
+          <td>9</td>
+          <td>10</td>
+          <td>11</td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td>13</td>
+          <td>14</td>
+          <td>15</td>
+          <td>16</td>
+          <td>17</td>
+          <td
+            style="background:#fff; color:#c62828; font-weight:bold; border-radius:50%;"
+          >
+            18
+          </td>
+        </tr>
+        <tr>
+          <td>19</td>
+          <td>20</td>
+          <td>21</td>
+          <td>22</td>
+          <td>23</td>
+          <td>24</td>
+          <td>25</td>
+        </tr>
+        <tr>
+          <td>26</td>
+          <td>27</td>
+          <td>28</td>
+          <td>29</td>
+          <td>30</td>
+          <td>31</td>
+          <td></td>
+        </tr>
+      </table>
+      <p style="margin-top:2vh; font-size:5vw;">💖 Ngày đặc biệt: 18.10.2026</p>
+    </div>
+
+    <!-- Script Countdown -->
+    <script>
+      var targetDate = new Date("October 18, 2026 00:00:00").getTime();
+      var countdown = setInterval(function() {
+        var now = new Date().getTime();
+        var distance = targetDate - now;
+
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("days").innerHTML = days;
+        document.getElementById("hours").innerHTML = hours;
+        document.getElementById("minutes").innerHTML = minutes;
+        document.getElementById("seconds").innerHTML = seconds;
+
+        if (distance < 0) {
+          clearInterval(countdown);
+          document.getElementById("countdown").innerHTML = "🎉 Đã đến ngày trọng đại!";
+        }
+      }, 1000);
+    </script>
   </body>
 </html>
