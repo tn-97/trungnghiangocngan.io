@@ -1125,19 +1125,18 @@
       
             document.removeEventListener("click", startOnFirstInteraction);
             document.removeEventListener("touchstart", startOnFirstInteraction);
-            document.removeEventListener("scroll", startOnFirstInteraction);
+            document.removeEventListener("touchmove", startOnFirstInteraction);
           }
       
-          // Luôn thêm click và touch
+          // Cho desktop/laptop
           document.addEventListener("click", startOnFirstInteraction);
-          document.addEventListener("touchstart", startOnFirstInteraction);
       
-          // Chỉ thêm scroll nếu là mobile
-          if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || window.matchMedia("(max-width: 768px)").matches) {
-            document.addEventListener("scroll", startOnFirstInteraction);
-          }
+          // Cho mobile
+          document.addEventListener("touchstart", startOnFirstInteraction);
+          document.addEventListener("touchmove", startOnFirstInteraction);
         });
       });
+
 
     </script>
   </body>
