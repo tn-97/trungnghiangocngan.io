@@ -1113,31 +1113,32 @@
       /* TỰ ĐỘNG PHÁT NGAY KHI MỞ TRANG (NẾU TRÌNH DUYỆT CHO PHÉP) */
 
       window.addEventListener("load", function() {
-
         bgMusic.play().then(function() {
           musicPlayer.classList.add("playing");
           isPlaying = true;
         }).catch(function(error) {
-          /* Đa số trình duyệt chặn tự động phát nhạc có âm thanh
-             cho đến khi người dùng tương tác với trang.
-             Trường hợp này, nhạc sẽ tự phát ngay khi người dùng
-             chạm/click vào bất kỳ đâu trên trang lần đầu tiên. */
-
           function startOnFirstInteraction() {
-
             bgMusic.play().then(function() {
               musicPlayer.classList.add("playing");
               isPlaying = true;
             });
-
+      
             document.removeEventListener("click", startOnFirstInteraction);
             document.removeEventListener("touchstart", startOnFirstInteraction);
+            document.removeEventListener("scroll", startOnFirstInteraction);
           }
-
+      
+          // Luôn thêm click và touch
           document.addEventListener("click", startOnFirstInteraction);
           document.addEventListener("touchstart", startOnFirstInteraction);
+      
+          // Chỉ thêm scroll nếu là mobile
+          if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || window.matchMedia("(max-width: 768px)").matches) {
+            document.addEventListener("scroll", startOnFirstInteraction);
+          }
         });
       });
+
     </script>
   </body>
 </html>
