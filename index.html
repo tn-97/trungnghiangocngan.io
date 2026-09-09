@@ -106,9 +106,16 @@
 
   <script>
     const btn = document.getElementById('openCard');
+
     btn.addEventListener('click', function(event) {
       event.preventDefault();
+
+      /* GHI NHỚ: người dùng vừa bấm (có "user gesture"),
+         báo cho trang thiệp chính biết để tự phát nhạc ngay khi mở */
+      sessionStorage.setItem('autoplayMusic', '1');
+
       document.body.classList.add('fade-out');
+
       setTimeout(() => {
         window.location.href = btn.getAttribute('href');
       }, 800);
