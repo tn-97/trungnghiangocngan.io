@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="vi">
   <head>
@@ -510,6 +509,67 @@
         }
       }
 
+      /* =========================
+         NÚT NHẠC NỀN (NỔI, THEO CUỘN TRANG)
+      ========================= */
+
+      .music-player {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        z-index: 999;
+
+        width: 65px;
+        height: 65px;
+
+        border-radius: 50%;
+        background: radial-gradient(circle at 30% 30%, #fdd835, #7b1f1f 70%);
+        border: 2px solid #fff;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        transition: transform 0.3s ease;
+      }
+
+      .music-player:hover {
+        transform: scale(1.08);
+      }
+
+      .music-player img,
+      .music-player svg {
+        width: 60%;
+        height: 60%;
+        pointer-events: none;
+      }
+
+      /* ĐĨA NHẠC QUAY TRÒN KHI ĐANG PHÁT */
+
+      .music-player.playing .disc-icon {
+        animation: discSpin 3s linear infinite;
+      }
+
+      @keyframes discSpin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @media (max-width: 600px) {
+        .music-player {
+          width: 55px;
+          height: 55px;
+          bottom: 18px;
+          right: 18px;
+        }
+      }
+
 
 
 
@@ -1005,5 +1065,79 @@
         Nhấn vào đây!!!
       </a>
     </div>
+
+    <!-- =========================
+         NHẠC NỀN TỰ ĐỘNG PHÁT
+    ========================== -->
+
+    <audio id="bgMusic" src="audio/nhac.mp3" loop preload="auto"></audio>
+
+    <div class="music-player" id="musicPlayer" title="Bật/Tắt nhạc" onclick="toggleMusic()">
+      <svg class="disc-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="46" fill="#1b1b1b" stroke="#fdd835" stroke-width="3" />
+        <circle cx="50" cy="50" r="30" fill="#7b1f1f" />
+        <circle cx="50" cy="50" r="8" fill="#fdd835" />
+        <circle cx="50" cy="50" r="3" fill="#1b1b1b" />
+      </svg>
+    </div>
+
+    <!-- SCRIPT NHẠC NỀN -->
+
+    <script>
+
+      var bgMusic = document.getElementById("bgMusic");
+      var musicPlayer = document.getElementById("musicPlayer");
+      var isPlaying = false;
+
+
+      /* HÀM BẬT / TẮT NHẠC */
+
+      function toggleMusic() {
+
+        if (isPlaying) {
+          bgMusic.pause();
+          musicPlayer.classList.remove("playing");
+          isPlaying = false;
+        }
+        else {
+          bgMusic.play().then(function() {
+            musicPlayer.classList.add("playing");
+            isPlaying = true;
+          }).catch(function(error) {
+            console.log("Không thể tự động phát nhạc:", error);
+          });
+        }
+      }
+
+
+      /* TỰ ĐỘNG PHÁT NGAY KHI MỞ TRANG (NẾU TRÌNH DUYỆT CHO PHÉP) */
+
+      window.addEventListener("load", function() {
+
+        bgMusic.play().then(function() {
+          musicPlayer.classList.add("playing");
+          isPlaying = true;
+        }).catch(function(error) {
+          /* Đa số trình duyệt chặn tự động phát nhạc có âm thanh
+             cho đến khi người dùng tương tác với trang.
+             Trường hợp này, nhạc sẽ tự phát ngay khi người dùng
+             chạm/click vào bất kỳ đâu trên trang lần đầu tiên. */
+
+          function startOnFirstInteraction() {
+
+            bgMusic.play().then(function() {
+              musicPlayer.classList.add("playing");
+              isPlaying = true;
+            });
+
+            document.removeEventListener("click", startOnFirstInteraction);
+            document.removeEventListener("touchstart", startOnFirstInteraction);
+          }
+
+          document.addEventListener("click", startOnFirstInteraction);
+          document.addEventListener("touchstart", startOnFirstInteraction);
+        });
+      });
+    </script>
   </body>
 </html>
