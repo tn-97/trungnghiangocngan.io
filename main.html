@@ -8,191 +8,479 @@
     <title>Wedding Invitation</title>
 
     <style>
-      * {
-        box-sizing: border-box;
-      }
+            * {
+              box-sizing: border-box;
+            }
 
-      body {
-        margin: 0;
-        padding: 20px 0;
-        min-height: 100vh;
+            body {
+              margin: 0;
+              padding: 20px 0;
+              min-height: 100vh;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              background: #7b1f1f;
+              font-family: "Segoe UI", sans-serif;
+            }
+
+            /* =========================
+               KHUNG CHUNG
+            ========================== */
+
+            .save-date,
+            .invitation-text,
+            .wedding-info,
+            .photo-carousel,
+            .countdown-calendar {
+              width: 90%;
+              max-width: 1000px;
+              margin-bottom: 40px;
+              border-radius: 12px;
+              text-align: center;
+            }
+
+            /* =========================
+               SAVE THE DATE
+            ========================== */
+
+            .save-date {
+              background: #7b1f1f;
+              color: #fdd835;
+              padding: 60px 40px;
+              border: 2px solid #fff;
+            }
+
+            .title {
+              font-family: "Playfair Display", serif;
+              font-size: clamp(30px, 5vw, 48px);
+              font-weight: bold;
+              letter-spacing: 4px;
+              margin-bottom: 20px;
+            }
+
+            .subtitle {
+              font-family: "Cormorant Garamond", serif;
+              font-size: clamp(20px, 3vw, 28px);
+              font-style: italic;
+              margin-bottom: 40px;
+            }
+
+            .names {
+              font-family: "Segoe Script", cursive;
+              font-size: clamp(32px, 6vw, 80px);
+              line-height: 1.4;
+              white-space: nowrap;
+
+              background: linear-gradient(45deg, #fbc02d, #fff9c4);
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+            }
+
+            .date {
+              font-family: "Playfair Display", serif;
+              font-size: clamp(24px, 4vw, 32px);
+              font-weight: bold;
+              margin-top: 30px;
+            }
+
+            /* =========================
+               THƯ MỜI
+            ========================== */
+
+            .invitation-text {
+              background: #c62828;
+              color: #fff;
+              padding: 40px 30px;
+              border: 2px solid #fff;
+              line-height: 1.8;
+            }
+
+            .invitation-text .header {
+              font-size: clamp(28px, 6vw, 48px);
+              font-weight: bold;
+              margin-bottom: 30px;
+            }
+
+            .invitation-text p {
+              font-size: clamp(16px, 3vw, 24px);
+              margin: 20px 0;
+            }
+
+            /* =========================
+               THÔNG TIN LỄ CƯỚI
+            ========================== */
+
+            .wedding-info {
+              background: #c62828;
+              color: #fff;
+              padding: 40px 25px;
+              border: 2px solid #fff;
+              font-family: Georgia, serif;
+              line-height: 1.6;
+            }
+
+            .wedding-info .title {
+              font-size: clamp(28px, 6vw, 48px);
+              font-weight: bold;
+              margin: 20px 0;
+            }
+
+            .wedding-info .subtitle {
+              font-size: clamp(22px, 4.5vw, 36px);
+              margin: 20px 0;
+            }
+
+            .wedding-info .text {
+              font-size: clamp(16px, 3.5vw, 24px);
+              margin: 15px 0;
+            }
+
+            .wedding-info .time {
+              font-size: clamp(20px, 4.5vw, 32px);
+              font-weight: bold;
+              margin: 20px 0;
+            }
+
+            .wedding-info .address {
+              font-size: clamp(16px, 3.5vw, 24px);
+              margin: 20px 0;
+            }
+
+            .wedding-info .invite {
+              font-size: clamp(20px, 4vw, 30px);
+              font-weight: bold;
+              margin-top: 30px;
+            }
+
+            /* =========================
+               GOOGLE MAP BUTTON
+            ========================== */
+
+            .map-button {
+              display: inline-block;
+              padding: 15px 40px;
+              background-color: #7b1f1f;
+              color: #fff;
+              font-size: clamp(16px, 3vw, 22px);
+              font-weight: bold;
+              border: 2px solid #fff;
+              border-radius: 10px;
+              cursor: pointer;
+              text-decoration: none;
+              transition: background-color 0.3s ease;
+              margin: 15px auto 20px;
+
+              /* HIỆU ỨNG NHẤP NHÁY */
+              animation: mapBlink 1.2s infinite;
+            }
+
+            .map-button:hover {
+              background-color: #b71c1c;
+            }
+
+            .map-button:active {
+              animation: none;
+              transform: scale(0.95);
+            }
+
+            /* HIỆU ỨNG NHẤP NHÁY NÚT MAP */
+
+            @keyframes mapBlink {
+              0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+              }
+
+              50% {
+                transform: scale(1.06);
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
+              }
+
+              100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+              }
+            }
+
+            /* =========================
+               COUNTDOWN + CALENDAR
+            ========================== */
+
+            .countdown-calendar {
+              background: #c62828;
+              color: #fff;
+              padding: 30px 20px;
+              border: 2px solid #fff;
+              font-family: Arial, sans-serif;
+              line-height: 1.6;
+            }
+
+            #countdown {
+              display: flex;
+              justify-content: center;
+              align-items: stretch;
+              gap: 12px;
+              margin-bottom: 30px;
+              width: 100%;
+            }
+
+            .count-box {
+              background: #7b1f1f;
+              color: #fff;
+              padding: 15px 8px;
+              border-radius: 10px;
+              text-align: center;
+              flex: 1;
+              min-width: 0;
+              border: 1px solid #fff;
+            }
+
+            .count-box div:first-child {
+              font-size: clamp(24px, 5vw, 50px);
+              font-weight: bold;
+              line-height: 1.2;
+            }
+
+            .count-box div:last-child {
+              font-size: clamp(12px, 2vw, 18px);
+              margin-top: 5px;
+            }
+
+            /* =========================
+               CALENDAR
+            ========================== */
+
+            .calendar-title {
+              font-size: clamp(24px, 4vw, 36px);
+              margin: 20px 0;
+              color: #fff;
+            }
+
+            .calendar {
+              width: 100%;
+              max-width: 700px;
+              margin: 0 auto;
+              border-collapse: separate;
+              border-spacing: 3px;
+              table-layout: fixed;
+              text-align: center;
+              font-size: clamp(12px, 2.5vw, 22px);
+              color: #fff;
+            }
+
+            .calendar th,
+            .calendar td {
+              width: 14.28%;
+              height: 45px;
+              padding: 5px 2px;
+              vertical-align: middle;
+            }
+
+            .calendar th {
+              font-weight: bold;
+            }
+
+            .calendar .special-day {
+              background: #fff;
+              color: #c62828;
+              font-weight: bold;
+              border-radius: 50%;
+            }
+
+            .special-date {
+              margin-top: 25px;
+              font-size: clamp(16px, 3vw, 24px);
+            }
+
+            /* =========================
+               IMAGE CAROUSEL
+            ========================== */
+
+            .photo-carousel {
+              padding: 0;
+            }
+
+            .carousel-title {
+              color: #fdd835;
+              font-family: "Playfair Display", serif;
+              font-size: clamp(28px, 5vw, 48px);
+              margin-bottom: 25px;
+              letter-spacing: 2px;
+            }
+
+            .carousel-container {
+              position: relative;
+              width: 100%;
+              overflow: hidden;
+              border-radius: 12px;
+              border: 2px solid #fff;
+              background: #000;
+            }
+
+            .carousel-track {
+              display: flex;
+              align-items: flex-start;
+              transition: transform 0.6s ease;
+            }
+
+            .carousel-slide {
+              min-width: 100%;
+              width: 100%;
+            }
+
+            /* HIỂN THỊ ĐẦY ĐỦ ẢNH */
+
+            .carousel-slide img {
+              width: 100%;
+              height: auto;
+              display: block;
+            }
+
+            /* NÚT CHUYỂN ẢNH */
+
+            .carousel-btn {
+              position: absolute;
+              top: 50%;
+              transform: translateY(-50%);
+
+              width: 50px;
+              height: 50px;
+
+              border: none;
+              border-radius: 50%;
+
+              background: rgba(123, 31, 31, 0.8);
+              color: #fff;
+
+              font-size: 35px;
+              cursor: pointer;
+              z-index: 10;
+
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+
+            .carousel-btn:hover {
+              background: #c62828;
+            }
+
+            .carousel-btn.prev {
+              left: 15px;
+            }
+
+            .carousel-btn.next {
+              right: 15px;
+            }
+
+            /* DẤU CHẤM */
+
+            .carousel-dots {
+              display: flex;
+              justify-content: center;
+              gap: 10px;
+              margin-top: 15px;
+            }
+
+            .carousel-dot {
+              width: 10px;
+              height: 10px;
+              border-radius: 50%;
+              background: #fff;
+              opacity: 0.5;
+              cursor: pointer;
+              transition: 0.3s;
+            }
+
+            .carousel-dot.active {
+              opacity: 1;
+              background: #fdd835;
+              transform: scale(1.3);
+            }
+
+      /* =========================
+         XÁC NHẬN THAM DỰ
+      ========================= */
+
+      .confirmation-section {
+        width: 90%;
+        max-width: 1000px;
+        margin: 0 auto 40px;
+
+        padding: 40px 25px;
+
+        background: #c62828;
+        color: #fff;
+
+        /* VIỀN GIỐNG CÁC PHẦN PHÍA TRÊN */
+        border: 2px solid #fff;
+        border-radius: 12px;
+
+        /* CĂN GIỮA */
+        text-align: center;
         display: flex;
         flex-direction: column;
         align-items: center;
-        background: #7b1f1f;
-        font-family: "Segoe UI", sans-serif;
       }
 
-      /* =========================
-         KHUNG CHUNG
-      ========================== */
-
-      .save-date,
-      .invitation-text,
-      .wedding-info,
-      .photo-carousel,
-      .countdown-calendar {
-        width: 90%;
-        max-width: 1000px;
-        margin-bottom: 40px;
-        border-radius: 12px;
+      .confirmation-title {
+        color: #fdd835;
+        font-family: "Playfair Display", serif;
+        font-size: clamp(28px, 5vw, 48px);
+        margin: 0 0 20px;
         text-align: center;
       }
 
-      /* =========================
-         SAVE THE DATE
-      ========================== */
-
-      .save-date {
-        background: #7b1f1f;
-        color: #fdd835;
-        padding: 60px 40px;
-        border: 2px solid #fff;
-      }
-
-      .title {
-        font-family: "Playfair Display", serif;
-        font-size: clamp(30px, 5vw, 48px);
-        font-weight: bold;
-        letter-spacing: 4px;
-        margin-bottom: 20px;
-      }
-
-      .subtitle {
-        font-family: "Cormorant Garamond", serif;
-        font-size: clamp(20px, 3vw, 28px);
-        font-style: italic;
-        margin-bottom: 40px;
-      }
-
-      .names {
-        font-family: "Segoe Script", cursive;
-        font-size: clamp(32px, 6vw, 80px);
-        line-height: 1.4;
-        white-space: nowrap;
-
-        background: linear-gradient(45deg, #fbc02d, #fff9c4);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-
-      .date {
-        font-family: "Playfair Display", serif;
-        font-size: clamp(24px, 4vw, 32px);
-        font-weight: bold;
-        margin-top: 30px;
-      }
-
-      /* =========================
-         THƯ MỜI
-      ========================== */
-
-      .invitation-text {
-        background: #c62828;
-        color: #fff;
-        padding: 40px 30px;
-        border: 2px solid #fff;
-        line-height: 1.8;
-      }
-
-      .invitation-text .header {
-        font-size: clamp(28px, 6vw, 48px);
-        font-weight: bold;
-        margin-bottom: 30px;
-      }
-
-      .invitation-text p {
-        font-size: clamp(16px, 3vw, 24px);
-        margin: 20px 0;
-      }
-
-      /* =========================
-         THÔNG TIN LỄ CƯỚI
-      ========================== */
-
-      .wedding-info {
-        background: #c62828;
-        color: #fff;
-        padding: 40px 25px;
-        border: 2px solid #fff;
-        font-family: Georgia, serif;
+      .confirmation-text {
+        max-width: 800px;
+        font-size: clamp(16px, 3vw, 22px);
         line-height: 1.6;
+        margin: 0 auto 25px;
+        text-align: center;
       }
 
-      .wedding-info .title {
-        font-size: clamp(28px, 6vw, 48px);
-        font-weight: bold;
-        margin: 20px 0;
-      }
-
-      .wedding-info .subtitle {
-        font-size: clamp(22px, 4.5vw, 36px);
-        margin: 20px 0;
-      }
-
-      .wedding-info .text {
-        font-size: clamp(16px, 3.5vw, 24px);
-        margin: 15px 0;
-      }
-
-      .wedding-info .time {
-        font-size: clamp(20px, 4.5vw, 32px);
-        font-weight: bold;
-        margin: 20px 0;
-      }
-
-      .wedding-info .address {
-        font-size: clamp(16px, 3.5vw, 24px);
-        margin: 20px 0;
-      }
-
-      .wedding-info .invite {
-        font-size: clamp(20px, 4vw, 30px);
-        font-weight: bold;
-        margin-top: 30px;
-      }
-
-      /* =========================
-         GOOGLE MAP BUTTON
-      ========================== */
-
-      .map-button {
+      .confirmation-button {
         display: inline-block;
-        padding: 15px 40px;
+        text-align: center;
+
+        padding: 20px 50px;
         background-color: #7b1f1f;
         color: #fff;
+
         font-size: clamp(16px, 3vw, 22px);
         font-weight: bold;
+
+        /* VIỀN CHO NÚT */
         border: 2px solid #fff;
         border-radius: 10px;
+
         cursor: pointer;
         text-decoration: none;
-        transition: background-color 0.3s ease;
-        margin: 15px auto 20px;
+        line-height: 1.6;
 
-        /* HIỆU ỨNG NHẤP NHÁY */
-        animation: mapBlink 1.2s infinite;
+        /* HIỆU ỨNG */
+        animation: confirmationBlink 1.2s infinite;
       }
 
-      .map-button:hover {
+      .confirmation-button:hover {
         background-color: #b71c1c;
       }
 
-      .map-button:active {
+      .confirmation-button:active {
         animation: none;
         transform: scale(0.95);
       }
 
-      /* HIỆU ỨNG NHẤP NHÁY NÚT MAP */
+      /* HIỆU ỨNG NHẤP NHÁY */
 
-      @keyframes mapBlink {
+      @keyframes confirmationBlink {
         0% {
           transform: scale(1);
           box-shadow: 0 0 0 rgba(255, 255, 255, 0);
         }
 
         50% {
-          transform: scale(1.06);
+          transform: scale(1.05);
           box-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
         }
 
@@ -203,293 +491,121 @@
       }
 
       /* =========================
-         COUNTDOWN + CALENDAR
-      ========================== */
-
-      .countdown-calendar {
-        background: #c62828;
-        color: #fff;
-        padding: 30px 20px;
-        border: 2px solid #fff;
-        font-family: Arial, sans-serif;
-        line-height: 1.6;
-      }
-
-      #countdown {
-        display: flex;
-        justify-content: center;
-        align-items: stretch;
-        gap: 12px;
-        margin-bottom: 30px;
-        width: 100%;
-      }
-
-      .count-box {
-        background: #7b1f1f;
-        color: #fff;
-        padding: 15px 8px;
-        border-radius: 10px;
-        text-align: center;
-        flex: 1;
-        min-width: 0;
-        border: 1px solid #fff;
-      }
-
-      .count-box div:first-child {
-        font-size: clamp(24px, 5vw, 50px);
-        font-weight: bold;
-        line-height: 1.2;
-      }
-
-      .count-box div:last-child {
-        font-size: clamp(12px, 2vw, 18px);
-        margin-top: 5px;
-      }
-
-      /* =========================
-         CALENDAR
-      ========================== */
-
-      .calendar-title {
-        font-size: clamp(24px, 4vw, 36px);
-        margin: 20px 0;
-        color: #fff;
-      }
-
-      .calendar {
-        width: 100%;
-        max-width: 700px;
-        margin: 0 auto;
-        border-collapse: separate;
-        border-spacing: 3px;
-        table-layout: fixed;
-        text-align: center;
-        font-size: clamp(12px, 2.5vw, 22px);
-        color: #fff;
-      }
-
-      .calendar th,
-      .calendar td {
-        width: 14.28%;
-        height: 45px;
-        padding: 5px 2px;
-        vertical-align: middle;
-      }
-
-      .calendar th {
-        font-weight: bold;
-      }
-
-      .calendar .special-day {
-        background: #fff;
-        color: #c62828;
-        font-weight: bold;
-        border-radius: 50%;
-      }
-
-      .special-date {
-        margin-top: 25px;
-        font-size: clamp(16px, 3vw, 24px);
-      }
-
-      /* =========================
-         IMAGE CAROUSEL
-      ========================== */
-
-      .photo-carousel {
-        padding: 0;
-      }
-
-      .carousel-title {
-        color: #fdd835;
-        font-family: "Playfair Display", serif;
-        font-size: clamp(28px, 5vw, 48px);
-        margin-bottom: 25px;
-        letter-spacing: 2px;
-      }
-
-      .carousel-container {
-        position: relative;
-        width: 100%;
-        overflow: hidden;
-        border-radius: 12px;
-        border: 2px solid #fff;
-        background: #000;
-      }
-
-      .carousel-track {
-        display: flex;
-        align-items: flex-start;
-        transition: transform 0.6s ease;
-      }
-
-      .carousel-slide {
-        min-width: 100%;
-        width: 100%;
-      }
-
-      /* HIỂN THỊ ĐẦY ĐỦ ẢNH */
-
-      .carousel-slide img {
-        width: 100%;
-        height: auto;
-        display: block;
-      }
-
-      /* NÚT CHUYỂN ẢNH */
-
-      .carousel-btn {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-
-        width: 50px;
-        height: 50px;
-
-        border: none;
-        border-radius: 50%;
-
-        background: rgba(123, 31, 31, 0.8);
-        color: #fff;
-
-        font-size: 35px;
-        cursor: pointer;
-        z-index: 10;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .carousel-btn:hover {
-        background: #c62828;
-      }
-
-      .carousel-btn.prev {
-        left: 15px;
-      }
-
-      .carousel-btn.next {
-        right: 15px;
-      }
-
-      /* DẤU CHẤM */
-
-      .carousel-dots {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        margin-top: 15px;
-      }
-
-      .carousel-dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background: #fff;
-        opacity: 0.5;
-        cursor: pointer;
-        transition: 0.3s;
-      }
-
-      .carousel-dot.active {
-        opacity: 1;
-        background: #fdd835;
-        transform: scale(1.3);
-      }
-
-      /* =========================
-         RESPONSIVE ĐIỆN THOẠI
-      ========================== */
+         ĐIỆN THOẠI
+      ========================= */
 
       @media (max-width: 600px) {
 
-        body {
-          padding: 10px 0;
-        }
-
-        .save-date,
-        .invitation-text,
-        .wedding-info,
-        .photo-carousel,
-        .countdown-calendar {
+        .confirmation-section {
           width: 95%;
-          margin-bottom: 25px;
-        }
-
-        .save-date {
-          padding: 40px 15px;
-        }
-
-        .invitation-text,
-        .wedding-info {
+          margin: 0 auto 25px;
           padding: 30px 15px;
         }
 
-        /* MAP BUTTON */
-
-        .map-button {
+        .confirmation-button {
           width: 90%;
           padding: 14px 10px;
           font-size: 16px;
-        }
-
-        /* COUNTDOWN */
-
-        .countdown-calendar {
-          padding: 20px 10px;
-        }
-
-        #countdown {
-          gap: 5px;
-        }
-
-        .count-box {
-          padding: 12px 3px;
-        }
-
-        .count-box div:first-child {
-          font-size: 7vw;
-        }
-
-        .count-box div:last-child {
-          font-size: 3vw;
-        }
-
-        /* CALENDAR */
-
-        .calendar {
-          border-spacing: 1px;
-        }
-
-        .calendar th,
-        .calendar td {
-          height: 38px;
-          padding: 3px 0;
-          font-size: 3.5vw;
-        }
-
-        /* CAROUSEL */
-
-        .carousel-slide img {
-          width: 100%;
-          height: auto;
-        }
-
-        .carousel-btn {
-          width: 38px;
-          height: 38px;
-          font-size: 25px;
-        }
-
-        .carousel-btn.prev {
-          left: 8px;
-        }
-
-        .carousel-btn.next {
-          right: 8px;
+          border-radius: 8px;
         }
       }
+
+
+
+
+
+            /* =========================
+               RESPONSIVE ĐIỆN THOẠI
+            ========================== */
+
+            @media (max-width: 600px) {
+
+              body {
+                padding: 10px 0;
+              }
+
+              .save-date,
+              .invitation-text,
+              .wedding-info,
+              .photo-carousel,
+              .countdown-calendar {
+                width: 95%;
+                margin-bottom: 25px;
+              }
+
+              .save-date {
+                padding: 40px 15px;
+              }
+
+              .invitation-text,
+              .wedding-info {
+                padding: 30px 15px;
+              }
+
+              /* MAP BUTTON */
+
+              .map-button {
+                width: 90%;
+                padding: 14px 10px;
+                font-size: 16px;
+              }
+
+              /* COUNTDOWN */
+
+              .countdown-calendar {
+                padding: 20px 10px;
+              }
+
+              #countdown {
+                gap: 5px;
+              }
+
+              .count-box {
+                padding: 12px 3px;
+              }
+
+              .count-box div:first-child {
+                font-size: 7vw;
+              }
+
+              .count-box div:last-child {
+                font-size: 3vw;
+              }
+
+              /* CALENDAR */
+
+              .calendar {
+                border-spacing: 1px;
+              }
+
+              .calendar th,
+              .calendar td {
+                height: 38px;
+                padding: 3px 0;
+                font-size: 3.5vw;
+              }
+
+              /* CAROUSEL */
+
+              .carousel-slide img {
+                width: 100%;
+                height: auto;
+              }
+
+              .carousel-btn {
+                width: 38px;
+                height: 38px;
+                font-size: 25px;
+              }
+
+              .carousel-btn.prev {
+                left: 8px;
+              }
+
+              .carousel-btn.next {
+                right: 8px;
+              }
+            }
     </style>
   </head>
 
@@ -670,38 +786,23 @@
       <div class="carousel-container">
         <div class="carousel-track" id="carouselTrack">
           <div class="carousel-slide">
-            <img
-              src="image/anh1.jpg"
-              alt="Ảnh cưới Trung Nghĩa và Ngọc Ngân"
-            />
+            <img src="image/anh1.jpg" alt="Ảnh cưới Trung Nghĩa và Ngọc Ngân" />
           </div>
 
           <div class="carousel-slide">
-            <img
-              src="image/anh2.jpg"
-              alt="Ảnh cưới Trung Nghĩa và Ngọc Ngân"
-            />
+            <img src="image/anh2.jpg" alt="Ảnh cưới Trung Nghĩa và Ngọc Ngân" />
           </div>
 
           <div class="carousel-slide">
-            <img
-              src="image/anh3.jpg"
-              alt="Ảnh cưới Trung Nghĩa và Ngọc Ngân"
-            />
+            <img src="image/anh3.jpg" alt="Ảnh cưới Trung Nghĩa và Ngọc Ngân" />
           </div>
 
           <div class="carousel-slide">
-            <img
-              src="anh4.jpg"
-              alt="Ảnh cưới Trung Nghĩa và Ngọc Ngân"
-            />
+            <img src="anh4.jpg" alt="Ảnh cưới Trung Nghĩa và Ngọc Ngân" />
           </div>
 
           <div class="carousel-slide">
-            <img
-              src="anh5.jpg"
-              alt="Ảnh cưới Trung Nghĩa và Ngọc Ngân"
-            />
+            <img src="anh5.jpg" alt="Ảnh cưới Trung Nghĩa và Ngọc Ngân" />
           </div>
         </div>
 
@@ -882,5 +983,27 @@
           1000
         );
     </script>
+    <!-- =========================
+     XÁC NHẬN THAM DỰ & XE ĐƯA ĐÓN
+========================= -->
+
+    <div class="confirmation-section">
+      <h2 class="confirmation-title">XÁC NHẬN THAM DỰ</h2>
+
+      <p class="confirmation-text">
+        Để thuận tiện cho việc chuẩn bị và sắp xếp xe đưa đón, vui lòng xác nhận
+        thông tin tham dự.
+      </p>
+
+      <a
+        href="https://docs.google.com/forms/d/e/1FAIpQLSeZ8h_RpG8xnewJVHY7cwTlNXKW9k-aGtq9lzR0gUB6Z2Ccsg/viewform?usp=publish-editor"
+        target="_blank"
+        class="confirmation-button"
+      >
+        🚌 Xác nhận đi và thông tin xe đưa đón
+        <br />
+        Nhấn vào đây!!!
+      </a>
+    </div>
   </body>
 </html>
