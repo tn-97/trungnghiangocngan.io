@@ -1111,33 +1111,53 @@
 
 
       /* TỰ ĐỘNG PHÁT NGAY KHI MỞ TRANG (NẾU TRÌNH DUYỆT CHO PHÉP) */
-
+      
       window.addEventListener("load", function() {
+  // Nếu trước đó đã có user gesture (từ index.html)
+      if (sessionStorage.getItem('autoplayMusic') === '1') {
         bgMusic.play().then(function() {
           musicPlayer.classList.add("playing");
           isPlaying = true;
-        }).catch(function(error) {
-          function startOnFirstInteraction() {
-            bgMusic.play().then(function() {
-              musicPlayer.classList.add("playing");
-              isPlaying = true;
-            });
-      
-            document.removeEventListener("click", startOnFirstInteraction);
-            document.removeEventListener("touchstart", startOnFirstInteraction);
-            document.removeEventListener("touchmove", startOnFirstInteraction);
-          }
-      
-          // Cho desktop/laptop
-          document.addEventListener("click", startOnFirstInteraction);
-      
-          // Cho mobile
-          document.addEventListener("touchstart", startOnFirstInteraction);
-          document.addEventListener("touchmove", startOnFirstInteraction);
+          sessionStorage.removeItem('autoplayMusic'); // reset flag
+        }).catch(showPlayButton);
+      } else {
+        // Nếu chưa có gesture, chờ tương tác
+        function startOnFirstInteraction() {
+          bgMusic.play().then(function() {
+            musicPlayer.classList.add("playing");
+            isPlaying = true;
+          }).catch(showPlayButton);
+    
+          document.removeEventListener("click", startOnFirstInteraction);
+          document.removeEventListener("touchstart", startOnFirstInteraction);
+          document.removeEventListener("touchmove", startOnFirstInteraction);
+          document.removeEventListener("scroll", startOnFirstInteraction);
+        }
+    
+        // Desktop
+        document.addEventListener("click", startOnFirstInteraction);
+    
+        // Mobile
+        document.addEventListener("touchstart", startOnFirstInteraction);
+        document.addEventListener("touchmove", startOnFirstInteraction);
+    
+        // Thêm scroll (có thể hoạt động trên Chrome, nhưng thường không trên Zalo)
+        document.addEventListener("scroll", startOnFirstInteraction);
+      }
+    
+      // Fallback: hiện nút Play nếu vẫn bị chặn
+      function showPlayButton() {
+        let btn = document.createElement("button");
+        btn.innerText = "Bật nhạc";
+        btn.addEventListener("click", function() {
+          bgMusic.play();
+          musicPlayer.classList.add("playing");
+          isPlaying = true;
+          btn.remove();
         });
-      });
-
-
+        document.body.appendChild(btn);
+      }
+    });
     </script>
   </body>
 </html>
