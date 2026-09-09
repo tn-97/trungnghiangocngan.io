@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="vi">
   <head>
@@ -152,6 +153,56 @@
       }
 
       /* =========================
+         GOOGLE MAP BUTTON
+      ========================== */
+
+      .map-button {
+        display: inline-block;
+        padding: 15px 40px;
+        background-color: #7b1f1f;
+        color: #fff;
+        font-size: clamp(16px, 3vw, 22px);
+        font-weight: bold;
+        border: 2px solid #fff;
+        border-radius: 10px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+        margin: 15px auto 20px;
+
+        /* HIỆU ỨNG NHẤP NHÁY */
+        animation: mapBlink 1.2s infinite;
+      }
+
+      .map-button:hover {
+        background-color: #b71c1c;
+      }
+
+      .map-button:active {
+        animation: none;
+        transform: scale(0.95);
+      }
+
+      /* HIỆU ỨNG NHẤP NHÁY NÚT MAP */
+
+      @keyframes mapBlink {
+        0% {
+          transform: scale(1);
+          box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+        }
+
+        50% {
+          transform: scale(1.06);
+          box-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
+        }
+
+        100% {
+          transform: scale(1);
+          box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+        }
+      }
+
+      /* =========================
          COUNTDOWN + CALENDAR
       ========================== */
 
@@ -196,7 +247,7 @@
       }
 
       /* =========================
-         LỊCH
+         CALENDAR
       ========================== */
 
       .calendar-title {
@@ -268,6 +319,7 @@
 
       .carousel-track {
         display: flex;
+        align-items: flex-start;
         transition: transform 0.6s ease;
       }
 
@@ -276,14 +328,15 @@
         width: 100%;
       }
 
+      /* HIỂN THỊ ĐẦY ĐỦ ẢNH */
+
       .carousel-slide img {
         width: 100%;
         height: auto;
         display: block;
-        object-fit: contain;
       }
 
-      /* Nút chuyển ảnh */
+      /* NÚT CHUYỂN ẢNH */
 
       .carousel-btn {
         position: absolute;
@@ -301,7 +354,6 @@
 
         font-size: 35px;
         cursor: pointer;
-
         z-index: 10;
 
         display: flex;
@@ -321,7 +373,7 @@
         right: 15px;
       }
 
-      /* Chấm hiển thị */
+      /* DẤU CHẤM */
 
       .carousel-dots {
         display: flex;
@@ -374,6 +426,14 @@
           padding: 30px 15px;
         }
 
+        /* MAP BUTTON */
+
+        .map-button {
+          width: 90%;
+          padding: 14px 10px;
+          font-size: 16px;
+        }
+
         /* COUNTDOWN */
 
         .countdown-calendar {
@@ -411,6 +471,11 @@
 
         /* CAROUSEL */
 
+        .carousel-slide img {
+          width: 100%;
+          height: auto;
+        }
+
         .carousel-btn {
           width: 38px;
           height: 38px;
@@ -429,9 +494,7 @@
   </head>
 
   <body>
-    <!-- =========================
-       SAVE THE DATE
-  ========================== -->
+    <!-- SAVE THE DATE -->
 
     <div class="save-date">
       <p class="title">SAVE THE DATE</p>
@@ -449,9 +512,7 @@
       <p class="date">18.10.2026</p>
     </div>
 
-    <!-- =========================
-       THƯ MỜI
-  ========================== -->
+    <!-- THƯ MỜI -->
 
     <div class="invitation-text">
       <p class="header">THƯ MỜI</p>
@@ -473,9 +534,7 @@
       </p>
     </div>
 
-    <!-- =========================
-       THÔNG TIN LỄ CƯỚI
-  ========================== -->
+    <!-- THÔNG TIN LỄ CƯỚI -->
 
     <div class="wedding-info">
       <p class="title">THÔNG TIN LỄ CƯỚI</p>
@@ -498,12 +557,20 @@
         168A/12, Khóm Long Hưng, Phường Thanh Đức, Tỉnh Vĩnh Long
       </p>
 
+      <!-- NÚT GOOGLE MAP -->
+
+      <a
+        href="https://www.google.com/maps/place/10%C2%B014'23.7%22N+106%C2%B000'18.9%22E/@10.239939,106.005262,20z/data=!4m4!3m3!8m2!3d10.239917!4d106.005248?hl=en&entry=ttu&g_ep=EgoyMDI2MDgxOS4wIKXMDSoASAFQAw%3D%3D"
+        target="_blank"
+        class="map-button"
+      >
+        📍 Chỉ đường trên Google Maps
+      </a>
+
       <p class="invite">TRÂN TRỌNG KÍNH MỜI</p>
     </div>
 
-    <!-- =========================
-       ĐẾM NGƯỢC + LỊCH
-  ========================== -->
+    <!-- ĐẾM NGƯỢC + LỊCH -->
 
     <div class="countdown-calendar">
       <div id="countdown">
@@ -595,16 +662,13 @@
       <p class="special-date">💖 Ngày đặc biệt: 18.10.2026</p>
     </div>
 
-    <!-- =========================
-       IMAGE CAROUSEL 
-  ========================== -->
+    <!-- IMAGE CAROUSEL -->
 
     <div class="photo-carousel">
       <h2 class="carousel-title">KHOẢNH KHẮC CỦA CHÚNG MÌNH</h2>
 
       <div class="carousel-container">
         <div class="carousel-track" id="carouselTrack">
-          <!-- ẢNH 1 -->
           <div class="carousel-slide">
             <img
               src="image/anh1.jpg"
@@ -612,7 +676,6 @@
             />
           </div>
 
-          <!-- ẢNH 2 -->
           <div class="carousel-slide">
             <img
               src="image/anh2.jpg"
@@ -620,7 +683,6 @@
             />
           </div>
 
-          <!-- ẢNH 3 -->
           <div class="carousel-slide">
             <img
               src="image/anh3.jpg"
@@ -628,24 +690,20 @@
             />
           </div>
 
-          <!-- ẢNH 4 -->
           <div class="carousel-slide">
             <img
-              src="image/anh4.jpg"
+              src="anh4.jpg"
               alt="Ảnh cưới Trung Nghĩa và Ngọc Ngân"
             />
           </div>
 
-          <!-- ẢNH 5 -->
           <div class="carousel-slide">
             <img
-              src="image/anh5.jpg"
+              src="anh5.jpg"
               alt="Ảnh cưới Trung Nghĩa và Ngọc Ngân"
             />
           </div>
         </div>
-
-        <!-- NÚT ẢNH TRƯỚC -->
 
         <button
           class="carousel-btn prev"
@@ -654,8 +712,6 @@
         >
           ‹
         </button>
-
-        <!-- NÚT ẢNH TIẾP -->
 
         <button
           class="carousel-btn next"
@@ -666,24 +722,22 @@
         </button>
       </div>
 
-      <!-- CÁC DẤU CHẤM -->
+      <!-- DẤU CHẤM -->
 
       <div class="carousel-dots">
-        <span class="carousel-dot active" onclick="goToSlide(0)"></span>
+        <span class="carousel-dot active" onclick="goToSlide(0)"> </span>
 
-        <span class="carousel-dot" onclick="goToSlide(1)"></span>
+        <span class="carousel-dot" onclick="goToSlide(1)"> </span>
 
-        <span class="carousel-dot" onclick="goToSlide(2)"></span>
+        <span class="carousel-dot" onclick="goToSlide(2)"> </span>
 
-        <span class="carousel-dot" onclick="goToSlide(3)"></span>
+        <span class="carousel-dot" onclick="goToSlide(3)"> </span>
 
-        <span class="carousel-dot" onclick="goToSlide(4)"></span>
+        <span class="carousel-dot" onclick="goToSlide(4)"> </span>
       </div>
     </div>
 
-    <!-- =========================
-       SCRIPT CAROUSEL
-  ========================== -->
+    <!-- SCRIPT CAROUSEL -->
 
     <script>
 
@@ -707,30 +761,23 @@
         if (index >= totalSlides) {
           currentSlide = 0;
         }
-
         else if (index < 0) {
           currentSlide = totalSlides - 1;
         }
-
         else {
           currentSlide = index;
         }
-
 
         track.style.transform =
           "translateX(-" +
           currentSlide * 100 +
           "%)";
 
-
         dots.forEach(function(dot) {
           dot.classList.remove("active");
         });
 
-
-        dots[currentSlide]
-          .classList.add("active");
-
+        dots[currentSlide].classList.add("active");
       }
 
 
@@ -756,9 +803,7 @@
       }, 4000);
     </script>
 
-    <!-- =========================
-       SCRIPT ĐẾM NGƯỢC
-  ========================== -->
+    <!-- SCRIPT ĐẾM NGƯỢC -->
 
     <script>
 
@@ -791,20 +836,17 @@
             distance / (1000 * 60 * 60 * 24)
           );
 
-
         var hours =
           Math.floor(
             (distance % (1000 * 60 * 60 * 24)) /
             (1000 * 60 * 60)
           );
 
-
         var minutes =
           Math.floor(
             (distance % (1000 * 60 * 60)) /
             (1000 * 60)
           );
-
 
         var seconds =
           Math.floor(
@@ -824,16 +866,15 @@
 
         document.getElementById("seconds").innerHTML =
           seconds;
-
       }
 
 
-      /* Chạy ngay khi mở trang */
+      /* CHẠY NGAY KHI MỞ TRANG */
 
       updateCountdown();
 
 
-      /* Cập nhật mỗi giây */
+      /* CẬP NHẬT MỖI GIÂY */
 
       var countdown =
         setInterval(
