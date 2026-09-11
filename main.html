@@ -1639,33 +1639,44 @@
     <!-- =====================================================
      SỔ LƯU BÚT
 ===================================================== -->
+<div class="guestbook-section">
 
-    <div class="guestbook-section">
-      <div class="guestbook-box">
-        <h2 class="guestbook-title">SỔ LƯU BÚT</h2>
+  <div class="guestbook-box">
 
-        <input
-          type="text"
-          id="guestName"
-          class="guestbook-input"
-          placeholder="Nhập tên*"
-          maxlength="50"
-        />
+    <h2 class="guestbook-title">
+      SỔ LƯU BÚT
+    </h2>
 
-        <textarea
-          id="guestMessage"
-          class="guestbook-message"
-          placeholder="Nhập lời chúc*"
-          maxlength="300"
-        ></textarea>
+    <input
+      type="text"
+      id="guestName"
+      class="guestbook-input"
+      placeholder="Nhập tên*"
+      maxlength="50"
+    />
 
-        <button class="guestbook-submit" onclick="addGuestbook()">
-          GỬI LỜI CHÚC
-        </button>
+    <textarea
+      id="guestMessage"
+      class="guestbook-message"
+      placeholder="Nhập lời chúc*"
+      maxlength="300"
+    ></textarea>
 
-        <div id="guestbookList" class="guestbook-list"></div>
-      </div>
-    </div>
+    <button
+      class="guestbook-submit"
+      onclick="addGuestbook()"
+    >
+      GỬI LỜI CHÚC
+    </button>
+
+    <div
+      id="guestbookList"
+      class="guestbook-list"
+    ></div>
+
+  </div>
+
+</div>
 
     <!-- =====================================================
      HỘP QUÀ MỪNG CƯỚI
