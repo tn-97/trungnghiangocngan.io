@@ -546,6 +546,55 @@
         pointer-events: none;
       }
 
+      /* VÒNG TRÒN XOAY BAO QUANH NÚT NHẠC KHI ĐANG PHÁT */
+
+      .music-player::before {
+        content: "";
+        position: absolute;
+        top: -8px;
+        left: -8px;
+        right: -8px;
+        bottom: -8px;
+        border-radius: 50%;
+        border: 2px dashed rgba(253, 216, 53, 0.8);
+        opacity: 0;
+        transform: rotate(0deg);
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+      }
+
+      .music-player.playing::before {
+        opacity: 1;
+        animation: ringSpin 5s linear infinite;
+      }
+
+      @keyframes ringSpin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* HIỆU ỨNG NHẤP NHÁY PHÁT SÁNG KHI ĐANG PHÁT */
+
+      .music-player.playing {
+        animation: playerPulse 1.6s ease-in-out infinite;
+      }
+
+      @keyframes playerPulse {
+        0%,
+        100% {
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4),
+            0 0 0 0 rgba(253, 216, 53, 0.6);
+        }
+        50% {
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4),
+            0 0 0 12px rgba(253, 216, 53, 0);
+        }
+      }
+
       /* ĐĨA NHẠC QUAY TRÒN KHI ĐANG PHÁT */
 
       .music-player.playing .disc-icon {
@@ -567,6 +616,76 @@
           height: 55px;
           bottom: 18px;
           right: 18px;
+        }
+      }
+
+      /* =========================
+         THÔNG BÁO NHẮC NHẤN NHẠC (THAY CHO NÚT PLAY)
+      ========================= */
+
+      .music-hint {
+        position: fixed;
+        bottom: 100px;
+        right: 20px;
+        z-index: 998;
+
+        max-width: 170px;
+        padding: 10px 14px;
+
+        background: #fff;
+        color: #7b1f1f;
+
+        font-size: 13px;
+        font-weight: bold;
+        line-height: 1.4;
+        text-align: center;
+
+        border-radius: 14px;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+
+        animation: hintBounce 1.5s ease-in-out infinite,
+          hintFadeIn 0.4s ease;
+        pointer-events: none;
+      }
+
+      .music-hint::after {
+        content: "";
+        position: absolute;
+        bottom: -8px;
+        right: 22px;
+        border-width: 8px 8px 0 8px;
+        border-style: solid;
+        border-color: #fff transparent transparent transparent;
+      }
+
+      @keyframes hintFadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes hintBounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-6px);
+        }
+      }
+
+      @media (max-width: 600px) {
+        .music-hint {
+          bottom: 82px;
+          right: 15px;
+          max-width: 140px;
+          font-size: 12px;
+          padding: 8px 12px;
         }
       }
 
@@ -1075,7 +1194,13 @@
     <div class="music-player" id="musicPlayer" title="Bật/Tắt nhạc" onclick="toggleMusic()">
       <svg class="disc-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
         <circle cx="50" cy="50" r="46" fill="#1b1b1b" stroke="#fdd835" stroke-width="3" />
+        <circle cx="50" cy="50" r="38" fill="none" stroke="#4a2a2a" stroke-width="1.2" />
         <circle cx="50" cy="50" r="30" fill="#7b1f1f" />
+        <circle cx="50" cy="50" r="22" fill="none" stroke="#4a2a2a" stroke-width="1" />
+        <path
+          d="M58 32 C58 30 60 29 62 29.5 L70 31.5 C71.5 31.8 72.5 33 72.5 34.5 L72.5 52 C72.5 55 70 57.2 67 57.2 C64 57.2 61.5 55 61.5 52 C61.5 49 64 46.8 67 46.8 C67.7 46.8 68.4 46.9 69 47.1 L69 37 L58 34.5 Z"
+          fill="#fdd835"
+        />
         <circle cx="50" cy="50" r="8" fill="#fdd835" />
         <circle cx="50" cy="50" r="3" fill="#1b1b1b" />
       </svg>
@@ -1103,6 +1228,7 @@
           bgMusic.play().then(function() {
             musicPlayer.classList.add("playing");
             isPlaying = true;
+            removeMusicHint();
           }).catch(function(error) {
             console.log("Không thể tự động phát nhạc:", error);
           });
@@ -1119,14 +1245,15 @@
           musicPlayer.classList.add("playing");
           isPlaying = true;
           sessionStorage.removeItem('autoplayMusic'); // reset flag
-        }).catch(showPlayButton);
+        }).catch(showMusicHint);
       } else {
         // Nếu chưa có gesture, chờ tương tác
         function startOnFirstInteraction() {
           bgMusic.play().then(function() {
             musicPlayer.classList.add("playing");
             isPlaying = true;
-          }).catch(showPlayButton);
+            removeMusicHint();
+          }).catch(showMusicHint);
     
           document.removeEventListener("click", startOnFirstInteraction);
           document.removeEventListener("touchstart", startOnFirstInteraction);
@@ -1145,17 +1272,34 @@
         document.addEventListener("scroll", startOnFirstInteraction);
       }
     
-      // Fallback: hiện nút Play nếu vẫn bị chặn
-      function showPlayButton() {
-        let btn = document.createElement("button");
-        btn.innerText = "Bật nhạc";
-        btn.addEventListener("click", function() {
-          bgMusic.play();
-          musicPlayer.classList.add("playing");
-          isPlaying = true;
-          btn.remove();
+      // Fallback: hiện thông báo nhắc nhấn vào icon đĩa nhạc, thay vì tạo nút riêng
+      function showMusicHint() {
+
+        if (document.getElementById("musicHint")) {
+          return;
+        }
+
+        var hint = document.createElement("div");
+        hint.id = "musicHint";
+        hint.className = "music-hint";
+        hint.innerHTML = "🎵 Nhấn vào đây<br>để bật nhạc";
+
+        document.body.appendChild(hint);
+
+        // Nhấn vào icon đĩa nhạc sẽ tự tắt thông báo (đã xử lý trong toggleMusic)
+        // Đồng thời cho phép nhấn ngay vào thông báo cũng bật được nhạc
+        hint.style.pointerEvents = "auto";
+        hint.style.cursor = "pointer";
+        hint.addEventListener("click", function() {
+          toggleMusic();
         });
-        document.body.appendChild(btn);
+      }
+
+      function removeMusicHint() {
+        var hint = document.getElementById("musicHint");
+        if (hint) {
+          hint.remove();
+        }
       }
     });
     </script>
