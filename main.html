@@ -7,191 +7,479 @@
     <title>Wedding Invitation</title>
 
     <style>
-            * {
-              box-sizing: border-box;
-            }
+                  * {
+                    box-sizing: border-box;
+                  }
 
-            body {
-              margin: 0;
-              padding: 20px 0;
-              min-height: 100vh;
+                  body {
+                    margin: 0;
+                    padding: 20px 0;
+                    min-height: 100vh;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    background: #7b1f1f;
+                    font-family: "Segoe UI", sans-serif;
+                  }
+
+                  /* =========================
+                     KHUNG CHUNG
+                  ========================== */
+
+                  .save-date,
+                  .invitation-text,
+                  .wedding-info,
+                  .photo-carousel,
+                  .countdown-calendar {
+                    width: 90%;
+                    max-width: 1000px;
+                    margin-bottom: 40px;
+                    border-radius: 12px;
+                    text-align: center;
+                  }
+
+                  /* =========================
+                     SAVE THE DATE
+                  ========================== */
+
+                  .save-date {
+                    background: #7b1f1f;
+                    color: #fdd835;
+                    padding: 60px 40px;
+                    border: 2px solid #fff;
+                  }
+
+                  .title {
+                    font-family: "Playfair Display", serif;
+                    font-size: clamp(30px, 5vw, 48px);
+                    font-weight: bold;
+                    letter-spacing: 4px;
+                    margin-bottom: 20px;
+                  }
+
+                  .subtitle {
+                    font-family: "Cormorant Garamond", serif;
+                    font-size: clamp(20px, 3vw, 28px);
+                    font-style: italic;
+                    margin-bottom: 40px;
+                  }
+
+                  .names {
+                    font-family: "Segoe Script", cursive;
+                    font-size: clamp(32px, 6vw, 80px);
+                    line-height: 1.4;
+                    white-space: nowrap;
+
+                    background: linear-gradient(45deg, #fbc02d, #fff9c4);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                  }
+
+                  .date {
+                    font-family: "Playfair Display", serif;
+                    font-size: clamp(24px, 4vw, 32px);
+                    font-weight: bold;
+                    margin-top: 30px;
+                  }
+
+                  /* =========================
+                     THƯ MỜI
+                  ========================== */
+
+                  .invitation-text {
+                    background: #c62828;
+                    color: #fff;
+                    padding: 40px 30px;
+                    border: 2px solid #fff;
+                    line-height: 1.8;
+                  }
+
+                  .invitation-text .header {
+                    font-size: clamp(28px, 6vw, 48px);
+                    font-weight: bold;
+                    margin-bottom: 30px;
+                  }
+
+                  .invitation-text p {
+                    font-size: clamp(16px, 3vw, 24px);
+                    margin: 20px 0;
+                  }
+
+                  /* =========================
+                     THÔNG TIN LỄ CƯỚI
+                  ========================== */
+
+                  .wedding-info {
+                    background: #c62828;
+                    color: #fff;
+                    padding: 40px 25px;
+                    border: 2px solid #fff;
+                    font-family: Georgia, serif;
+                    line-height: 1.6;
+                  }
+
+                  .wedding-info .title {
+                    font-size: clamp(28px, 6vw, 48px);
+                    font-weight: bold;
+                    margin: 20px 0;
+                  }
+
+                  .wedding-info .subtitle {
+                    font-size: clamp(22px, 4.5vw, 36px);
+                    margin: 20px 0;
+                  }
+
+                  .wedding-info .text {
+                    font-size: clamp(16px, 3.5vw, 24px);
+                    margin: 15px 0;
+                  }
+
+                  .wedding-info .time {
+                    font-size: clamp(20px, 4.5vw, 32px);
+                    font-weight: bold;
+                    margin: 20px 0;
+                  }
+
+                  .wedding-info .address {
+                    font-size: clamp(16px, 3.5vw, 24px);
+                    margin: 20px 0;
+                  }
+
+                  .wedding-info .invite {
+                    font-size: clamp(20px, 4vw, 30px);
+                    font-weight: bold;
+                    margin-top: 30px;
+                  }
+
+                  /* =========================
+                     GOOGLE MAP BUTTON
+                  ========================== */
+
+                  .map-button {
+                    display: inline-block;
+                    padding: 15px 40px;
+                    background-color: #7b1f1f;
+                    color: #fff;
+                    font-size: clamp(16px, 3vw, 22px);
+                    font-weight: bold;
+                    border: 2px solid #fff;
+                    border-radius: 10px;
+                    cursor: pointer;
+                    text-decoration: none;
+                    transition: background-color 0.3s ease;
+                    margin: 15px auto 20px;
+
+                    /* HIỆU ỨNG NHẤP NHÁY */
+                    animation: mapBlink 1.2s infinite;
+                  }
+
+                  .map-button:hover {
+                    background-color: #b71c1c;
+                  }
+
+                  .map-button:active {
+                    animation: none;
+                    transform: scale(0.95);
+                  }
+
+                  /* HIỆU ỨNG NHẤP NHÁY NÚT MAP */
+
+                  @keyframes mapBlink {
+                    0% {
+                      transform: scale(1);
+                      box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+                    }
+
+                    50% {
+                      transform: scale(1.06);
+                      box-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
+                    }
+
+                    100% {
+                      transform: scale(1);
+                      box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+                    }
+                  }
+
+                  /* =========================
+                     COUNTDOWN + CALENDAR
+                  ========================== */
+
+                  .countdown-calendar {
+                    background: #c62828;
+                    color: #fff;
+                    padding: 30px 20px;
+                    border: 2px solid #fff;
+                    font-family: Arial, sans-serif;
+                    line-height: 1.6;
+                  }
+
+                  #countdown {
+                    display: flex;
+                    justify-content: center;
+                    align-items: stretch;
+                    gap: 12px;
+                    margin-bottom: 30px;
+                    width: 100%;
+                  }
+
+                  .count-box {
+                    background: #7b1f1f;
+                    color: #fff;
+                    padding: 15px 8px;
+                    border-radius: 10px;
+                    text-align: center;
+                    flex: 1;
+                    min-width: 0;
+                    border: 1px solid #fff;
+                  }
+
+                  .count-box div:first-child {
+                    font-size: clamp(24px, 5vw, 50px);
+                    font-weight: bold;
+                    line-height: 1.2;
+                  }
+
+                  .count-box div:last-child {
+                    font-size: clamp(12px, 2vw, 18px);
+                    margin-top: 5px;
+                  }
+
+                  /* =========================
+                     CALENDAR
+                  ========================== */
+
+                  .calendar-title {
+                    font-size: clamp(24px, 4vw, 36px);
+                    margin: 20px 0;
+                    color: #fff;
+                  }
+
+                  .calendar {
+                    width: 100%;
+                    max-width: 700px;
+                    margin: 0 auto;
+                    border-collapse: separate;
+                    border-spacing: 3px;
+                    table-layout: fixed;
+                    text-align: center;
+                    font-size: clamp(12px, 2.5vw, 22px);
+                    color: #fff;
+                  }
+
+                  .calendar th,
+                  .calendar td {
+                    width: 14.28%;
+                    height: 45px;
+                    padding: 5px 2px;
+                    vertical-align: middle;
+                  }
+
+                  .calendar th {
+                    font-weight: bold;
+                  }
+
+                  .calendar .special-day {
+                    background: #fff;
+                    color: #c62828;
+                    font-weight: bold;
+                    border-radius: 50%;
+                  }
+
+                  .special-date {
+                    margin-top: 25px;
+                    font-size: clamp(16px, 3vw, 24px);
+                  }
+
+                  /* =========================
+                     IMAGE CAROUSEL
+                  ========================== */
+
+                  .photo-carousel {
+                    padding: 0;
+                  }
+
+                  .carousel-title {
+                    color: #fdd835;
+                    font-family: "Playfair Display", serif;
+                    font-size: clamp(28px, 5vw, 48px);
+                    margin-bottom: 25px;
+                    letter-spacing: 2px;
+                  }
+
+                  .carousel-container {
+                    position: relative;
+                    width: 100%;
+                    overflow: hidden;
+                    border-radius: 12px;
+                    border: 2px solid #fff;
+                    background: #000;
+                  }
+
+                  .carousel-track {
+                    display: flex;
+                    align-items: flex-start;
+                    transition: transform 0.6s ease;
+                  }
+
+                  .carousel-slide {
+                    min-width: 100%;
+                    width: 100%;
+                  }
+
+                  /* HIỂN THỊ ĐẦY ĐỦ ẢNH */
+
+                  .carousel-slide img {
+                    width: 100%;
+                    height: auto;
+                    display: block;
+                  }
+
+                  /* NÚT CHUYỂN ẢNH */
+
+                  .carousel-btn {
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+
+                    width: 50px;
+                    height: 50px;
+
+                    border: none;
+                    border-radius: 50%;
+
+                    background: rgba(123, 31, 31, 0.8);
+                    color: #fff;
+
+                    font-size: 35px;
+                    cursor: pointer;
+                    z-index: 10;
+
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                  }
+
+                  .carousel-btn:hover {
+                    background: #c62828;
+                  }
+
+                  .carousel-btn.prev {
+                    left: 15px;
+                  }
+
+                  .carousel-btn.next {
+                    right: 15px;
+                  }
+
+                  /* DẤU CHẤM */
+
+                  .carousel-dots {
+                    display: flex;
+                    justify-content: center;
+                    gap: 10px;
+                    margin-top: 15px;
+                  }
+
+                  .carousel-dot {
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 50%;
+                    background: #fff;
+                    opacity: 0.5;
+                    cursor: pointer;
+                    transition: 0.3s;
+                  }
+
+                  .carousel-dot.active {
+                    opacity: 1;
+                    background: #fdd835;
+                    transform: scale(1.3);
+                  }
+
+            /* =========================
+               XÁC NHẬN THAM DỰ
+            ========================= */
+
+            .confirmation-section {
+              width: 90%;
+              max-width: 1000px;
+              margin: 0 auto 40px;
+
+              padding: 40px 25px;
+
+              background: #c62828;
+              color: #fff;
+
+              /* VIỀN GIỐNG CÁC PHẦN PHÍA TRÊN */
+              border: 2px solid #fff;
+              border-radius: 12px;
+
+              /* CĂN GIỮA */
+              text-align: center;
               display: flex;
               flex-direction: column;
               align-items: center;
-              background: #7b1f1f;
-              font-family: "Segoe UI", sans-serif;
             }
 
-            /* =========================
-               KHUNG CHUNG
-            ========================== */
-
-            .save-date,
-            .invitation-text,
-            .wedding-info,
-            .photo-carousel,
-            .countdown-calendar {
-              width: 90%;
-              max-width: 1000px;
-              margin-bottom: 40px;
-              border-radius: 12px;
+            .confirmation-title {
+              color: #fdd835;
+              font-family: "Playfair Display", serif;
+              font-size: clamp(28px, 5vw, 48px);
+              margin: 0 0 20px;
               text-align: center;
             }
 
-            /* =========================
-               SAVE THE DATE
-            ========================== */
-
-            .save-date {
-              background: #7b1f1f;
-              color: #fdd835;
-              padding: 60px 40px;
-              border: 2px solid #fff;
-            }
-
-            .title {
-              font-family: "Playfair Display", serif;
-              font-size: clamp(30px, 5vw, 48px);
-              font-weight: bold;
-              letter-spacing: 4px;
-              margin-bottom: 20px;
-            }
-
-            .subtitle {
-              font-family: "Cormorant Garamond", serif;
-              font-size: clamp(20px, 3vw, 28px);
-              font-style: italic;
-              margin-bottom: 40px;
-            }
-
-            .names {
-              font-family: "Segoe Script", cursive;
-              font-size: clamp(32px, 6vw, 80px);
-              line-height: 1.4;
-              white-space: nowrap;
-
-              background: linear-gradient(45deg, #fbc02d, #fff9c4);
-              -webkit-background-clip: text;
-              -webkit-text-fill-color: transparent;
-            }
-
-            .date {
-              font-family: "Playfair Display", serif;
-              font-size: clamp(24px, 4vw, 32px);
-              font-weight: bold;
-              margin-top: 30px;
-            }
-
-            /* =========================
-               THƯ MỜI
-            ========================== */
-
-            .invitation-text {
-              background: #c62828;
-              color: #fff;
-              padding: 40px 30px;
-              border: 2px solid #fff;
-              line-height: 1.8;
-            }
-
-            .invitation-text .header {
-              font-size: clamp(28px, 6vw, 48px);
-              font-weight: bold;
-              margin-bottom: 30px;
-            }
-
-            .invitation-text p {
-              font-size: clamp(16px, 3vw, 24px);
-              margin: 20px 0;
-            }
-
-            /* =========================
-               THÔNG TIN LỄ CƯỚI
-            ========================== */
-
-            .wedding-info {
-              background: #c62828;
-              color: #fff;
-              padding: 40px 25px;
-              border: 2px solid #fff;
-              font-family: Georgia, serif;
+            .confirmation-text {
+              max-width: 800px;
+              font-size: clamp(16px, 3vw, 22px);
               line-height: 1.6;
+              margin: 0 auto 25px;
+              text-align: center;
             }
 
-            .wedding-info .title {
-              font-size: clamp(28px, 6vw, 48px);
-              font-weight: bold;
-              margin: 20px 0;
-            }
-
-            .wedding-info .subtitle {
-              font-size: clamp(22px, 4.5vw, 36px);
-              margin: 20px 0;
-            }
-
-            .wedding-info .text {
-              font-size: clamp(16px, 3.5vw, 24px);
-              margin: 15px 0;
-            }
-
-            .wedding-info .time {
-              font-size: clamp(20px, 4.5vw, 32px);
-              font-weight: bold;
-              margin: 20px 0;
-            }
-
-            .wedding-info .address {
-              font-size: clamp(16px, 3.5vw, 24px);
-              margin: 20px 0;
-            }
-
-            .wedding-info .invite {
-              font-size: clamp(20px, 4vw, 30px);
-              font-weight: bold;
-              margin-top: 30px;
-            }
-
-            /* =========================
-               GOOGLE MAP BUTTON
-            ========================== */
-
-            .map-button {
+            .confirmation-button {
               display: inline-block;
-              padding: 15px 40px;
+              text-align: center;
+
+              padding: 20px 50px;
               background-color: #7b1f1f;
               color: #fff;
+
               font-size: clamp(16px, 3vw, 22px);
               font-weight: bold;
+
+              /* VIỀN CHO NÚT */
               border: 2px solid #fff;
               border-radius: 10px;
+
               cursor: pointer;
               text-decoration: none;
-              transition: background-color 0.3s ease;
-              margin: 15px auto 20px;
+              line-height: 1.6;
 
-              /* HIỆU ỨNG NHẤP NHÁY */
-              animation: mapBlink 1.2s infinite;
+              /* HIỆU ỨNG */
+              animation: confirmationBlink 1.2s infinite;
             }
 
-            .map-button:hover {
+            .confirmation-button:hover {
               background-color: #b71c1c;
             }
 
-            .map-button:active {
+            .confirmation-button:active {
               animation: none;
               transform: scale(0.95);
             }
 
-            /* HIỆU ỨNG NHẤP NHÁY NÚT MAP */
+            /* HIỆU ỨNG NHẤP NHÁY */
 
-            @keyframes mapBlink {
+            @keyframes confirmationBlink {
               0% {
                 transform: scale(1);
                 box-shadow: 0 0 0 rgba(255, 255, 255, 0);
               }
 
               50% {
-                transform: scale(1.06);
+                transform: scale(1.05);
                 box-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
               }
 
@@ -202,592 +490,756 @@
             }
 
             /* =========================
-               COUNTDOWN + CALENDAR
-            ========================== */
+               ĐIỆN THOẠI
+            ========================= */
 
-            .countdown-calendar {
-              background: #c62828;
-              color: #fff;
-              padding: 30px 20px;
-              border: 2px solid #fff;
-              font-family: Arial, sans-serif;
-              line-height: 1.6;
-            }
+            @media (max-width: 600px) {
 
-            #countdown {
-              display: flex;
-              justify-content: center;
-              align-items: stretch;
-              gap: 12px;
-              margin-bottom: 30px;
-              width: 100%;
-            }
+              .confirmation-section {
+                width: 95%;
+                margin: 0 auto 25px;
+                padding: 30px 15px;
+              }
 
-            .count-box {
-              background: #7b1f1f;
-              color: #fff;
-              padding: 15px 8px;
-              border-radius: 10px;
-              text-align: center;
-              flex: 1;
-              min-width: 0;
-              border: 1px solid #fff;
-            }
-
-            .count-box div:first-child {
-              font-size: clamp(24px, 5vw, 50px);
-              font-weight: bold;
-              line-height: 1.2;
-            }
-
-            .count-box div:last-child {
-              font-size: clamp(12px, 2vw, 18px);
-              margin-top: 5px;
+              .confirmation-button {
+                width: 90%;
+                padding: 14px 10px;
+                font-size: 16px;
+                border-radius: 8px;
+              }
             }
 
             /* =========================
-               CALENDAR
-            ========================== */
+               NÚT NHẠC NỀN (NỔI, THEO CUỘN TRANG)
+            ========================= */
 
-            .calendar-title {
-              font-size: clamp(24px, 4vw, 36px);
-              margin: 20px 0;
-              color: #fff;
-            }
+            .music-player {
+              position: fixed;
+              bottom: 25px;
+              right: 25px;
+              z-index: 999;
 
-            .calendar {
-              width: 100%;
-              max-width: 700px;
-              margin: 0 auto;
-              border-collapse: separate;
-              border-spacing: 3px;
-              table-layout: fixed;
-              text-align: center;
-              font-size: clamp(12px, 2.5vw, 22px);
-              color: #fff;
-            }
+              width: 65px;
+              height: 65px;
 
-            .calendar th,
-            .calendar td {
-              width: 14.28%;
-              height: 45px;
-              padding: 5px 2px;
-              vertical-align: middle;
-            }
-
-            .calendar th {
-              font-weight: bold;
-            }
-
-            .calendar .special-day {
-              background: #fff;
-              color: #c62828;
-              font-weight: bold;
               border-radius: 50%;
-            }
-
-            .special-date {
-              margin-top: 25px;
-              font-size: clamp(16px, 3vw, 24px);
-            }
-
-            /* =========================
-               IMAGE CAROUSEL
-            ========================== */
-
-            .photo-carousel {
-              padding: 0;
-            }
-
-            .carousel-title {
-              color: #fdd835;
-              font-family: "Playfair Display", serif;
-              font-size: clamp(28px, 5vw, 48px);
-              margin-bottom: 25px;
-              letter-spacing: 2px;
-            }
-
-            .carousel-container {
-              position: relative;
-              width: 100%;
-              overflow: hidden;
-              border-radius: 12px;
+              background: radial-gradient(circle at 30% 30%, #fdd835, #7b1f1f 70%);
               border: 2px solid #fff;
-              background: #000;
-            }
-
-            .carousel-track {
-              display: flex;
-              align-items: flex-start;
-              transition: transform 0.6s ease;
-            }
-
-            .carousel-slide {
-              min-width: 100%;
-              width: 100%;
-            }
-
-            /* HIỂN THỊ ĐẦY ĐỦ ẢNH */
-
-            .carousel-slide img {
-              width: 100%;
-              height: auto;
-              display: block;
-            }
-
-            /* NÚT CHUYỂN ẢNH */
-
-            .carousel-btn {
-              position: absolute;
-              top: 50%;
-              transform: translateY(-50%);
-
-              width: 50px;
-              height: 50px;
-
-              border: none;
-              border-radius: 50%;
-
-              background: rgba(123, 31, 31, 0.8);
-              color: #fff;
-
-              font-size: 35px;
-              cursor: pointer;
-              z-index: 10;
+              box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 
               display: flex;
-              justify-content: center;
               align-items: center;
-            }
-
-            .carousel-btn:hover {
-              background: #c62828;
-            }
-
-            .carousel-btn.prev {
-              left: 15px;
-            }
-
-            .carousel-btn.next {
-              right: 15px;
-            }
-
-            /* DẤU CHẤM */
-
-            .carousel-dots {
-              display: flex;
               justify-content: center;
-              gap: 10px;
-              margin-top: 15px;
-            }
-
-            .carousel-dot {
-              width: 10px;
-              height: 10px;
-              border-radius: 50%;
-              background: #fff;
-              opacity: 0.5;
               cursor: pointer;
-              transition: 0.3s;
+
+              transition: transform 0.3s ease;
             }
 
-            .carousel-dot.active {
+            .music-player:hover {
+              transform: scale(1.08);
+            }
+
+            .music-player img,
+            .music-player svg {
+              width: 60%;
+              height: 60%;
+              pointer-events: none;
+            }
+
+            /* VÒNG TRÒN XOAY BAO QUANH NÚT NHẠC KHI ĐANG PHÁT */
+
+            .music-player::before {
+              content: "";
+              position: absolute;
+              top: -8px;
+              left: -8px;
+              right: -8px;
+              bottom: -8px;
+              border-radius: 50%;
+              border: 2px dashed rgba(253, 216, 53, 0.8);
+              opacity: 0;
+              transform: rotate(0deg);
+              transition: opacity 0.3s ease;
+              pointer-events: none;
+            }
+
+            .music-player.playing::before {
               opacity: 1;
-              background: #fdd835;
-              transform: scale(1.3);
+              animation: ringSpin 5s linear infinite;
             }
 
-      /* =========================
-         XÁC NHẬN THAM DỰ
-      ========================= */
+            @keyframes ringSpin {
+              from {
+                transform: rotate(0deg);
+              }
+              to {
+                transform: rotate(360deg);
+              }
+            }
 
-      .confirmation-section {
+            /* HIỆU ỨNG NHẤP NHÁY PHÁT SÁNG KHI ĐANG PHÁT */
+
+            .music-player.playing {
+              animation: playerPulse 1.6s ease-in-out infinite;
+            }
+
+            @keyframes playerPulse {
+              0%,
+              100% {
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4),
+                  0 0 0 0 rgba(253, 216, 53, 0.6);
+              }
+              50% {
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4),
+                  0 0 0 12px rgba(253, 216, 53, 0);
+              }
+            }
+
+            /* ĐĨA NHẠC QUAY TRÒN KHI ĐANG PHÁT */
+
+            .music-player.playing .disc-icon {
+              animation: discSpin 3s linear infinite;
+            }
+
+            @keyframes discSpin {
+              from {
+                transform: rotate(0deg);
+              }
+              to {
+                transform: rotate(360deg);
+              }
+            }
+
+            @media (max-width: 600px) {
+              .music-player {
+                width: 55px;
+                height: 55px;
+                bottom: 18px;
+                right: 18px;
+              }
+            }
+
+            /* =========================
+               THÔNG BÁO NHẮC NHẤN NHẠC (THAY CHO NÚT PLAY)
+            ========================= */
+
+            .music-hint {
+              position: fixed;
+              bottom: 100px;
+              right: 20px;
+              z-index: 998;
+
+              max-width: 170px;
+              padding: 10px 14px;
+
+              background: #fff;
+              color: #7b1f1f;
+
+              font-size: 13px;
+              font-weight: bold;
+              line-height: 1.4;
+              text-align: center;
+
+              border-radius: 14px;
+              box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+
+              animation: hintBounce 1.5s ease-in-out infinite,
+                hintFadeIn 0.4s ease;
+              pointer-events: none;
+            }
+
+            .music-hint::after {
+              content: "";
+              position: absolute;
+              bottom: -8px;
+              right: 22px;
+              border-width: 8px 8px 0 8px;
+              border-style: solid;
+              border-color: #fff transparent transparent transparent;
+            }
+
+            @keyframes hintFadeIn {
+              from {
+                opacity: 0;
+                transform: translateY(8px);
+              }
+              to {
+                opacity: 1;
+                transform: translateY(0);
+              }
+            }
+
+            @keyframes hintBounce {
+              0%,
+              100% {
+                transform: translateY(0);
+              }
+              50% {
+                transform: translateY(-6px);
+              }
+            }
+
+            @media (max-width: 600px) {
+              .music-hint {
+                bottom: 82px;
+                right: 15px;
+                max-width: 140px;
+                font-size: 12px;
+                padding: 8px 12px;
+              }
+            }
+
+
+
+
+
+                  /* =========================
+                     RESPONSIVE ĐIỆN THOẠI
+                  ========================== */
+
+                  @media (max-width: 600px) {
+
+                    body {
+                      padding: 10px 0;
+                    }
+
+                    .save-date,
+                    .invitation-text,
+                    .wedding-info,
+                    .photo-carousel,
+                    .countdown-calendar {
+                      width: 95%;
+                      margin-bottom: 25px;
+                    }
+
+                    .save-date {
+                      padding: 40px 15px;
+                    }
+
+                    .invitation-text,
+                    .wedding-info {
+                      padding: 30px 15px;
+                    }
+
+                    /* MAP BUTTON */
+
+                    .map-button {
+                      width: 90%;
+                      padding: 14px 10px;
+                      font-size: 16px;
+                    }
+
+                    /* COUNTDOWN */
+
+                    .countdown-calendar {
+                      padding: 20px 10px;
+                    }
+
+                    #countdown {
+                      gap: 5px;
+                    }
+
+                    .count-box {
+                      padding: 12px 3px;
+                    }
+
+                    .count-box div:first-child {
+                      font-size: 7vw;
+                    }
+
+                    .count-box div:last-child {
+                      font-size: 3vw;
+                    }
+
+                    /* CALENDAR */
+
+                    .calendar {
+                      border-spacing: 1px;
+                    }
+
+                    .calendar th,
+                    .calendar td {
+                      height: 38px;
+                      padding: 3px 0;
+                      font-size: 3.5vw;
+                    }
+
+                    /* CAROUSEL */
+
+                    .carousel-slide img {
+                      width: 100%;
+                      height: auto;
+                    }
+
+                    .carousel-btn {
+                      width: 38px;
+                      height: 38px;
+                      font-size: 25px;
+                    }
+
+                    .carousel-btn.prev {
+                      left: 8px;
+                    }
+
+                    .carousel-btn.next {
+                      right: 8px;
+                    }
+                  }
+                /* =====================================================
+         SỔ LƯU BÚT
+      ===================================================== */
+
+      .guestbook-section,
+      .gift-section {
         width: 90%;
         max-width: 1000px;
         margin: 0 auto 40px;
+        text-align: center;
+      }
 
-        padding: 40px 25px;
-
+      .guestbook-box,
+      .gift-box {
         background: #c62828;
         color: #fff;
-
-        /* VIỀN GIỐNG CÁC PHẦN PHÍA TRÊN */
+        padding: 35px 25px;
         border: 2px solid #fff;
         border-radius: 12px;
-
-        /* CĂN GIỮA */
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
       }
 
-      .confirmation-title {
+      .guestbook-title,
+      .gift-title {
         color: #fdd835;
         font-family: "Playfair Display", serif;
-        font-size: clamp(28px, 5vw, 48px);
-        margin: 0 0 20px;
-        text-align: center;
+        font-size: clamp(26px, 5vw, 42px);
+        letter-spacing: 2px;
+        margin: 0 0 25px;
       }
 
-      .confirmation-text {
-        max-width: 800px;
-        font-size: clamp(16px, 3vw, 22px);
-        line-height: 1.6;
-        margin: 0 auto 25px;
-        text-align: center;
+      .guestbook-input,
+      .guestbook-message {
+        display: block;
+        width: 90%;
+        max-width: 650px;
+        margin: 8px auto;
+
+        background: #fff;
+        color: #555;
+
+        border: 2px solid #fff;
+        border-radius: 7px;
+
+        padding: 12px 14px;
+
+        font-family: "Segoe UI", sans-serif;
+        font-size: 14px;
+
+        outline: none;
       }
 
-      .confirmation-button {
-        display: inline-block;
-        text-align: center;
+      .guestbook-message {
+        height: 120px;
+        resize: vertical;
+      }
 
-        padding: 20px 50px;
-        background-color: #7b1f1f;
+      .guestbook-input:focus,
+      .guestbook-message:focus {
+        border-color: #fdd835;
+      }
+
+      .guestbook-submit {
+        margin-top: 10px;
+
+        padding: 12px 28px;
+
+        background: #7b1f1f;
         color: #fff;
 
-        font-size: clamp(16px, 3vw, 22px);
-        font-weight: bold;
-
-        /* VIỀN CHO NÚT */
         border: 2px solid #fff;
         border-radius: 10px;
 
-        cursor: pointer;
-        text-decoration: none;
-        line-height: 1.6;
+        font-size: 14px;
+        font-weight: bold;
 
-        /* HIỆU ỨNG */
+        cursor: pointer;
+
         animation: confirmationBlink 1.2s infinite;
       }
 
-      .confirmation-button:hover {
-        background-color: #b71c1c;
+      .guestbook-submit:hover {
+        background: #b71c1c;
       }
 
-      .confirmation-button:active {
-        animation: none;
-        transform: scale(0.95);
+
+      /* DANH SÁCH LỜI CHÚC */
+
+      .guestbook-list {
+        width: 90%;
+        max-width: 700px;
+
+        max-height: 400px;
+        overflow-y: auto;
+
+        margin: 25px auto 0;
+
+        text-align: left;
       }
 
-      /* HIỆU ỨNG NHẤP NHÁY */
+      .guestbook-item {
+        background: #fff;
+        color: #555;
 
-      @keyframes confirmationBlink {
-        0% {
-          transform: scale(1);
-          box-shadow: 0 0 0 rgba(255, 255, 255, 0);
-        }
+        border: 1px solid #fff;
+        border-radius: 7px;
 
-        50% {
-          transform: scale(1.05);
-          box-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
-        }
+        padding: 10px 12px;
+        margin-bottom: 8px;
 
-        100% {
-          transform: scale(1);
-          box-shadow: 0 0 0 rgba(255, 255, 255, 0);
-        }
+        font-size: 13px;
       }
 
-      /* =========================
-         ĐIỆN THOẠI
-      ========================= */
-
-      @media (max-width: 600px) {
-
-        .confirmation-section {
-          width: 95%;
-          margin: 0 auto 25px;
-          padding: 30px 15px;
-        }
-
-        .confirmation-button {
-          width: 90%;
-          padding: 14px 10px;
-          font-size: 16px;
-          border-radius: 8px;
-        }
+      .guestbook-name {
+        font-weight: bold;
+        color: #7b1f1f;
       }
 
-      /* =========================
-         NÚT NHẠC NỀN (NỔI, THEO CUỘN TRANG)
-      ========================= */
+      .guestbook-time {
+        float: right;
+        color: #999;
+        font-size: 9px;
+      }
 
-      .music-player {
-        position: fixed;
-        bottom: 25px;
-        right: 25px;
-        z-index: 999;
+      .guestbook-content {
+        margin-top: 5px;
+        line-height: 1.5;
+      }
 
-        width: 65px;
-        height: 65px;
 
-        border-radius: 50%;
-        background: radial-gradient(circle at 30% 30%, #fdd835, #7b1f1f 70%);
-        border: 2px solid #fff;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      /* =====================================================
+         HỘP QUÀ
+      ===================================================== */
 
-        display: flex;
-        align-items: center;
-        justify-content: center;
+      .gift-section {
+        margin-top: 10px;
+      }
+
+      .gift-box {
+        overflow: hidden;
+      }
+
+      .gift-description {
+        font-size: clamp(14px, 3vw, 19px);
+        margin-bottom: 20px;
+      }
+
+
+      /* HỘP QUÀ CSS */
+
+      .gift-container {
+        position: relative;
+
+        width: 170px;
+        height: 150px;
+
+        margin: 30px auto 15px;
+
         cursor: pointer;
 
         transition: transform 0.3s ease;
       }
 
-      .music-player:hover {
+      .gift-container:hover {
         transform: scale(1.08);
       }
 
-      .music-player img,
-      .music-player svg {
-        width: 60%;
-        height: 60%;
-        pointer-events: none;
-      }
-
-      /* VÒNG TRÒN XOAY BAO QUANH NÚT NHẠC KHI ĐANG PHÁT */
-
-      .music-player::before {
-        content: "";
+      .gift-body {
         position: absolute;
-        top: -8px;
-        left: -8px;
-        right: -8px;
-        bottom: -8px;
-        border-radius: 50%;
-        border: 2px dashed rgba(253, 216, 53, 0.8);
-        opacity: 0;
-        transform: rotate(0deg);
-        transition: opacity 0.3s ease;
-        pointer-events: none;
-      }
 
-      .music-player.playing::before {
-        opacity: 1;
-        animation: ringSpin 5s linear infinite;
-      }
+        width: 130px;
+        height: 95px;
 
-      @keyframes ringSpin {
-        from {
-          transform: rotate(0deg);
-        }
-        to {
-          transform: rotate(360deg);
-        }
-      }
-
-      /* HIỆU ỨNG NHẤP NHÁY PHÁT SÁNG KHI ĐANG PHÁT */
-
-      .music-player.playing {
-        animation: playerPulse 1.6s ease-in-out infinite;
-      }
-
-      @keyframes playerPulse {
-        0%,
-        100% {
-          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4),
-            0 0 0 0 rgba(253, 216, 53, 0.6);
-        }
-        50% {
-          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4),
-            0 0 0 12px rgba(253, 216, 53, 0);
-        }
-      }
-
-      /* ĐĨA NHẠC QUAY TRÒN KHI ĐANG PHÁT */
-
-      .music-player.playing .disc-icon {
-        animation: discSpin 3s linear infinite;
-      }
-
-      @keyframes discSpin {
-        from {
-          transform: rotate(0deg);
-        }
-        to {
-          transform: rotate(360deg);
-        }
-      }
-
-      @media (max-width: 600px) {
-        .music-player {
-          width: 55px;
-          height: 55px;
-          bottom: 18px;
-          right: 18px;
-        }
-      }
-
-      /* =========================
-         THÔNG BÁO NHẮC NHẤN NHẠC (THAY CHO NÚT PLAY)
-      ========================= */
-
-      .music-hint {
-        position: fixed;
-        bottom: 100px;
-        right: 20px;
-        z-index: 998;
-
-        max-width: 170px;
-        padding: 10px 14px;
+        left: 20px;
+        top: 40px;
 
         background: #fff;
-        color: #7b1f1f;
+
+        border: 3px solid #fdd835;
+
+        border-radius: 4px;
+
+        box-shadow:
+          0 8px 15px rgba(0,0,0,0.35);
+      }
+
+
+      /* NẮP HỘP */
+
+      .gift-lid {
+        position: absolute;
+
+        width: 145px;
+        height: 30px;
+
+        left: 12px;
+        top: 25px;
+
+        background: #f5eeee;
+
+        border: 3px solid #fdd835;
+
+        border-radius: 5px;
+
+        z-index: 3;
+      }
+
+
+      /* DẢI RUY-BĂNG DỌC */
+
+      .gift-ribbon-vertical {
+        position: absolute;
+
+        width: 24px;
+        height: 95px;
+
+        left: 73px;
+        top: 40px;
+
+        background: #c62828;
+
+        border-left: 2px solid #fdd835;
+        border-right: 2px solid #fdd835;
+
+        z-index: 2;
+      }
+
+
+      /* DẢI RUY-BĂNG NGANG */
+
+      .gift-ribbon-horizontal {
+        position: absolute;
+
+        width: 130px;
+        height: 20px;
+
+        left: 20px;
+        top: 75px;
+
+        background: #c62828;
+
+        border-top: 2px solid #fdd835;
+        border-bottom: 2px solid #fdd835;
+
+        z-index: 2;
+      }
+
+
+      /* NƠ */
+
+      .gift-bow {
+        position: absolute;
+
+        left: 58px;
+        top: 5px;
+
+        font-size: 48px;
+
+        z-index: 5;
+
+        transform: rotate(-8deg);
+      }
+
+
+      /* CHỮ NHẤN */
+
+      .gift-hint {
+        color: #fdd835;
 
         font-size: 13px;
-        font-weight: bold;
-        line-height: 1.4;
+
+        margin-top: 8px;
+
+        animation: giftHint 1.5s ease-in-out infinite;
+      }
+
+      @keyframes giftHint {
+        0%,100% {
+          opacity: 0.6;
+        }
+
+        50% {
+          opacity: 1;
+        }
+      }
+
+
+      /* =====================================================
+         POPUP QR
+      ===================================================== */
+
+      .qr-overlay {
+        position: fixed;
+
+        inset: 0;
+
+        background: rgba(0,0,0,0.7);
+
+        display: none;
+
+        align-items: center;
+        justify-content: center;
+
+        z-index: 10000;
+
+        padding: 20px;
+      }
+
+      .qr-overlay.show {
+        display: flex;
+      }
+
+      .qr-popup {
+        width: 90%;
+        max-width: 390px;
+
+        background: #c62828;
+
+        color: #fff;
+
+        border: 2px solid #fff;
+
+        border-radius: 15px;
+
+        padding: 25px 20px;
+
         text-align: center;
 
-        border-radius: 14px;
-        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+        box-shadow: 0 10px 40px rgba(0,0,0,0.5);
 
-        animation: hintBounce 1.5s ease-in-out infinite,
-          hintFadeIn 0.4s ease;
-        pointer-events: none;
+        animation: qrPopup 0.3s ease;
       }
 
-      .music-hint::after {
-        content: "";
-        position: absolute;
-        bottom: -8px;
-        right: 22px;
-        border-width: 8px 8px 0 8px;
-        border-style: solid;
-        border-color: #fff transparent transparent transparent;
-      }
-
-      @keyframes hintFadeIn {
+      @keyframes qrPopup {
         from {
           opacity: 0;
-          transform: translateY(8px);
+          transform: scale(0.8);
         }
+
         to {
           opacity: 1;
-          transform: translateY(0);
+          transform: scale(1);
         }
       }
 
-      @keyframes hintBounce {
-        0%,
-        100% {
-          transform: translateY(0);
-        }
-        50% {
-          transform: translateY(-6px);
-        }
+      .qr-close {
+        position: absolute;
+
+        border: none;
+
+        background: none;
+
+        color: #fff;
+
+        font-size: 30px;
+
+        cursor: pointer;
       }
+
+      .qr-popup {
+        position: relative;
+      }
+
+      .qr-title {
+        color: #fdd835;
+
+        font-family: "Playfair Display", serif;
+
+        font-size: 25px;
+
+        margin: 5px 0 18px;
+      }
+
+      .qr-image {
+        width: 240px;
+        height: 240px;
+
+        max-width: 80%;
+
+        background: #fff;
+
+        padding: 8px;
+
+        border-radius: 8px;
+
+        display: block;
+
+        margin: 0 auto 15px;
+      }
+
+      .bank-info {
+        font-size: 13px;
+
+        line-height: 1.8;
+
+        margin-bottom: 15px;
+      }
+
+      .bank-info strong {
+        color: #fdd835;
+      }
+
+      .qr-save-button {
+        padding: 11px 25px;
+
+        background: #7b1f1f;
+
+        color: #fff;
+
+        border: 2px solid #fff;
+
+        border-radius: 10px;
+
+        font-weight: bold;
+
+        cursor: pointer;
+      }
+
+      .qr-save-button:hover {
+        background: #b71c1c;
+      }
+
 
       @media (max-width: 600px) {
-        .music-hint {
-          bottom: 82px;
-          right: 15px;
-          max-width: 140px;
-          font-size: 12px;
-          padding: 8px 12px;
+
+        .guestbook-section,
+        .gift-section {
+          width: 95%;
+        }
+
+        .guestbook-box,
+        .gift-box {
+          padding: 30px 15px;
+        }
+
+        .guestbook-input,
+        .guestbook-message {
+          width: 95%;
+        }
+
+        .gift-container {
+          transform: scale(0.9);
+        }
+
+        .gift-container:hover {
+          transform: scale(0.95);
+        }
+
+        .qr-image {
+          width: 220px;
+          height: 220px;
         }
       }
-
-
-
-
-
-            /* =========================
-               RESPONSIVE ĐIỆN THOẠI
-            ========================== */
-
-            @media (max-width: 600px) {
-
-              body {
-                padding: 10px 0;
-              }
-
-              .save-date,
-              .invitation-text,
-              .wedding-info,
-              .photo-carousel,
-              .countdown-calendar {
-                width: 95%;
-                margin-bottom: 25px;
-              }
-
-              .save-date {
-                padding: 40px 15px;
-              }
-
-              .invitation-text,
-              .wedding-info {
-                padding: 30px 15px;
-              }
-
-              /* MAP BUTTON */
-
-              .map-button {
-                width: 90%;
-                padding: 14px 10px;
-                font-size: 16px;
-              }
-
-              /* COUNTDOWN */
-
-              .countdown-calendar {
-                padding: 20px 10px;
-              }
-
-              #countdown {
-                gap: 5px;
-              }
-
-              .count-box {
-                padding: 12px 3px;
-              }
-
-              .count-box div:first-child {
-                font-size: 7vw;
-              }
-
-              .count-box div:last-child {
-                font-size: 3vw;
-              }
-
-              /* CALENDAR */
-
-              .calendar {
-                border-spacing: 1px;
-              }
-
-              .calendar th,
-              .calendar td {
-                height: 38px;
-                padding: 3px 0;
-                font-size: 3.5vw;
-              }
-
-              /* CAROUSEL */
-
-              .carousel-slide img {
-                width: 100%;
-                height: auto;
-              }
-
-              .carousel-btn {
-                width: 38px;
-                height: 38px;
-                font-size: 25px;
-              }
-
-              .carousel-btn.prev {
-                left: 8px;
-              }
-
-              .carousel-btn.next {
-                right: 8px;
-              }
-            }
     </style>
   </head>
-
   <body>
     <!-- SAVE THE DATE -->
 
@@ -1184,19 +1636,146 @@
         Nhấn vào đây!!!
       </a>
     </div>
+    <!-- =====================================================
+     SỔ LƯU BÚT
+===================================================== -->
 
+    <div class="guestbook-section">
+      <div class="guestbook-box">
+        <h2 class="guestbook-title">SỔ LƯU BÚT</h2>
+
+        <input
+          type="text"
+          id="guestName"
+          class="guestbook-input"
+          placeholder="Nhập tên*"
+          maxlength="50"
+        />
+
+        <textarea
+          id="guestMessage"
+          class="guestbook-message"
+          placeholder="Nhập lời chúc*"
+          maxlength="300"
+        ></textarea>
+
+        <button class="guestbook-submit" onclick="addGuestbook()">
+          GỬI LỜI CHÚC
+        </button>
+
+        <div id="guestbookList" class="guestbook-list"></div>
+      </div>
+    </div>
+
+    <!-- =====================================================
+     HỘP QUÀ MỪNG CƯỚI
+===================================================== -->
+
+    <div class="gift-section">
+      <div class="gift-box">
+        <h2 class="gift-title">HỘP QUÀ MỪNG CƯỚI</h2>
+
+        <p class="gift-description">
+          Nếu bạn muốn gửi lời chúc mừng đến chúng mình
+        </p>
+
+        <!-- HỘP QUÀ -->
+
+        <div class="gift-container" onclick="openQR()" title="Nhấn để mở">
+          <div class="gift-bow">🎀</div>
+
+          <div class="gift-lid"></div>
+
+          <div class="gift-body"></div>
+
+          <div class="gift-ribbon-vertical"></div>
+
+          <div class="gift-ribbon-horizontal"></div>
+        </div>
+
+        <div class="gift-hint">🎁 Nhấn vào hộp quà để gửi mừng cưới</div>
+      </div>
+    </div>
+
+    <!-- =====================================================
+     POPUP QR CHUYỂN KHOẢN
+    ===================================================== -->
+
+    <div id="qrOverlay" class="qr-overlay" onclick="closeQR(event)">
+      <div class="qr-popup" onclick="event.stopPropagation()">
+        <button class="qr-close" onclick="closeQR()">×</button>
+
+        <h2 class="qr-title">MỪNG CƯỚI</h2>
+
+        <img id="qrImage" class="qr-image" src="" alt="Mã QR chuyển khoản" />
+
+        <div class="bank-info">
+          <div>
+            <strong>NGÂN HÀNG:</strong>
+            <span id="bankName">MB BANK</span>
+          </div>
+
+          <div>
+            <strong>SỐ TÀI KHOẢN:</strong>
+            <span id="bankAccount">0123456789</span>
+          </div>
+
+          <div>
+            <strong>CHỦ TÀI KHOẢN:</strong>
+            <span id="bankOwner">TRUNG NGHIA</span>
+          </div>
+
+          <div>
+            <strong>NỘI DUNG:</strong>
+            MUNG CUOI TRUNG NGHIA NGOC NGAN
+          </div>
+        </div>
+
+        <button class="qr-save-button" onclick="saveQR()">💾 LƯU MÃ QR</button>
+      </div>
+    </div>
     <!-- =========================
          NHẠC NỀN TỰ ĐỘNG PHÁT
     ========================== -->
 
     <audio id="bgMusic" src="audio/nhac.mp3" loop preload="auto"></audio>
 
-    <div class="music-player" id="musicPlayer" title="Bật/Tắt nhạc" onclick="toggleMusic()">
-      <svg class="disc-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="50" cy="50" r="46" fill="#1b1b1b" stroke="#fdd835" stroke-width="3" />
-        <circle cx="50" cy="50" r="38" fill="none" stroke="#4a2a2a" stroke-width="1.2" />
+    <div
+      class="music-player"
+      id="musicPlayer"
+      title="Bật/Tắt nhạc"
+      onclick="toggleMusic()"
+    >
+      <svg
+        class="disc-icon"
+        viewBox="0 0 100 100"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle
+          cx="50"
+          cy="50"
+          r="46"
+          fill="#1b1b1b"
+          stroke="#fdd835"
+          stroke-width="3"
+        />
+        <circle
+          cx="50"
+          cy="50"
+          r="38"
+          fill="none"
+          stroke="#4a2a2a"
+          stroke-width="1.2"
+        />
         <circle cx="50" cy="50" r="30" fill="#7b1f1f" />
-        <circle cx="50" cy="50" r="22" fill="none" stroke="#4a2a2a" stroke-width="1" />
+        <circle
+          cx="50"
+          cy="50"
+          r="22"
+          fill="none"
+          stroke="#4a2a2a"
+          stroke-width="1"
+        />
         <path
           d="M58 32 C58 30 60 29 62 29.5 L70 31.5 C71.5 31.8 72.5 33 72.5 34.5 L72.5 52 C72.5 55 70 57.2 67 57.2 C64 57.2 61.5 55 61.5 52 C61.5 49 64 46.8 67 46.8 C67.7 46.8 68.4 46.9 69 47.1 L69 37 L58 34.5 Z"
           fill="#fdd835"
@@ -1210,98 +1789,484 @@
 
     <script>
 
-      var bgMusic = document.getElementById("bgMusic");
-      var musicPlayer = document.getElementById("musicPlayer");
-      var isPlaying = false;
+          var bgMusic = document.getElementById("bgMusic");
+          var musicPlayer = document.getElementById("musicPlayer");
+          var isPlaying = false;
 
 
-      /* HÀM BẬT / TẮT NHẠC */
+          /* HÀM BẬT / TẮT NHẠC */
 
-      function toggleMusic() {
+          function toggleMusic() {
 
-        if (isPlaying) {
-          bgMusic.pause();
-          musicPlayer.classList.remove("playing");
-          isPlaying = false;
+            if (isPlaying) {
+              bgMusic.pause();
+              musicPlayer.classList.remove("playing");
+              isPlaying = false;
+            }
+            else {
+              bgMusic.play().then(function() {
+                musicPlayer.classList.add("playing");
+                isPlaying = true;
+                removeMusicHint();
+              }).catch(function(error) {
+                console.log("Không thể tự động phát nhạc:", error);
+              });
+            }
+          }
+
+
+          /* TỰ ĐỘNG PHÁT NGAY KHI MỞ TRANG (NẾU TRÌNH DUYỆT CHO PHÉP) */
+
+          window.addEventListener("load", function() {
+      // Nếu trước đó đã có user gesture (từ index.html)
+          if (sessionStorage.getItem('autoplayMusic') === '1') {
+            bgMusic.play().then(function() {
+              musicPlayer.classList.add("playing");
+              isPlaying = true;
+              sessionStorage.removeItem('autoplayMusic'); // reset flag
+            }).catch(showMusicHint);
+          } else {
+            // Nếu chưa có gesture, chờ tương tác
+            function startOnFirstInteraction() {
+              bgMusic.play().then(function() {
+                musicPlayer.classList.add("playing");
+                isPlaying = true;
+                removeMusicHint();
+              }).catch(showMusicHint);
+
+              document.removeEventListener("click", startOnFirstInteraction);
+              document.removeEventListener("touchstart", startOnFirstInteraction);
+              document.removeEventListener("touchmove", startOnFirstInteraction);
+              document.removeEventListener("scroll", startOnFirstInteraction);
+            }
+
+            // Desktop
+            document.addEventListener("click", startOnFirstInteraction);
+
+            // Mobile
+            document.addEventListener("touchstart", startOnFirstInteraction);
+            document.addEventListener("touchmove", startOnFirstInteraction);
+
+            // Thêm scroll (có thể hoạt động trên Chrome, nhưng thường không trên Zalo)
+            document.addEventListener("scroll", startOnFirstInteraction);
+          }
+
+          // Fallback: hiện thông báo nhắc nhấn vào icon đĩa nhạc, thay vì tạo nút riêng
+          function showMusicHint() {
+
+            if (document.getElementById("musicHint")) {
+              return;
+            }
+
+            var hint = document.createElement("div");
+            hint.id = "musicHint";
+            hint.className = "music-hint";
+            hint.innerHTML = "🎵 Nhấn vào đây<br>để bật nhạc";
+
+            document.body.appendChild(hint);
+
+            // Nhấn vào icon đĩa nhạc sẽ tự tắt thông báo (đã xử lý trong toggleMusic)
+            // Đồng thời cho phép nhấn ngay vào thông báo cũng bật được nhạc
+            hint.style.pointerEvents = "auto";
+            hint.style.cursor = "pointer";
+            hint.addEventListener("click", function() {
+              toggleMusic();
+            });
+          }
+
+          function removeMusicHint() {
+            var hint = document.getElementById("musicHint");
+            if (hint) {
+              hint.remove();
+            }
+          }
+        });
+    </script>
+    <script>
+
+      /* =====================================================
+         GOOGLE SHEETS - SỔ LƯU BÚT
+      ===================================================== */
+
+
+      /*
+         =====================================================
+         DÁN URL GOOGLE APPS SCRIPT CỦA BẠN VÀO ĐÂY
+         =====================================================
+      */
+
+      const GUESTBOOK_API =
+"https://script.google.com/macros/s/AKfycbwOgsDMm88tEsJL2nYBkOIUOiHeo9OUXMv-6pNFl2bljJJO_3-cVljNe908v50KMsWWow/exec";
+
+
+      /* =====================================================
+         GỬI LỜI CHÚC
+      ===================================================== */
+
+      function addGuestbook() {
+
+        const name =
+          document
+            .getElementById("guestName")
+            .value
+            .trim();
+
+
+        const message =
+          document
+            .getElementById("guestMessage")
+            .value
+            .trim();
+
+
+        /* Kiểm tra */
+
+        if (!name) {
+
+          alert("Vui lòng nhập tên!");
+
+          return;
+
         }
-        else {
-          bgMusic.play().then(function() {
-            musicPlayer.classList.add("playing");
-            isPlaying = true;
-            removeMusicHint();
-          }).catch(function(error) {
-            console.log("Không thể tự động phát nhạc:", error);
-          });
+
+
+        if (!message) {
+
+          alert("Vui lòng nhập lời chúc!");
+
+          return;
+
         }
+
+
+        /*
+          Vô hiệu hóa nút trong lúc gửi
+        */
+
+        const button =
+          document.querySelector(
+            ".guestbook-submit"
+          );
+
+
+        button.disabled = true;
+
+        button.innerText =
+          "ĐANG GỬI...";
+
+
+        /*
+          Dữ liệu gửi lên Google Sheets
+        */
+
+        const formData =
+          new URLSearchParams();
+
+
+        formData.append(
+          "name",
+          name
+        );
+
+
+        formData.append(
+          "message",
+          message
+        );
+
+
+        /*
+          POST đơn giản
+          để tránh CORS preflight
+        */
+
+        fetch(
+          GUESTBOOK_API,
+          {
+            method: "POST",
+
+            mode: "no-cors",
+
+            headers: {
+              "Content-Type":
+                "application/x-www-form-urlencoded"
+            },
+
+            body:
+              formData.toString()
+          }
+        )
+        .then(function() {
+
+          /*
+            Xóa nội dung
+          */
+
+          document
+            .getElementById("guestName")
+            .value = "";
+
+
+          document
+            .getElementById("guestMessage")
+            .value = "";
+
+
+          alert(
+            "Cảm ơn bạn đã gửi lời chúc ❤️"
+          );
+
+
+          /*
+            Đợi Google Sheets ghi dữ liệu
+            rồi tải lại danh sách
+          */
+
+          setTimeout(
+            loadGuestbook,
+            800
+          );
+
+        })
+        .catch(function(error) {
+
+          console.error(error);
+
+          alert(
+            "Không thể gửi lời chúc. Vui lòng thử lại!"
+          );
+
+        })
+        .finally(function() {
+
+          button.disabled = false;
+
+          button.innerText =
+            "GỬI LỜI CHÚC";
+
+        });
+
       }
 
 
-      /* TỰ ĐỘNG PHÁT NGAY KHI MỞ TRANG (NẾU TRÌNH DUYỆT CHO PHÉP) */
-      
-      window.addEventListener("load", function() {
-  // Nếu trước đó đã có user gesture (từ index.html)
-      if (sessionStorage.getItem('autoplayMusic') === '1') {
-        bgMusic.play().then(function() {
-          musicPlayer.classList.add("playing");
-          isPlaying = true;
-          sessionStorage.removeItem('autoplayMusic'); // reset flag
-        }).catch(showMusicHint);
-      } else {
-        // Nếu chưa có gesture, chờ tương tác
-        function startOnFirstInteraction() {
-          bgMusic.play().then(function() {
-            musicPlayer.classList.add("playing");
-            isPlaying = true;
-            removeMusicHint();
-          }).catch(showMusicHint);
-    
-          document.removeEventListener("click", startOnFirstInteraction);
-          document.removeEventListener("touchstart", startOnFirstInteraction);
-          document.removeEventListener("touchmove", startOnFirstInteraction);
-          document.removeEventListener("scroll", startOnFirstInteraction);
-        }
-    
-        // Desktop
-        document.addEventListener("click", startOnFirstInteraction);
-    
-        // Mobile
-        document.addEventListener("touchstart", startOnFirstInteraction);
-        document.addEventListener("touchmove", startOnFirstInteraction);
-    
-        // Thêm scroll (có thể hoạt động trên Chrome, nhưng thường không trên Zalo)
-        document.addEventListener("scroll", startOnFirstInteraction);
-      }
-    
-      // Fallback: hiện thông báo nhắc nhấn vào icon đĩa nhạc, thay vì tạo nút riêng
-      function showMusicHint() {
+      /* =====================================================
+         TẢI DANH SÁCH LỜI CHÚC
+      ===================================================== */
 
-        if (document.getElementById("musicHint")) {
+      function loadGuestbook() {
+
+        /*
+          Nếu chưa nhập URL
+        */
+
+        if (
+          !GUESTBOOK_API ||
+          GUESTBOOK_API.includes(
+            "DAN_URL"
+          )
+        ) {
+
+          return;
+
+        }
+
+
+        const callbackName =
+          "guestbookCallback_" +
+          Date.now();
+
+
+        /*
+          Tạo hàm callback toàn cục
+        */
+
+        window[callbackName] =
+          function(messages) {
+
+            displayGuestbook(
+              messages
+            );
+
+
+            /*
+              Xóa callback
+            */
+
+            delete window[
+              callbackName
+            ];
+
+          };
+
+
+        /*
+          Tạo script để gọi JSONP
+        */
+
+        const script =
+          document.createElement(
+            "script"
+          );
+
+
+        script.src =
+          GUESTBOOK_API +
+          "?callback=" +
+          callbackName;
+
+
+        script.onerror =
+          function() {
+
+            console.error(
+              "Không thể tải sổ lưu bút"
+            );
+
+
+            delete window[
+              callbackName
+            ];
+
+          };
+
+
+        document.body.appendChild(
+          script
+        );
+
+      }
+
+
+      /* =====================================================
+         HIỂN THỊ LỜI CHÚC
+      ===================================================== */
+
+      function displayGuestbook(
+        messages
+      ) {
+
+        const list =
+          document.getElementById(
+            "guestbookList"
+          );
+
+
+        if (!list) {
           return;
         }
 
-        var hint = document.createElement("div");
-        hint.id = "musicHint";
-        hint.className = "music-hint";
-        hint.innerHTML = "🎵 Nhấn vào đây<br>để bật nhạc";
 
-        document.body.appendChild(hint);
+        list.innerHTML = "";
 
-        // Nhấn vào icon đĩa nhạc sẽ tự tắt thông báo (đã xử lý trong toggleMusic)
-        // Đồng thời cho phép nhấn ngay vào thông báo cũng bật được nhạc
-        hint.style.pointerEvents = "auto";
-        hint.style.cursor = "pointer";
-        hint.addEventListener("click", function() {
-          toggleMusic();
-        });
-      }
 
-      function removeMusicHint() {
-        var hint = document.getElementById("musicHint");
-        if (hint) {
-          hint.remove();
+        if (
+          !messages ||
+          messages.length === 0
+        ) {
+
+          return;
+
         }
+
+
+        messages.forEach(
+          function(item) {
+
+            const div =
+              document.createElement(
+                "div"
+              );
+
+
+            div.className =
+              "guestbook-item";
+
+
+            /*
+              Không dùng innerHTML
+              cho dữ liệu khách nhập,
+              tránh XSS.
+            */
+
+            const nameDiv =
+              document.createElement(
+                "div"
+              );
+
+
+            nameDiv.className =
+              "guestbook-name";
+
+
+            nameDiv.textContent =
+              item.name;
+
+
+            const timeSpan =
+              document.createElement(
+                "span"
+              );
+
+
+            timeSpan.className =
+              "guestbook-time";
+
+
+            timeSpan.textContent =
+              item.time;
+
+
+            nameDiv.appendChild(
+              timeSpan
+            );
+
+
+            const messageDiv =
+              document.createElement(
+                "div"
+              );
+
+
+            messageDiv.className =
+              "guestbook-content";
+
+
+            messageDiv.textContent =
+              item.message;
+
+
+            div.appendChild(
+              nameDiv
+            );
+
+
+            div.appendChild(
+              messageDiv
+            );
+
+
+            list.appendChild(
+              div
+            );
+
+          }
+        );
+
       }
-    });
+
+
+      /* =====================================================
+         TỰ ĐỘNG TẢI KHI MỞ TRANG
+      ===================================================== */
+
+      document.addEventListener(
+        "DOMContentLoaded",
+        function() {
+
+          loadGuestbook();
+
+        }
+      );
     </script>
   </body>
 </html>
