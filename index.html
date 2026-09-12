@@ -14,12 +14,17 @@
       margin: 0;
       padding: 20px;
       min-height: 100vh;
+      min-height: 100dvh; /* chiều cao thực tế hiển thị trên di động (bỏ qua thanh địa chỉ) */
       display: flex;
       justify-content: center;
       align-items: center;
       text-align: center;
       position: relative;
-      overflow: hidden;
+
+      /* Cho phép cuộn dọc nếu nội dung cao hơn màn hình,
+         tránh trường hợp ảnh/nút bị CẮT MẤT mà không cuộn được */
+      overflow-x: hidden;
+      overflow-y: auto;
 
       /* Màu nền dự phòng, khớp tông màu ảnh nền để không bị hở viền trắng
          khi ảnh được scale theo kiểu "contain" (giữ trọn ảnh, không cắt xén) */
@@ -81,7 +86,11 @@
       width: auto;
       height: auto;
       max-width: min(92vw, 420px);
-      max-height: min(75vh, 620px);
+
+      /* Chừa khoảng trống cho nút "Xem Thiệp Cưới" + lề bên dưới,
+         tránh bị che khuất hoặc CẮT MẤT trên màn hình điện thoại thấp */
+      max-height: min(68vh, 600px);
+      max-height: min(68dvh, calc(100dvh - 170px), 600px);
     }
 
     .btn {
