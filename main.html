@@ -1898,125 +1898,46 @@
       /* =====================================================
          GOOGLE SHEETS - SỔ LƯU BÚT
       ===================================================== */
-
-
 const GUESTBOOK_API =
   "https://script.google.com/macros/s/AKfycbwOgsDMm88tEsJL2nYBkOIUOiHeo9OUXMv-6pNFl2bljJJO_3-cVljNe908v50KMsWWow/exec";
-
-
 function loadGuestbook() {
+    const list = document.getElementById("guestbookList");
 
-  const list =
-    document.getElementById("guestbookList");
-
-
-  if (!list) {
-    console.error("Không tìm thấy guestbookList");
-    return;
-  }
-
-
-  list.innerHTML =
-    '<div class="guestbook-loading">Đang tải lời chúc...</div>';
-
-
-  const callbackName =
-    "__guestbook_" + Date.now();
-
-
-  const script =
-    document.createElement("script");
-
-
-  let finished = false;
-
-
-  const timeout =
-    setTimeout(function () {
-
-      if (finished) return;
-
-      finished = true;
-
-      delete window[callbackName];
-
-      script.remove();
-
-
-      list.innerHTML =
-        '<div class="guestbook-empty">' +
-        'Chưa tải được lời chúc.' +
-        '</div>';
-
-    }, 10000);
-
-
-  function cleanup() {
-
-    clearTimeout(timeout);
-
-    delete window[callbackName];
-
-    script.remove();
-  }
-
-
-  window[callbackName] =
-    function(messages) {
-
-      if (finished) return;
-
-      finished = true;
-
-      cleanup();
-
-
-      if (!Array.isArray(messages)) {
-
-        list.innerHTML =
-          '<div class="guestbook-empty">' +
-          'Không có dữ liệu lời chúc.' +
-          '</div>';
-
+    if (!list) {
+        console.error("Không tìm thấy #guestbookList");
         return;
-      }
+    }
 
+    list.innerHTML = `
+        <div class="guestbook-loading">
+            Đang tải lời chúc...
+        </div>
+    `;
 
-      displayGuestbook(messages);
-    };
+    fetch(GUESTBOOK_API + "?t=" + Date.now())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("HTTP " + response.status);
+            }
+            return response.json();
+        })
+        .then(messages => {
 
+            console.log("Dữ liệu nhận được:", messages);
 
-  script.src =
-    GUESTBOOK_API +
-    "?callback=" +
-    encodeURIComponent(callbackName) +
-    "&t=" +
-    Date.now();
+            displayGuestbook(messages);
+        })
+        .catch(error => {
 
+            console.error("Lỗi tải sổ lưu bút:", error);
 
-  script.onerror =
-    function() {
-
-      if (finished) return;
-
-      finished = true;
-
-      cleanup();
-
-
-      list.innerHTML =
-        '<div class="guestbook-empty">' +
-        'Không thể tải sổ lưu bút.' +
-        '</div>';
-    };
-
-
-  document.body.appendChild(script);
+            list.innerHTML = `
+                <div class="guestbook-empty">
+                    Không thể tải lời chúc.
+                </div>
+            `;
+        });
 }
-
-
-  
-
 
       /* =====================================================
          HIỂN THỊ LỜI CHÚC
