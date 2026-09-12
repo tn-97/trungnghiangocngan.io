@@ -895,6 +895,51 @@
         margin: 25px auto 0;
 
         text-align: left;
+
+        position: relative;
+      }
+
+      /* Khi có nhiều hơn 3 lời chúc: cuộn tự động theo vòng lặp */
+      .guestbook-list.auto-scroll {
+        overflow: hidden;
+        -webkit-mask-image: linear-gradient(
+          to bottom,
+          transparent 0%,
+          #000 8%,
+          #000 92%,
+          transparent 100%
+        );
+        mask-image: linear-gradient(
+          to bottom,
+          transparent 0%,
+          #000 8%,
+          #000 92%,
+          transparent 100%
+        );
+      }
+
+      .guestbook-track {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .guestbook-list.auto-scroll .guestbook-track {
+        animation: guestbookScroll linear infinite;
+      }
+
+      /* Dừng cuộn khi rê chuột vào hoặc chạm vào (để đọc cho dễ) */
+      .guestbook-list.auto-scroll:hover .guestbook-track,
+      .guestbook-list.auto-scroll.paused .guestbook-track {
+        animation-play-state: paused;
+      }
+
+      @keyframes guestbookScroll {
+        from {
+          transform: translateY(0);
+        }
+        to {
+          transform: translateY(-50%);
+        }
       }
 
       .guestbook-item {
@@ -2011,6 +2056,7 @@ function displayGuestbook(messages) {
   }
 
   if (!Array.isArray(items) || items.length === 0) {
+    list.classList.remove("auto-scroll");
     list.innerHTML = `
       <div class="guestbook-empty">
         Chưa có lời chúc nào. Hãy là người đầu tiên gửi lời chúc! 💌
@@ -2024,7 +2070,7 @@ function displayGuestbook(messages) {
   // Hiển thị lời chúc mới nhất lên đầu
   normalized.reverse();
 
-  list.innerHTML = normalized
+  const itemsHtml = normalized
     .map(function (entry) {
       return `
         <div class="guestbook-item">
@@ -2035,6 +2081,43 @@ function displayGuestbook(messages) {
       `;
     })
     .join("");
+
+  const AUTO_SCROLL_THRESHOLD = 3;
+  const SECONDS_PER_ITEM = 3.5; // tốc độ cuộn: số giây cho mỗi lời chúc
+
+  if (normalized.length > AUTO_SCROLL_THRESHOLD) {
+    // Nhân đôi danh sách để tạo hiệu ứng cuộn vòng lặp liền mạch (seamless loop)
+    const duration = (normalized.length * SECONDS_PER_ITEM).toFixed(1);
+
+    list.classList.add("auto-scroll");
+    list.innerHTML = `
+      <div class="guestbook-track" style="animation-duration: ${duration}s;">
+        ${itemsHtml}
+        ${itemsHtml}
+      </div>
+    `;
+
+    setupGuestbookAutoScrollPause(list);
+  } else {
+    list.classList.remove("auto-scroll");
+    list.innerHTML = itemsHtml;
+  }
+}
+
+/* Cho phép dừng cuộn khi chạm vào trên thiết bị cảm ứng (desktop đã có :hover trong CSS) */
+function setupGuestbookAutoScrollPause(list) {
+  if (list.dataset.pauseBound === "1") return;
+  list.dataset.pauseBound = "1";
+
+  list.addEventListener("touchstart", function () {
+    list.classList.add("paused");
+  }, { passive: true });
+
+  list.addEventListener("touchend", function () {
+    setTimeout(function () {
+      list.classList.remove("paused");
+    }, 1500);
+  }, { passive: true });
 }
 
 /* =====================================================
