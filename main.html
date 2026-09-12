@@ -870,6 +870,18 @@
         background: #b71c1c;
       }
 
+      .guestbook-submit:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        animation: none;
+      }
+
+      .guestbook-loading,
+      .guestbook-empty {
+        color: #fff;
+        font-size: 13px;
+        padding: 10px;
+      }
 
       /* DANH SÁCH LỜI CHÚC */
 
@@ -1664,6 +1676,7 @@
 
     <button
       class="guestbook-submit"
+      id="guestbookSubmitBtn"
       onclick="addGuestbook()"
     >
       GỬI LỜI CHÚC
@@ -1900,6 +1913,50 @@
       ===================================================== */
 const GUESTBOOK_API =
   "https://script.google.com/macros/s/AKfycbwOgsDMm88tEsJL2nYBkOIUOiHeo9OUXMv-6pNFl2bljJJO_3-cVljNe908v50KMsWWow/exec";
+
+/* Chuẩn hoá 1 dòng dữ liệu trả về từ Apps Script (chấp nhận nhiều tên cột khác nhau) */
+function normalizeGuestbookEntry(item) {
+  var name =
+    item.name || item.Name || item.ten || item.Ten || item["Tên"] || item.hoTen || "Ẩn danh";
+
+  var message =
+    item.message || item.Message || item.loiChuc || item.LoiChuc ||
+    item["Lời chúc"] || item.content || item.noiDung || "";
+
+  var time =
+    item.time || item.Time || item.timestamp || item.Timestamp ||
+    item["Thời gian"] || item.createdAt || "";
+
+  return { name: String(name), message: String(message), time: time };
+}
+
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function formatGuestbookTime(time) {
+  if (!time) return "";
+  var d = new Date(time);
+  if (isNaN(d.getTime())) {
+    return escapeHtml(time);
+  }
+  return d.toLocaleString("vi-VN", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
+/* =====================================================
+   TẢI DANH SÁCH LỜI CHÚC
+===================================================== */
 function loadGuestbook() {
     const list = document.getElementById("guestbookList");
 
@@ -1939,8 +1996,109 @@ function loadGuestbook() {
         });
 }
 
+/* =====================================================
+   HIỂN THỊ DANH SÁCH LỜI CHÚC
+===================================================== */
+function displayGuestbook(messages) {
+  const list = document.getElementById("guestbookList");
+
+  if (!list) return;
+
+  // Chấp nhận cả trường hợp API trả về { data: [...] } hoặc { messages: [...] }
+  let items = messages;
+  if (!Array.isArray(items)) {
+    items = messages.data || messages.messages || messages.result || [];
+  }
+
+  if (!Array.isArray(items) || items.length === 0) {
+    list.innerHTML = `
+      <div class="guestbook-empty">
+        Chưa có lời chúc nào. Hãy là người đầu tiên gửi lời chúc! 💌
+      </div>
+    `;
+    return;
+  }
+
+  const normalized = items.map(normalizeGuestbookEntry);
+
+  // Hiển thị lời chúc mới nhất lên đầu
+  normalized.reverse();
+
+  list.innerHTML = normalized
+    .map(function (entry) {
+      return `
+        <div class="guestbook-item">
+          <span class="guestbook-name">${escapeHtml(entry.name)}</span>
+          <span class="guestbook-time">${formatGuestbookTime(entry.time)}</span>
+          <div class="guestbook-content">${escapeHtml(entry.message)}</div>
+        </div>
+      `;
+    })
+    .join("");
+}
+
+/* =====================================================
+   GỬI LỜI CHÚC MỚI
+===================================================== */
+function addGuestbook() {
+  const nameInput = document.getElementById("guestName");
+  const messageInput = document.getElementById("guestMessage");
+  const submitBtn = document.getElementById("guestbookSubmitBtn");
+
+  const name = nameInput.value.trim();
+  const message = messageInput.value.trim();
+
+  if (!name || !message) {
+    alert("Vui lòng nhập đầy đủ tên và lời chúc!");
+    return;
+  }
+
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.textContent = "ĐANG GỬI...";
+  }
+
+  const payload = {
+    name: name,
+    message: message,
+    time: new Date().toISOString(),
+  };
+
+  // Dùng Content-Type: text/plain để tránh preflight CORS với Google Apps Script
+  fetch(GUESTBOOK_API, {
+    method: "POST",
+    headers: {
+      "Content-Type": "text/plain;charset=utf-8",
+    },
+    body: JSON.stringify(payload),
+  })
+    .then(function (response) {
+      if (!response.ok) {
+        throw new Error("HTTP " + response.status);
+      }
+      return response.json().catch(function () {
+        return {};
+      });
+    })
+    .then(function () {
+      nameInput.value = "";
+      messageInput.value = "";
+      loadGuestbook();
+    })
+    .catch(function (error) {
+      console.error("Lỗi gửi lời chúc:", error);
+      alert("Gửi lời chúc thất bại, vui lòng thử lại sau!");
+    })
+    .finally(function () {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "GỬI LỜI CHÚC";
+      }
+    });
+}
+
       /* =====================================================
-         HIỂN THỊ LỜI CHÚC
+         TỰ ĐỘNG TẢI KHI MỞ TRANG
       ===================================================== */
 
       if (document.readyState === "loading") {
@@ -1955,19 +2113,29 @@ function loadGuestbook() {
   loadGuestbook();
 
 }
+    </script>
+    <!-- =========================
+         SCRIPT HỘP QUÀ / QR
+    ========================== -->
+    <script>
+      function openQR() {
+        var overlay = document.getElementById("qrOverlay");
+        if (overlay) overlay.classList.add("show");
+      }
 
-      /* =====================================================
-         TỰ ĐỘNG TẢI KHI MỞ TRANG
-      ===================================================== */
+      function closeQR(event) {
+        var overlay = document.getElementById("qrOverlay");
+        if (overlay) overlay.classList.remove("show");
+      }
 
-      document.addEventListener(
-        "DOMContentLoaded",
-        function() {
-
-          loadGuestbook();
-
-        }
-      );
+      function saveQR() {
+        var img = document.getElementById("qrImage");
+        if (!img || !img.src) return;
+        var link = document.createElement("a");
+        link.href = img.src;
+        link.download = "qr-mung-cuoi.png";
+        link.click();
+      }
     </script>
   </body>
 </html>
