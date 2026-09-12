@@ -2141,36 +2141,33 @@ function addGuestbook() {
     submitBtn.textContent = "ĐANG GỬI...";
   }
 
-  const payload = {
-    name: name,
-    message: message,
-    time: new Date().toISOString(),
-  };
+  // Apps Script đọc dữ liệu qua e.parameter, nên phải gửi dạng
+  // application/x-www-form-urlencoded (URLSearchParams), KHÔNG phải JSON.
+  const params = new URLSearchParams();
+  params.append("name", name);
+  params.append("message", message);
 
-  // Dùng Content-Type: text/plain để tránh preflight CORS với Google Apps Script
   fetch(GUESTBOOK_API, {
     method: "POST",
-    headers: {
-      "Content-Type": "text/plain;charset=utf-8",
-    },
-    body: JSON.stringify(payload),
+    body: params,
   })
     .then(function (response) {
       if (!response.ok) {
         throw new Error("HTTP " + response.status);
       }
-      return response.json().catch(function () {
-        return {};
-      });
+      return response.json();
     })
-    .then(function () {
+    .then(function (result) {
+      if (result && result.success === false) {
+        throw new Error(result.error || "Gửi thất bại");
+      }
       nameInput.value = "";
       messageInput.value = "";
       loadGuestbook();
     })
     .catch(function (error) {
       console.error("Lỗi gửi lời chúc:", error);
-      alert("Gửi lời chúc thất bại, vui lòng thử lại sau!");
+      alert("Gửi lời chúc thất bại: " + error.message);
     })
     .finally(function () {
       if (submitBtn) {
