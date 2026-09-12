@@ -1295,9 +1295,102 @@
           height: 220px;
         }
       }
+
+      /* =========================
+         LỜI KẾT
+      ========================= */
+
+      .closing-note {
+        width: 90%;
+        max-width: 1000px;
+        margin: 0 auto 30px;
+        text-align: center;
+        color: #fdd835;
+        font-family: "Playfair Display", serif;
+        font-size: clamp(18px, 3.5vw, 28px);
+        line-height: 1.8;
+        padding: 0 15px;
+      }
+
+      .closing-note .invite-line {
+        display: block;
+        margin-top: 10px;
+        font-weight: bold;
+        letter-spacing: 2px;
+      }
+
+      /* =====================================================
+         HIỆU ỨNG TRÁI TIM NỔI (TOÀN TRANG)
+      ===================================================== */
+
+      .floating-hearts {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 1;
+
+        /* KHÔNG CHẶN THAO TÁC / KHÔNG ẢNH HƯỞNG NỘI DUNG */
+        pointer-events: none;
+      }
+
+      .floating-heart {
+        position: absolute;
+        bottom: -60px;
+        will-change: transform, opacity;
+        line-height: 1;
+        user-select: none;
+        filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.25));
+        animation-name: heartFloatUp;
+        animation-timing-function: ease-in;
+        animation-iteration-count: 1;
+      }
+
+      @keyframes heartFloatUp {
+        0% {
+          transform: translate(0, 0) rotate(0deg);
+          opacity: 0;
+        }
+        10% {
+          opacity: 0.65;
+        }
+        50% {
+          transform: translate(var(--drift, 20px), -55vh) rotate(12deg);
+        }
+        90% {
+          opacity: 0.55;
+        }
+        100% {
+          transform: translate(calc(var(--drift, 20px) * -1), -115vh) rotate(-10deg);
+          opacity: 0;
+        }
+      }
+
+      /* GIẢM BỚT HIỆU ỨNG TRÊN MÀN HÌNH NHỎ ĐỂ KHÔNG RỐI MẮT */
+
+      @media (max-width: 600px) {
+        .floating-heart {
+          filter: none;
+        }
+      }
+
+      /* TÔN TRỌNG NGƯỜI DÙNG TẮT HIỆU ỨNG CHUYỂN ĐỘNG */
+
+      @media (prefers-reduced-motion: reduce) {
+        .floating-hearts {
+          display: none;
+        }
+      }
     </style>
   </head>
   <body>
+    <!-- =========================
+         HIỆU ỨNG TRÁI TIM NỔI (NỀN TOÀN TRANG)
+    ========================== -->
+
+    <div class="floating-hearts" id="floatingHearts" aria-hidden="true"></div>
+
     <!-- SAVE THE DATE -->
 
     <div class="save-date">
@@ -1743,11 +1836,6 @@
     <div class="gift-section">
       <div class="gift-box">
         <h2 class="gift-title">HỘP QUÀ MỪNG CƯỚI</h2>
-
-        <p class="gift-description">
-          Nếu bạn muốn gửi lời chúc mừng đến chúng mình
-        </p>
-
         <!-- HỘP QUÀ -->
 
         <div class="gift-container" onclick="openQR()" title="Nhấn để mở">
@@ -1764,6 +1852,15 @@
 
         <div class="gift-hint">🎁 Nhấn vào hộp quà để gửi mừng cưới</div>
       </div>
+    </div>
+
+    <!-- =====================================================
+     LỜI KẾT
+    ===================================================== -->
+
+    <div class="closing-note">
+      Sự hiện diện của quý khách là niềm vinh hạnh của gia đình chúng tôi!
+      <span class="invite-line">Kính Mời</span>
     </div>
 
     <!-- =====================================================
@@ -2216,6 +2313,80 @@ function addGuestbook() {
         link.download = "qr-mung-cuoi.png";
         link.click();
       }
+    </script>
+
+    <!-- =========================
+         SCRIPT HIỆU ỨNG TRÁI TIM NỔI
+    ========================== -->
+    <script>
+      (function () {
+        var container = document.getElementById("floatingHearts");
+
+        if (!container) return;
+
+        /* Tôn trọng thiết lập giảm chuyển động của người dùng */
+        var prefersReducedMotion =
+          window.matchMedia &&
+          window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        if (prefersReducedMotion) return;
+
+        var symbols = ["❤", "💛", "🤍", "✨"];
+        var colors = ["#fdd835", "#ffffff", "#fff9c4", "#ffcdd2"];
+
+        var isMobile = window.innerWidth <= 600;
+        var spawnInterval = isMobile ? 1100 : 700;
+        var maxHearts = isMobile ? 12 : 22;
+        var activeHearts = 0;
+
+        function spawnHeart() {
+          if (activeHearts >= maxHearts) return;
+
+          var heart = document.createElement("span");
+          heart.className = "floating-heart";
+
+          heart.textContent =
+            symbols[Math.floor(Math.random() * symbols.length)];
+
+          var size = Math.random() * 16 + 14; // 14px - 30px
+          var duration = Math.random() * 7 + 9; // 9s - 16s
+          var drift = (Math.random() * 60 + 20).toFixed(0) + "px";
+          var leftPos = Math.random() * 100;
+          var opacityBase = (Math.random() * 0.25 + 0.35).toFixed(2);
+
+          heart.style.left = leftPos + "%";
+          heart.style.fontSize = size + "px";
+          heart.style.color =
+            colors[Math.floor(Math.random() * colors.length)];
+          heart.style.setProperty("--drift", drift);
+          heart.style.animationDuration = duration + "s";
+          heart.style.opacity = opacityBase;
+
+          container.appendChild(heart);
+          activeHearts++;
+
+          setTimeout(function () {
+            if (heart.parentNode) {
+              heart.parentNode.removeChild(heart);
+            }
+            activeHearts--;
+          }, duration * 1000 + 200);
+        }
+
+        /* Rải sẵn vài trái tim ngay khi mở trang */
+        for (var i = 0; i < 6; i++) {
+          setTimeout(spawnHeart, i * 350);
+        }
+
+        setInterval(spawnHeart, spawnInterval);
+
+        /* Cập nhật lại giới hạn khi xoay màn hình / đổi kích thước */
+        window.addEventListener("resize", function () {
+          isMobile = window.innerWidth <= 600;
+          spawnInterval = isMobile ? 1100 : 700;
+          maxHearts = isMobile ? 12 : 22;
+        });
+      })();
     </script>
   </body>
 </html>
