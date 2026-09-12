@@ -64,9 +64,13 @@
     }
 
     .cover-frame {
-      /* Khung co theo đúng tỉ lệ hình chữ nhật thật của ảnh bìa,
-         không ép khung/cắt xén nội dung ảnh */
-      display: inline-block;
+      /* Khung co theo đúng tỉ lệ hình chữ nhật thật của ảnh bìa.
+         Chiều rộng của khung được JS tính toán để vừa cả chiều rộng
+         lẫn chiều cao màn hình — ảnh bên trong luôn scale khít 100%
+         theo khung, không cắt xén, không méo, không bị hụt/lố khung. */
+      display: block;
+      margin: 0 auto;
+      width: min(92vw, 420px);
       max-width: 100%;
       line-height: 0;
 
@@ -75,22 +79,16 @@
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
       border: 3px solid rgba(255, 255, 255, 0.85);
 
-      transition: transform 0.6s ease, opacity 0.6s ease;
+      transition: width 0.2s ease, transform 0.6s ease, opacity 0.6s ease;
     }
 
     .cover-frame img {
       display: block;
 
-      /* Tự động scale theo cả chiều rộng lẫn chiều cao màn hình,
-         luôn giữ nguyên toàn bộ chi tiết ảnh (không cắt, không méo) */
-      width: auto;
+      /* Ảnh luôn lấp đầy đúng 100% khung do JS tính sẵn theo tỉ lệ thật,
+         nên không bị hụt (letterbox) cũng không bị tràn/cắt khung */
+      width: 100%;
       height: auto;
-      max-width: min(92vw, 420px);
-
-      /* Chừa khoảng trống cho nút "Xem Thiệp Cưới" + lề bên dưới,
-         tránh bị che khuất hoặc CẮT MẤT trên màn hình điện thoại thấp */
-      max-height: min(68vh, 600px);
-      max-height: min(68dvh, calc(100dvh - 170px), 600px);
     }
 
     .btn {
@@ -215,8 +213,8 @@
 </head>
 <body>
   <div class="cover" id="cover">
-    <div class="cover-frame">
-      <img src="imagebia/anhbia.png" alt="Ảnh bìa cưới">
+    <div class="cover-frame" id="coverFrame">
+      <img src="imagebia/anhbia.png" alt="Ảnh bìa cưới" id="coverImg">
     </div>
     <a href="main.html" class="btn" id="openCard">Xem Thiệp Cưới</a>
   </div>
@@ -231,6 +229,43 @@
     const btn = document.getElementById('openCard');
     const cover = document.getElementById('cover');
     const transitionOverlay = document.getElementById('pageTransition');
+    const coverFrame = document.getElementById('coverFrame');
+    const coverImg = document.getElementById('coverImg');
+
+    /* =========================================================
+       TÍNH KHUNG THEO ĐÚNG TỈ LỆ THẬT CỦA ẢNH BÌA
+       - Khung luôn scale vừa cả chiều rộng lẫn chiều cao màn hình
+       - Ảnh bên trong lấp đầy 100% khung (không hụt, không cắt, không méo)
+    ========================================================= */
+
+    function fitCoverFrame() {
+      if (!coverImg.naturalWidth || !coverImg.naturalHeight) return;
+
+      const ratio = coverImg.naturalHeight / coverImg.naturalWidth; // cao/rộng
+
+      // Không gian chừa cho nút "Xem Thiệp Cưới" + lề trên dưới
+      const RESERVED_FOR_BUTTON = 170;
+
+      const maxWidthByViewport = Math.min(window.innerWidth * 0.92, 420);
+      const maxHeightAllowed = Math.max(
+        window.innerHeight - RESERVED_FOR_BUTTON,
+        220
+      );
+      const maxWidthByHeight = maxHeightAllowed / ratio;
+
+      const finalWidth = Math.min(maxWidthByViewport, maxWidthByHeight);
+
+      coverFrame.style.width = finalWidth + 'px';
+    }
+
+    if (coverImg.complete) {
+      fitCoverFrame();
+    } else {
+      coverImg.addEventListener('load', fitCoverFrame);
+    }
+
+    window.addEventListener('resize', fitCoverFrame);
+    window.addEventListener('orientationchange', fitCoverFrame);
 
     btn.addEventListener('click', function(event) {
       event.preventDefault();
