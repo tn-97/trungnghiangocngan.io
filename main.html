@@ -1900,370 +1900,140 @@
       ===================================================== */
 
 
-      /*
-         =====================================================
-         DÁN URL GOOGLE APPS SCRIPT CỦA BẠN VÀO ĐÂY
-         =====================================================
-      */
-
-      const GUESTBOOK_API = "https://script.google.com/macros/s/AKfycbwOgsDMm88tEsJL2nYBkOIUOiHeo9OUXMv-6pNFl2bljJJO_3-cVljNe908v50KMsWWow/exec";
+const GUESTBOOK_API =
+  "https://script.google.com/macros/s/AKfycbwOgsDMm88tEsJL2nYBkOIUOiHeo9OUXMv-6pNFl2bljJJO_3-cVljNe908v50KMsWWow/exec";
 
 
-      /* =====================================================
-         GỬI LỜI CHÚC
-      ===================================================== */
+function loadGuestbook() {
 
-      function addGuestbook() {
-
-        const name =
-          document
-            .getElementById("guestName")
-            .value
-            .trim();
+  const list =
+    document.getElementById("guestbookList");
 
 
-        const message =
-          document
-            .getElementById("guestMessage")
-            .value
-            .trim();
+  if (!list) {
+    console.error("Không tìm thấy guestbookList");
+    return;
+  }
 
 
-        /* Kiểm tra */
-
-        if (!name) {
-
-          alert("Vui lòng nhập tên!");
-
-          return;
-
-        }
+  list.innerHTML =
+    '<div class="guestbook-loading">Đang tải lời chúc...</div>';
 
 
-        if (!message) {
-
-          alert("Vui lòng nhập lời chúc!");
-
-          return;
-
-        }
+  const callbackName =
+    "__guestbook_" + Date.now();
 
 
-        /*
-          Vô hiệu hóa nút trong lúc gửi
-        */
-
-        const button =
-          document.querySelector(
-            ".guestbook-submit"
-          );
+  const script =
+    document.createElement("script");
 
 
-        button.disabled = true;
-
-        button.innerText =
-          "ĐANG GỬI...";
+  let finished = false;
 
 
-        /*
-          Dữ liệu gửi lên Google Sheets
-        */
+  const timeout =
+    setTimeout(function () {
 
-        const formData =
-          new URLSearchParams();
+      if (finished) return;
 
+      finished = true;
 
-        formData.append(
-          "name",
-          name
-        );
+      delete window[callbackName];
+
+      script.remove();
 
 
-        formData.append(
-          "message",
-          message
-        );
+      list.innerHTML =
+        '<div class="guestbook-empty">' +
+        'Chưa tải được lời chúc.' +
+        '</div>';
+
+    }, 10000);
 
 
-        /*
-          POST đơn giản
-          để tránh CORS preflight
-        */
+  function cleanup() {
 
-        fetch(
-          GUESTBOOK_API,
-          {
-            method: "POST",
+    clearTimeout(timeout);
 
-            mode: "no-cors",
+    delete window[callbackName];
 
-            headers: {
-              "Content-Type":
-                "application/x-www-form-urlencoded"
-            },
-
-            body:
-              formData.toString()
-          }
-        )
-        .then(function() {
-
-          /*
-            Xóa nội dung
-          */
-
-          document
-            .getElementById("guestName")
-            .value = "";
+    script.remove();
+  }
 
 
-          document
-            .getElementById("guestMessage")
-            .value = "";
+  window[callbackName] =
+    function(messages) {
+
+      if (finished) return;
+
+      finished = true;
+
+      cleanup();
 
 
-          alert(
-            "Cảm ơn bạn đã gửi lời chúc ❤️"
-          );
+      if (!Array.isArray(messages)) {
 
+        list.innerHTML =
+          '<div class="guestbook-empty">' +
+          'Không có dữ liệu lời chúc.' +
+          '</div>';
 
-          /*
-            Đợi Google Sheets ghi dữ liệu
-            rồi tải lại danh sách
-          */
-
-          setTimeout(
-            loadGuestbook,
-            800
-          );
-
-        })
-        .catch(function(error) {
-
-          console.error(error);
-
-          alert(
-            "Không thể gửi lời chúc. Vui lòng thử lại!"
-          );
-
-        })
-        .finally(function() {
-
-          button.disabled = false;
-
-          button.innerText =
-            "GỬI LỜI CHÚC";
-
-        });
-
+        return;
       }
 
 
-      /* =====================================================
-         TẢI DANH SÁCH LỜI CHÚC
-      ===================================================== */
-
-      function loadGuestbook() {
-
-        /*
-          Nếu chưa nhập URL
-        */
-
-        if (
-          !GUESTBOOK_API ||
-          GUESTBOOK_API.includes(
-            "https://script.google.com/macros/s/AKfycbwOgsDMm88tEsJL2nYBkOIUOiHeo9OUXMv-6pNFl2bljJJO_3-cVljNe908v50KMsWWow/exec"
-          )
-        ) {
-
-          return;
-
-        }
+      displayGuestbook(messages);
+    };
 
 
-        const callbackName =
-          "guestbookCallback_" +
-          Date.now();
+  script.src =
+    GUESTBOOK_API +
+    "?callback=" +
+    encodeURIComponent(callbackName) +
+    "&t=" +
+    Date.now();
 
 
-        /*
-          Tạo hàm callback toàn cục
-        */
+  script.onerror =
+    function() {
 
-        window[callbackName] =
-          function(messages) {
+      if (finished) return;
 
-            displayGuestbook(
-              messages
-            );
+      finished = true;
+
+      cleanup();
 
 
-            /*
-              Xóa callback
-            */
-
-            delete window[
-              callbackName
-            ];
-
-          };
+      list.innerHTML =
+        '<div class="guestbook-empty">' +
+        'Không thể tải sổ lưu bút.' +
+        '</div>';
+    };
 
 
-        /*
-          Tạo script để gọi JSONP
-        */
-
-        const script =
-          document.createElement(
-            "script"
-          );
+  document.body.appendChild(script);
+}
 
 
-        script.src =
-          GUESTBOOK_API +
-          "?callback=" +
-          callbackName;
-
-
-        script.onerror =
-          function() {
-
-            console.error(
-              "Không thể tải sổ lưu bút"
-            );
-
-
-            delete window[
-              callbackName
-            ];
-
-          };
-
-
-        document.body.appendChild(
-          script
-        );
-
-      }
+  
 
 
       /* =====================================================
          HIỂN THỊ LỜI CHÚC
       ===================================================== */
 
-      function displayGuestbook(
-        messages
-      ) {
+      if (document.readyState === "loading") {
 
-        const list =
-          document.getElementById(
-            "guestbookList"
-          );
+  document.addEventListener(
+    "DOMContentLoaded",
+    loadGuestbook
+  );
 
+} else {
 
-        if (!list) {
-          return;
-        }
+  loadGuestbook();
 
-
-        list.innerHTML = "";
-
-
-        if (
-          !messages ||
-          messages.length === 0
-        ) {
-
-          return;
-
-        }
-
-
-        messages.forEach(
-          function(item) {
-
-            const div =
-              document.createElement(
-                "div"
-              );
-
-
-            div.className =
-              "guestbook-item";
-
-
-            /*
-              Không dùng innerHTML
-              cho dữ liệu khách nhập,
-              tránh XSS.
-            */
-
-            const nameDiv =
-              document.createElement(
-                "div"
-              );
-
-
-            nameDiv.className =
-              "guestbook-name";
-
-
-            nameDiv.textContent =
-              item.name;
-
-
-            const timeSpan =
-              document.createElement(
-                "span"
-              );
-
-
-            timeSpan.className =
-              "guestbook-time";
-
-
-            timeSpan.textContent =
-              item.time;
-
-
-            nameDiv.appendChild(
-              timeSpan
-            );
-
-
-            const messageDiv =
-              document.createElement(
-                "div"
-              );
-
-
-            messageDiv.className =
-              "guestbook-content";
-
-
-            messageDiv.textContent =
-              item.message;
-
-
-            div.appendChild(
-              nameDiv
-            );
-
-
-            div.appendChild(
-              messageDiv
-            );
-
-
-            list.appendChild(
-              div
-            );
-
-          }
-        );
-
-      }
-
+}
 
       /* =====================================================
          TỰ ĐỘNG TẢI KHI MỞ TRANG
