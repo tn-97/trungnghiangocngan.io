@@ -1192,6 +1192,44 @@
         position: relative;
       }
 
+      /* NÚT ĐÓNG POPUP QR */
+
+      .qr-close {
+        position: absolute;
+        top: 10px;
+        right: 12px;
+
+        width: 32px;
+        height: 32px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        background: rgba(255, 255, 255, 0.15);
+        color: #fff;
+
+        border: 2px solid #fff;
+        border-radius: 50%;
+
+        font-size: 20px;
+        line-height: 1;
+        font-weight: bold;
+
+        cursor: pointer;
+        transition: background 0.2s ease, transform 0.2s ease;
+      }
+
+      .qr-close:hover {
+        background: #fdd835;
+        color: #7b1f1f;
+        transform: rotate(90deg);
+      }
+
+      .qr-close:active {
+        transform: rotate(90deg) scale(0.9);
+      }
+
       .qr-title {
         color: #fdd835;
 
@@ -1199,7 +1237,7 @@
 
         font-size: 25px;
 
-        margin: 5px 0 18px;
+        margin: 5px 40px 18px 0;
       }
 
       .qr-image {
@@ -1280,6 +1318,14 @@
         .qr-image {
           width: 220px;
           height: 220px;
+        }
+
+        .qr-close {
+          top: 8px;
+          right: 8px;
+          width: 28px;
+          height: 28px;
+          font-size: 18px;
         }
       }
 
@@ -1856,7 +1902,7 @@
 
     <div id="qrOverlay" class="qr-overlay" onclick="closeQR(event)">
       <div class="qr-popup" onclick="event.stopPropagation()">
-        <button class="qr-close" onclick="closeQR()">×</button>
+        <button class="qr-close" onclick="closeQR()" aria-label="Đóng">×</button>
 
         <h2 class="qr-title">MỪNG CƯỚI</h2>
 
