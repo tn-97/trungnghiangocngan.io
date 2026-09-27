@@ -1189,17 +1189,18 @@
 
       .qr-close {
         position: absolute;
-        right: 0;
-        left: auto; /* Resets left if previously defined */
-        border: none;
-
-        background: none;
-
-        color: #fff;
-
-        font-size: 30px;
-
+        top: 18px;            /* Gives equal breathing room from top */
+        right: 18px;          /* Equal breathing room from right */
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         cursor: pointer;
+        background: transparent;
+        border: none;
+        color: rgba(255, 255, 255, 0.8); /* Softer white looks much cleaner */
+        font-size: 20px;
       }
 
       .qr-popup {
